@@ -77,5 +77,25 @@ p, li { white-space: pre-wrap; }
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>nextNoise()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>258</x>
+     <y>398</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>358</x>
+     <y>433</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>nextNoise()</slot>
+ </slots>
 </ui>

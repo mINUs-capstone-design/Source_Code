@@ -96,7 +96,7 @@ p, li { white-space: pre-wrap; }
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap resource="resource.qrc">:/sound/다운로드.png</pixmap>
+     <pixmap>:/sound/다운로드.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -127,5 +127,25 @@ p, li { white-space: pre-wrap; }
  <resources>
   <include location="resource.qrc"/>
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>startbutton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>nextSpeak()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>252</x>
+     <y>392</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>344</x>
+     <y>392</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>nextSpeak()</slot>
+ </slots>
 </ui>

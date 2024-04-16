@@ -145,12 +145,12 @@ p, li { white-space: pre-wrap; }
    <slot>nextClick()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>365</x>
-     <y>425</y>
+     <x>253</x>
+     <y>394</y>
     </hint>
     <hint type="destinationlabel">
-     <x>570</x>
-     <y>444</y>
+     <x>339</x>
+     <y>425</y>
     </hint>
    </hints>
   </connection>

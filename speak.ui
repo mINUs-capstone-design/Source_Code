@@ -144,9 +144,26 @@ p, li { white-space: pre-wrap; }
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
- <resources>
-  <include location="resource.qrc"/>
-  <include location="../../PycharmProjects/capston/.venv/Lib/site-packages/qt5_applications/Qt/bin/resource.qrc"/>
- </resources>
- <connections/>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>startbutton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>nextResult()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>225</x>
+     <y>408</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>391</x>
+     <y>398</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>nextResult()</slot>
+ </slots>
 </ui>
