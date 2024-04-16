@@ -21,26 +21,35 @@ class WindowClass(QMainWindow, form_class):
         super().__init__()
         self.setupUi(self)
 
-    def nextClick(self):
+    def nextpage(self):
         self.hide()
-        self.second = select_wordwindow()
-        self.second.exec()
+        self.next = SelectWordwindow()
+        self.next.exec_()
         self.show()
 
-class select_wordwindow(QDialog,QWidget,form_selectwordwindow):
+
+
+class SelectWordwindow(QDialog, QWidget, form_selectwordwindow):
     def __init__(self):
-        super(select_wordwindow,self).__init__()
-        self.initUi()
+        super(SelectWordwindow, self).__init__()
+        print("error1")
+        self.initUI()
+        print("errorinit")
         self.show()
 
-    def initUi(self):
+    def end(self):
+        self.close()
+    def initUI(self):
         self.setupUi(self)
+
 
     def nextcheckNoise(self):
         self.hide()
         self.second = check_noisewindow()
         self.second.exec()
-        self.show()
+        self.second.show()
+
+
 class check_noisewindow(QDialog,QWidget,form_checknoisewindow):
     def __init__(self):
         super(check_noisewindow,self).__init__()

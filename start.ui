@@ -142,7 +142,7 @@ p, li { white-space: pre-wrap; }
    <sender>startbutton</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
-   <slot>nextClick()</slot>
+   <slot>nextpage()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>253</x>
@@ -156,6 +156,6 @@ p, li { white-space: pre-wrap; }
   </connection>
  </connections>
  <slots>
-  <slot>nextClick()</slot>
+  <slot>nextpage()</slot>
  </slots>
 </ui>

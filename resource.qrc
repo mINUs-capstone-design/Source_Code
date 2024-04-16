@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="sound">
     <file>다운로드.png</file>
+    <file>resource.qrc</file>
   </qresource>
 </RCC>
