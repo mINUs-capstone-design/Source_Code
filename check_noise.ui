@@ -61,5 +61,25 @@ p, li { white-space: pre-wrap; }
   </widget>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>nextNoise()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>252</x>
+     <y>362</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>297</x>
+     <y>413</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>nextNoise()</slot>
+ </slots>
 </ui>

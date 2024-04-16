@@ -136,5 +136,25 @@ p, li { white-space: pre-wrap; }
   <zorder>check_sentense_2</zorder>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>startbutton</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>nextcheckNoise()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>257</x>
+     <y>395</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>390</x>
+     <y>432</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>nextcheckNoise()</slot>
+ </slots>
 </ui>
