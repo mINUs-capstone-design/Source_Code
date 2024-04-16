@@ -32,13 +32,9 @@ class WindowClass(QMainWindow, form_class):
 class SelectWordwindow(QDialog, QWidget, form_selectwordwindow):
     def __init__(self):
         super(SelectWordwindow, self).__init__()
-        print("error1")
         self.initUI()
-        print("errorinit")
         self.show()
 
-    def end(self):
-        self.close()
     def initUI(self):
         self.setupUi(self)
 
