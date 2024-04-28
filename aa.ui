@@ -2,67 +2,30 @@
 <ui version="4.0">
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
-  <property name="enabled">
-   <bool>true</bool>
-  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>480</height>
+    <height>600</height>
    </rect>
-  </property>
-  <property name="minimumSize">
-   <size>
-    <width>0</width>
-    <height>0</height>
-   </size>
-  </property>
-  <property name="maximumSize">
-   <size>
-    <width>800</width>
-    <height>480</height>
-   </size>
-  </property>
-  <property name="baseSize">
-   <size>
-    <width>0</width>
-    <height>0</height>
-   </size>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <property name="autoFillBackground">
-   <bool>false</bool>
-  </property>
-  <widget class="QWidget" name="gridLayout_2">
+  <widget class="QWidget" name="centralwidget">
    <widget class="QWidget" name="gridLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>200</x>
-      <y>50</y>
+      <x>80</x>
+      <y>110</y>
       <width>431</width>
       <height>282</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout">
-     <property name="sizeConstraint">
-      <enum>QLayout::SetDefaultConstraint</enum>
-     </property>
-     <item row="5" column="0" alignment="Qt::AlignHCenter">
-      <widget class="QPushButton" name="startbutton_2">
-       <property name="autoFillBackground">
-        <bool>true</bool>
-       </property>
-       <property name="text">
-        <string>학습시작</string>
-       </property>
-      </widget>
-     </item>
      <item row="1" column="0" alignment="Qt::AlignHCenter">
-      <widget class="QTextBrowser" name="textBrowser_2">
+      <widget class="QTextBrowser" name="textBrowser">
        <property name="maximumSize">
         <size>
          <width>16777215</width>
@@ -84,7 +47,17 @@ p, li { white-space: pre-wrap; }
        </property>
       </widget>
      </item>
-     <item row="3" column="0">
+     <item row="5" column="0" alignment="Qt::AlignHCenter">
+      <widget class="QPushButton" name="startbutton">
+       <property name="autoFillBackground">
+        <bool>true</bool>
+       </property>
+       <property name="text">
+        <string>학습시작</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
       <widget class="QScrollArea" name="scrollArea">
        <property name="widgetResizable">
         <bool>true</bool>
@@ -98,7 +71,7 @@ p, li { white-space: pre-wrap; }
           <height>213</height>
          </rect>
         </property>
-        <widget class="QTextBrowser" name="check_sentense_2">
+        <widget class="QTextBrowser" name="check_sentense">
          <property name="enabled">
           <bool>true</bool>
          </property>
@@ -124,7 +97,7 @@ p, li { white-space: pre-wrap; }
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;문장&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
         </widget>
-        <widget class="QTextBrowser" name="check_word_2">
+        <widget class="QTextBrowser" name="check_word">
          <property name="geometry">
           <rect>
            <x>90</x>
@@ -162,45 +135,9 @@ p, li { white-space: pre-wrap; }
      <height>21</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menu">
-    <property name="title">
-     <string>한국어 발음 평가 프로그램</string>
-    </property>
-   </widget>
-   <addaction name="menu"/>
   </widget>
-  <widget class="QToolBar" name="toolBar">
-   <property name="windowTitle">
-    <string>toolBar</string>
-   </property>
-   <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
-  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
- <connections>
-  <connection>
-   <sender>startbutton_2</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>nextpage()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>409</x>
-     <y>357</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>320</x>
-     <y>410</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
- <slots>
-  <slot>nextpage()</slot>
- </slots>
+ <connections/>
 </ui>

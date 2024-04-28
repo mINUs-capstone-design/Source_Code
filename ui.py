@@ -7,7 +7,8 @@ form_class = uic.loadUiType("./start.ui")[0]
 
 form_checknoisewindow = uic.loadUiType("./check_noise.ui")[0]
 
-form_selectwordwindow = uic.loadUiType("./select_word.ui")[0]
+form_selectsexwindow = uic.loadUiType("./select_sex.ui")[0]
+
 
 form_noisedwindow = uic.loadUiType("./noise.ui")[0]
 
@@ -23,15 +24,14 @@ class WindowClass(QMainWindow, form_class):
 
     def nextpage(self):
         self.hide()
-        self.next = SelectWordwindow()
-        self.next.exec_()
+        self.next = SelectSexwindow()
+        self.next.exec()
         self.show()
 
-
-
-class SelectWordwindow(QDialog, QWidget, form_selectwordwindow):
+class SelectSexwindow(QDialog, QWidget, form_selectsexwindow):
     def __init__(self):
-        super(SelectWordwindow, self).__init__()
+        super(SelectSexwindow, self).__init__()
+
         self.initUI()
         self.show()
 
@@ -43,8 +43,10 @@ class SelectWordwindow(QDialog, QWidget, form_selectwordwindow):
         self.hide()
         self.second = check_noisewindow()
         self.second.exec()
-        self.second.show()
+        self.show()
 
+    def backtomain(self):
+        self.close()
 
 class check_noisewindow(QDialog,QWidget,form_checknoisewindow):
     def __init__(self):
@@ -57,8 +59,14 @@ class check_noisewindow(QDialog,QWidget,form_checknoisewindow):
 
     def nextNoise(self):
         self.hide()
-        self.second = noisewindow()
-        self.second.exec()
+        self.nextnoise = noisewindow()
+        self.nextnoise.exec()
+        self.show()
+
+    def backtoselectsex(self):
+        self.hide()
+        self.nextnoise = SelectSexwindow()
+        self.nextnoise.exec()
         self.show()
 
 class noisewindow(QDialog,QWidget,form_noisedwindow):
@@ -72,8 +80,8 @@ class noisewindow(QDialog,QWidget,form_noisedwindow):
 
     def nextSpeak(self):
         self.hide()
-        self.second = speakwindow()
-        self.second.exec()
+        self.nextspeak = speakwindow()
+        self.nextspeak.exec()
         self.show()
 
 class speakwindow(QDialog,QWidget,form_speakdwindow):
@@ -87,8 +95,8 @@ class speakwindow(QDialog,QWidget,form_speakdwindow):
 
     def nextResult(self):
         self.hide()
-        self.second = resultwindow()
-        self.second.exec()
+        self.nextresult = resultwindow()
+        self.nextresult.exec()
         self.show()
 
 class resultwindow(QDialog,QWidget,form_resultdwindow):
