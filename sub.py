@@ -2,7 +2,8 @@ import sys
 
 from PyQt5 import uic
 from PyQt5.QtWidgets import *
-from PyQt5 import QtWidgets
+from PyQt5.QtCore import *
+
 
 form_class = uic.loadUiType("./sub.ui")[0]
 
@@ -23,7 +24,8 @@ class WindowClass(QMainWindow, form_class):
         self.button_backtomain.clicked.connect(self.uimain)
         self.button_rerecord.clicked.connect(self.uiresultnoise)
         self.button_exit.clicked.connect(self.close)
-
+        self.noise = None
+        self.dialog = QDialog()
     def uimain(self):
         self.selectsexual.hide()
         self.checknoise.hide()
@@ -36,12 +38,22 @@ class WindowClass(QMainWindow, form_class):
         self.resultnoise.hide()
         self.result.hide()
         self.mainwindow.hide()
+
     def uichecknoise(self):
         self.selectsexual.hide()
         self.checknoise.show()
         self.resultnoise.hide()
         self.result.hide()
         self.mainwindow.hide()
+        self.dialog.setWindowTitle("Dialog")
+        self.dialog.setWindowModality(Qt.ApplicationModal)
+        self.dialog.resize(300,200)
+        self.noise = "noisecount"# 소음 입력 할것
+        noiselabel = QLabel(self.dialog)
+        noiselabel.move(100,100)
+        noiselabel.setText(self.noise)
+        self.dialog.show()
+
     def uiresultnoise(self):
         self.selectsexual.hide()
         self.checknoise.hide()
