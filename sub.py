@@ -23,6 +23,7 @@ import torch.nn as nn
 from torch import optim
 import torch.nn.functional as F
 
+import button_rc
 form_class = uic.loadUiType("./sub.ui")[0]
 
 class WindowClass(QMainWindow, form_class):
@@ -63,21 +64,7 @@ class WindowClass(QMainWindow, form_class):
         self.resultnoise.hide()
         self.result.hide()
         self.mainwindow.hide()
-        self.dialog.setWindowTitle("Dialog")
-        self.dialog.setWindowModality(Qt.ApplicationModal)
-        self.dialog.resize(300,200)
-        db_value = 100  # 사운드센서 값 불러옴
-        self.noise = str(db_value) + "db"
-        noiselabel = QLabel(self.dialog)
-        noiselabel.move(100, 100)
-        noiselabel.setText(self.noise)
-        if db_value > 80:
-            noiselabel.setStyleSheet("COLOR : red")
-        elif db_value <= 80 and db_value > 60:
-            noiselabel.setStyleSheet("COLOR : yellow")
-        else :
-            noiselabel.setStyleSheet("COLOR : green")
-        self.dialog.show()
+
 
     def read_sensor_data(self):  # 사운드 센서값을 불러오는 함수
         while True:
@@ -96,6 +83,22 @@ class WindowClass(QMainWindow, form_class):
         self.resultnoise.show()
         self.result.hide()
         self.mainwindow.hide()
+        self.dialog.setWindowTitle("Dialog")
+        self.dialog.setWindowModality(Qt.ApplicationModal)
+        self.dialog.resize(300, 200)
+        db_value = 100  # 사운드센서 값 불러옴
+        self.noise = str(db_value) + "db"
+        noiselabel = QLabel(self.dialog)
+        noiselabel.move(100, 100)
+        noiselabel.setText(self.noise)
+        if db_value > 80:
+            noiselabel.setStyleSheet("COLOR : red")
+        elif db_value <= 80 and db_value > 60:
+            noiselabel.setStyleSheet("COLOR : yellow")
+        else:
+            noiselabel.setStyleSheet("COLOR : green")
+        self.dialog.setWindowTitle("소음측정결과")
+        self.dialog.show()
     def uiresult(self):
         self.selectsexual.hide()
         self.checknoise.hide()
@@ -208,7 +211,7 @@ class SiameseNetwork(nn.Module):
 
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
-model = torch.load("siamese_net_v4_cpu.pt", map_location=device)
+model = torch.load("siamese_net_v4.pt", map_location=device)
 print(model)
 
 folder_dataset_test = dset.ImageFolder(root=Config.testing_dir)
@@ -232,7 +235,7 @@ for i in range(10):
     output1, output2 = model(Variable(x0), Variable(x1))
     euclidean_distance = F.pairwise_distance(output1, output2)
     imshow(torchvision.utils.make_grid(concatenated),
-           'isNotSame : {:.0f}\nDissimilarity: {:.2f}'.format(label1.item(), euclidean_distance.item()))
+          'isNotSame : {:.0f}\nDissimilarity: {:.2f}'.format(label1.item(), euclidean_distance.item()))
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
