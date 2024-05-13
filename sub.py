@@ -38,27 +38,19 @@ class WindowClass(QMainWindow, form_class):
         self.button_startchecknoise.clicked.connect(self.uichecknoise)
         self.button_resultnoise.clicked.connect(self.uiresultnoise)
         self.button_resultnoise.clicked.connect(self.show_noise_result)
-        self.button_result.clicked.connect(self.uiresult)
+        self.button_startrecord.clicked.connect(self.start_record)
+        self.button_stoprecord.clicked.connect(self.uiresult)
         self.button_backtoselectsexual.clicked.connect(self.uiselectsexual)
         self.button_backtochecknoise.clicked.connect(self.uichecknoise)
         self.button_backtomain.clicked.connect(self.uimain)
         self.button_rerecord.clicked.connect(self.uiresultnoise)
         self.button_exit.clicked.connect(self.close)
-        #self.check_man.stateChanged.connect(self.check_select)
         self.noise = None
         self.dialog = QDialog()
         self.buttongroup_sexual = QButtonGroup(self)
         self.buttongroup_sexual.setExclusive(True)
         self.buttongroup_sexual.addButton(self.check_man,1)
         self.buttongroup_sexual.addButton(self.check_woman,2)
-
-
-    #def check_select(self, state):
-    #    if state == Qt.Checked:
-    #        self.label.setText('Checked')
-    #    else:
-    #        self.label.setText('UnChecked')
-
 
     def uimain(self):
         self.selectsexual.hide()
@@ -96,9 +88,14 @@ class WindowClass(QMainWindow, form_class):
         self.selectsexual.hide()
         self.checknoise.hide()
         self.resultnoise.show()
+        self.button_stoprecord.hide()
+        self.button_startrecord.show()
         self.result.hide()
         self.mainwindow.hide()
 
+    def start_record(self):
+        self.button_startrecord.hide()
+        self.button_stoprecord.show()
     def uiresult(self):
         self.selectsexual.hide()
         self.checknoise.hide()

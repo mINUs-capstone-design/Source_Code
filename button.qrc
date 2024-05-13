@@ -4,6 +4,7 @@
   </qresource>
   <qresource prefix="record_button">
     <file>free-icon-voice-recording-3444418.png</file>
+    <file>free-icon-voice-3687408.png</file>
   </qresource>
   <qresource prefix="exit_button">
     <file>free-icon-exit-full-screen-7479439.png</file>
