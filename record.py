@@ -1,6 +1,5 @@
 import queue, os, threading
 import time
-import keyboard
 
 import sounddevice as sd
 import soundfile as sf
@@ -38,14 +37,3 @@ def stop():
     recording = False
     recorder.join()
     print("record stop")
-
-
-def on_press_z(event):
-    if event.name == 'z':
-        start()
-def on_press_x(event):
-    if event.name == 'x':
-        stop()
-
-keyboard.on_press(on_press_z)
-keyboard.on_press(on_press_x)

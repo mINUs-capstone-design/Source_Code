@@ -96,10 +96,12 @@ class WindowClass(QMainWindow, form_class):
     def start_record(self):
         self.button_startrecord.hide()
         self.button_stoprecord.show()
+        record.start()
     def uiresult(self):
         self.selectsexual.hide()
         self.checknoise.hide()
         self.resultnoise.hide()
+        record.stop()
         self.result.show()
         self.mainwindow.hide()
 
@@ -248,8 +250,8 @@ for i in range(10):
     # output1,output2 = model(Variable(x0).cuda(),Variable(x1).cuda())
     output1, output2 = model(Variable(x0), Variable(x1))
     euclidean_distance = F.pairwise_distance(output1, output2)
-    imshow(torchvision.utils.make_grid(concatenated),
-          'isNotSame : {:.0f}\nDissimilarity: {:.2f}'.format(label1.item(), euclidean_distance.item()))
+    # imshow(torchvision.utils.make_grid(concatenated),
+    #       'isNotSame : {:.0f}\nDissimilarity: {:.2f}'.format(label1.item(), euclidean_distance.item()))
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
