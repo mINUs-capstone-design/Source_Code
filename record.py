@@ -14,16 +14,12 @@ recording = False
 
 def complicated_record():
     filename = "./record.wav"
-    if not os.path.exists(filename):  # 파일이 존재하지 않으면 새로 생성
-        with sf.SoundFile(filename, mode='w', samplerate=SAMPLERATE, subtype='PCM_16', channels=CHANNELS) as file:
-            with sd.InputStream(samplerate=SAMPLERATE, dtype='int16', channels=CHANNELS, callback=complicated_save):
-                while recording and not q.empty():
-                    file.write(q.get())
-    else:
-        with sf.SoundFile(filename, mode='a') as file:  # 파일이 이미 존재하면 이어쓰기 모드로 열기
-            with sd.InputStream(samplerate=SAMPLERATE, dtype='int16', channels=CHANNELS, callback=complicated_save):
-                while recording and not q.empty():
-                    file.write(q.get())
+     # 파일이 존재하지 않으면 새로 생성
+    with sf.SoundFile(filename, mode='w', samplerate=SAMPLERATE, subtype='PCM_16', channels=CHANNELS) as file:
+        with sd.InputStream(samplerate=SAMPLERATE, dtype='int16', channels=CHANNELS, callback=complicated_save):
+            while recording:
+                file.write(q.get())
+
 
 def complicated_save(indata,frames,time,status):
     q.put(indata.copy())
@@ -53,6 +49,3 @@ def on_press_x(event):
 
 keyboard.on_press(on_press_z)
 keyboard.on_press(on_press_x)
-
-keyboard.wait('esc')
-keyboard.unhook_all()

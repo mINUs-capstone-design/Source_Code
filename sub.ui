@@ -400,7 +400,7 @@ p, li { white-space: pre-wrap; }
       <string>학습시작</string>
      </property>
     </widget>
-    <widget class="QCheckBox" name="checkBox_2">
+    <widget class="QCheckBox" name="check_woman">
      <property name="geometry">
       <rect>
        <x>440</x>
@@ -416,7 +416,7 @@ p, li { white-space: pre-wrap; }
       <bool>false</bool>
      </property>
     </widget>
-    <widget class="QCheckBox" name="checkBox">
+    <widget class="QCheckBox" name="check_man">
      <property name="geometry">
       <rect>
        <x>280</x>
