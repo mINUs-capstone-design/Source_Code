@@ -161,11 +161,11 @@ p, li { white-space: pre-wrap; }
       <string/>
      </property>
     </widget>
-    <widget class="QTextBrowser" name="check_word_2">
+    <widget class="QTextBrowser" name="select_word">
      <property name="geometry">
       <rect>
        <x>360</x>
-       <y>150</y>
+       <y>147</y>
        <width>80</width>
        <height>31</height>
       </rect>

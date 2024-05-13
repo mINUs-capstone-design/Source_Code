@@ -90,6 +90,7 @@ class WindowClass(QMainWindow, form_class):
         self.resultnoise.show()
         self.button_stoprecord.hide()
         self.button_startrecord.show()
+        self.select_word.setPlainText(random(list))
         self.result.hide()
         self.mainwindow.hide()
 
@@ -122,6 +123,10 @@ class WindowClass(QMainWindow, form_class):
             noiselabel.setStyleSheet("COLOR : green")
         self.dialog.setWindowTitle("소음측정결과")
         self.dialog.show()
+
+
+    list = ['안녕하세요', '바가지','도깨비','고구마','누룽지','주전자']
+
 class Config():
     testing_dir = "./testing"
 
