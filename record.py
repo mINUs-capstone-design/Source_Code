@@ -1,32 +1,39 @@
-import pyaudio
-import wave
+import queue, os, threading
+import time
 
-MIC_DEVICE_ID = 1
+import sounddevice as sd
+import soundfile as sf
+from scipy.io.wavfile import write
 
-CHUNK = 1024
-FORMAT = pyaudio.paInt16
+SAMPLERATE = 16000
 CHANNELS = 1
+q = queue.Queue()
+recorder = False
+recording = False
 
-RATE = 16000
+def complicated_record():
+    with sf.SoundFile("/record.wav",mode='w',samplerate=SAMPLERATE,subtype='PCM_16',channels=CHANNELS) as file:
+        with sd.InputStream(samplerate=SAMPLERATE,dtype='int16',channels=CHANNELS,callback=complicated_record()):
+            while recording:
+                file.write(q.get())
 
-SAMPLE_SIZE = 2
+def complicated_save(indata,frames,time,status):
+    q.put(indata.copy())
 
-def record(record_seconds):
-    p = pyaudio.PyAudio()
-    stream = p.open(input_device_index=MIC_DEVICE_ID,
-                    format=FORMAT,
-                    channels = CHANNELS,
-                    rate = RATE,
-                    input = True,
-                    frames_per_buffer=CHUNK)
-    frames = []
+def start():
+    global recorder
+    global recording
+    recording = True
+    recorder = threading.Thread(target=complicated_record)
+    print("start recording")
+    recorder.start()
 
-    for i in range(0,int(RATE / CHUNK * record_seconds)):
-        data = stream.read(CHUNK)
-        frames.append(data)
+def stop():
+    global recorder
+    global recording
+    recording = False
+    recorder.join()
 
-    stream.stop_stream()
-    stream.close()
-    p.terminate()
-
-    return frames
+start()
+time.sleep(3)
+stop()
