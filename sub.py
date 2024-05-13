@@ -6,7 +6,7 @@ from PyQt5.QtCore import *
 
 import time
 import math
-
+import record
 import torchvision
 import torchvision.datasets as dset
 import torchvision.transforms as transforms
@@ -37,14 +37,29 @@ class WindowClass(QMainWindow, form_class):
         self.button_selectsexual.clicked.connect(self.uiselectsexual)
         self.button_startchecknoise.clicked.connect(self.uichecknoise)
         self.button_resultnoise.clicked.connect(self.uiresultnoise)
+        self.button_resultnoise.clicked.connect(self.show_noise_result)
         self.button_result.clicked.connect(self.uiresult)
         self.button_backtoselectsexual.clicked.connect(self.uiselectsexual)
         self.button_backtochecknoise.clicked.connect(self.uichecknoise)
         self.button_backtomain.clicked.connect(self.uimain)
         self.button_rerecord.clicked.connect(self.uiresultnoise)
         self.button_exit.clicked.connect(self.close)
+        #self.check_man.stateChanged.connect(self.check_select)
         self.noise = None
         self.dialog = QDialog()
+        self.buttongroup_sexual = QButtonGroup(self)
+        self.buttongroup_sexual.setExclusive(True)
+        self.buttongroup_sexual.addButton(self.check_man,1)
+        self.buttongroup_sexual.addButton(self.check_woman,2)
+
+
+    #def check_select(self, state):
+    #    if state == Qt.Checked:
+    #        self.label.setText('Checked')
+    #    else:
+    #        self.label.setText('UnChecked')
+
+
     def uimain(self):
         self.selectsexual.hide()
         self.checknoise.hide()
@@ -83,10 +98,19 @@ class WindowClass(QMainWindow, form_class):
         self.resultnoise.show()
         self.result.hide()
         self.mainwindow.hide()
+
+    def uiresult(self):
+        self.selectsexual.hide()
+        self.checknoise.hide()
+        self.resultnoise.hide()
+        self.result.show()
+        self.mainwindow.hide()
+
+    def show_noise_result(self):
         self.dialog.setWindowTitle("Dialog")
         self.dialog.setWindowModality(Qt.ApplicationModal)
         self.dialog.resize(300, 200)
-        db_value = 100  # 사운드센서 값 불러옴
+        db_value = 5  # 사운드센서 값 불러옴
         self.noise = str(db_value) + "db"
         noiselabel = QLabel(self.dialog)
         noiselabel.move(100, 100)
@@ -99,13 +123,6 @@ class WindowClass(QMainWindow, form_class):
             noiselabel.setStyleSheet("COLOR : green")
         self.dialog.setWindowTitle("소음측정결과")
         self.dialog.show()
-    def uiresult(self):
-        self.selectsexual.hide()
-        self.checknoise.hide()
-        self.resultnoise.hide()
-        self.result.show()
-        self.mainwindow.hide()
-
 class Config():
     testing_dir = "./testing"
 
