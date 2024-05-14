@@ -46,7 +46,7 @@ class WindowClass(QMainWindow, form_class):
         self.button_backtomain.clicked.connect(self.uimain)
         self.button_rerecord.clicked.connect(self.uiresultnoise)
         self.button_exit.clicked.connect(self.close)
-        self.noise = None
+        noise = None
         self.spi = spidev.SpiDev()
         self.spi.open(0,0)
         self.spi.max_speed_hz = 1350000
@@ -118,11 +118,11 @@ class WindowClass(QMainWindow, form_class):
         self.dialog.setWindowModality(Qt.ApplicationModal)
         self.dialog.resize(300, 200)
         db_value = self.read_sensor_data()  # 사운드센서 값 불러옴
-        self.noise = str(db_value) + "db"
-        self.noiselabel = QLabel(self.dialog)
-        self.noiselabel.clear()
-        self.noiselabel.move(100, 100)
-        self.noiselabel.setText(self.noise)
+        noise = str(db_value) + "db"
+        noiselabel = QLabel(self.dialog)
+        noiselabel.clear()
+        noiselabel.move(100, 100)
+        noiselabel.setText(noise)
         if db_value > 80:
             self.noiselabel.setStyleSheet("COLOR : red")
         elif db_value <= 80 and db_value > 60:
