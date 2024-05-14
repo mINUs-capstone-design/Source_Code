@@ -75,6 +75,7 @@ class WindowClass(QMainWindow, form_class):
         self.resultnoise.hide()
         self.result.hide()
         self.mainwindow.hide()
+        self.noiselabel.clear()
 
 
     def read_sensor_data(self):
@@ -118,16 +119,16 @@ class WindowClass(QMainWindow, form_class):
         self.dialog.resize(300, 200)
         db_value = self.read_sensor_data()  # 사운드센서 값 불러옴
         self.noise = str(db_value) + "db"
-        noiselabel = QLabel(self.dialog)
-        noiselabel.clear()
-        noiselabel.move(100, 100)
-        noiselabel.setText(self.noise)
+        self.noiselabel = QLabel(self.dialog)
+        self.noiselabel.clear()
+        self.noiselabel.move(100, 100)
+        self.noiselabel.setText(self.noise)
         if db_value > 80:
-            noiselabel.setStyleSheet("COLOR : red")
+            self.noiselabel.setStyleSheet("COLOR : red")
         elif db_value <= 80 and db_value > 60:
-            noiselabel.setStyleSheet("COLOR : yellow")
+            self.noiselabel.setStyleSheet("COLOR : yellow")
         else:
-            noiselabel.setStyleSheet("COLOR : green")
+            self.noiselabel.setStyleSheet("COLOR : green")
         self.dialog.setWindowTitle("소음측정결과")
         self.dialog.show()
         
