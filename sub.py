@@ -117,6 +117,7 @@ class WindowClass(QMainWindow, form_class):
         self.dialog.setWindowTitle("Dialog")
         self.dialog.setWindowModality(Qt.ApplicationModal)
         self.dialog.resize(300, 200)
+        noise = None
         db_value = self.read_sensor_data()  # 사운드센서 값 불러옴
         noise = str(db_value) + "db"
         noiselabel = QLabel(self.dialog)
