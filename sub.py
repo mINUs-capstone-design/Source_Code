@@ -124,9 +124,9 @@ class WindowClass(QMainWindow, form_class):
         noiselabel.clear()
         noiselabel.move(100, 100)
         noiselabel.setText(noise)
-        if db_value > 80:
+        if db_value > 40:
             noiselabel.setStyleSheet("COLOR : red")
-        elif db_value <= 80 and db_value > 60:
+        elif db_value <= 40 and db_value > 20:
             noiselabel.setStyleSheet("COLOR : yellow")
         else:
             noiselabel.setStyleSheet("COLOR : green")
