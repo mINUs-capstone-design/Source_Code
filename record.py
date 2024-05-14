@@ -27,7 +27,9 @@ def complicated_record():
 
 
 def complicated_save(indata,frames,time,status):
-    q.put(indata.copy())
+    if status:
+        print('status:', status)
+    q.put(indata.copy())  
 
 def start():
     global recorder
