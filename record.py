@@ -30,8 +30,9 @@ def start():
     global recording
     recording = True
     recorder = threading.Thread(target=complicated_record)
-    print("start recording")
     recorder.start()
+    print("start recording")
+    
 
 def stop():
     global recorder
