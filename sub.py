@@ -131,7 +131,7 @@ class WindowClass(QMainWindow, form_class):
             noiselabel.setStyleSheet("COLOR : green")
         self.dialog.setWindowTitle("소음측정결과")
         self.dialog.show()
-        if self.dialoge.close():
+        if self.dialog.close():
             noiselabel.clear()
         
         
