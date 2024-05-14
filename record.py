@@ -25,6 +25,7 @@ def complicated_record():
 def complicated_save(indata,frames,time,status):
     if status:
         print('status:', status)
+        print('data:',indata)
     q.put(indata.copy())  
 
 def start():
