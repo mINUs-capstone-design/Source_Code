@@ -18,6 +18,7 @@ def complicated_record():
         with sd.InputStream(samplerate=SAMPLERATE, dtype='int16', channels=CHANNELS, callback=complicated_save):
             while recording:
                 file.write(q.get())
+                print("녹음 중")
                 
 
 
