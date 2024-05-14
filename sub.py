@@ -1,4 +1,5 @@
 import sys
+import spidev
 
 from PyQt5 import uic
 from PyQt5.QtWidgets import *
@@ -46,6 +47,9 @@ class WindowClass(QMainWindow, form_class):
         self.button_rerecord.clicked.connect(self.uiresultnoise)
         self.button_exit.clicked.connect(self.close)
         self.noise = None
+        self.spi = spidev.SpiDev()
+        self.spi.open(0,0)
+        self.spi.max_speed_hz = 1350000
         self.dialog = QDialog()
         self.buttongroup_sexual = QButtonGroup(self)
         self.buttongroup_sexual.setExclusive(True)
