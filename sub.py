@@ -78,8 +78,9 @@ class WindowClass(QMainWindow, form_class):
 
 
     def read_sensor_data(self):
-        db_value = 0  # 사운드 센서값을 불러오는 함수
+        # 사운드 센서값을 불러오는 함수
         while True:
+            db_value = 0
             r = self.spi.xfer2([1, (8 + 0) << 4, 0])
             adc_out = ((r[1] & 3) << 8) + r[2]
             analog_value = adc_out
