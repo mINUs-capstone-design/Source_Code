@@ -120,7 +120,7 @@ class WindowClass(QMainWindow, form_class):
         self.noise = str(db_value) + "db"
         noiselabel = QLabel(self.dialog)
         noiselabel.move(100, 100)
-        noiselabel.setText(self.noise)
+        noiselabel.(self.noise)
         if db_value > 80:
             noiselabel.setStyleSheet("COLOR : red")
         elif db_value <= 80 and db_value > 60:
@@ -129,8 +129,9 @@ class WindowClass(QMainWindow, form_class):
             noiselabel.setStyleSheet("COLOR : green")
         self.dialog.setWindowTitle("소음측정결과")
         self.dialog.show()
+        noislabel.clear()
         
-        db_value = 0
+        
 
 
     #list = ['안녕하세요', '바가지','도깨비','고구마','누룽지','주전자']
