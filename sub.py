@@ -120,7 +120,7 @@ class WindowClass(QMainWindow, form_class):
         self.noise = str(db_value) + "db"
         noiselabel = QLabel(self.dialog)
         noiselabel.move(100, 100)
-        noiselabel.(self.noise)
+        noiselabel.setText(self.noise)
         if db_value > 80:
             noiselabel.setStyleSheet("COLOR : red")
         elif db_value <= 80 and db_value > 60:
