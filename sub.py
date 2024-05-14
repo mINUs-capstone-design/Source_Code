@@ -80,7 +80,7 @@ class WindowClass(QMainWindow, form_class):
     def read_sensor_data(self):
         # 사운드 센서값을 불러오는 함수
         while True:
-            db_value = 0
+            
             r = self.spi.xfer2([1, (8 + 0) << 4, 0])
             adc_out = ((r[1] & 3) << 8) + r[2]
             analog_value = adc_out
@@ -129,6 +129,8 @@ class WindowClass(QMainWindow, form_class):
             noiselabel.setStyleSheet("COLOR : green")
         self.dialog.setWindowTitle("소음측정결과")
         self.dialog.show()
+        
+        db_value = 0
 
 
     #list = ['안녕하세요', '바가지','도깨비','고구마','누룽지','주전자']
