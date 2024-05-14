@@ -18,6 +18,8 @@ def complicated_record():
         with sd.InputStream(samplerate=SAMPLERATE, dtype='int16', channels=CHANNELS, callback=complicated_save):
             while recording:
                 file.write(q.get())
+                if not recording:
+                    break
 
 
 def complicated_save(indata,frames,time,status):
