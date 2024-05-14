@@ -124,11 +124,11 @@ class WindowClass(QMainWindow, form_class):
         noiselabel.move(100, 100)
         noiselabel.setText(noise)
         if db_value > 80:
-            self.noiselabel.setStyleSheet("COLOR : red")
+            noiselabel.setStyleSheet("COLOR : red")
         elif db_value <= 80 and db_value > 60:
-            self.noiselabel.setStyleSheet("COLOR : yellow")
+            noiselabel.setStyleSheet("COLOR : yellow")
         else:
-            self.noiselabel.setStyleSheet("COLOR : green")
+            noiselabel.setStyleSheet("COLOR : green")
         self.dialog.setWindowTitle("소음측정결과")
         self.dialog.show()
         
