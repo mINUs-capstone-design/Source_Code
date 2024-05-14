@@ -21,7 +21,6 @@ def complicated_record():
                 print("녹음 중")
                 if not recording:
                     break
-                    print("녹음 완")
                 
 
 
