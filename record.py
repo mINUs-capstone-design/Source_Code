@@ -19,7 +19,9 @@ def complicated_record():
             while recording:
                 if not recording:
                     break
-                file.write(q.get())
+                data = q.get()
+                if data is not None:  # 큐에서 음성 데이터를 가져옴
+                    file.write(data)
                 print("녹음중")
                 
 
