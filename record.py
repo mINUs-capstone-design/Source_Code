@@ -17,10 +17,10 @@ def complicated_record():
     with sf.SoundFile(filename, mode='w', samplerate=SAMPLERATE, subtype='PCM_16', channels=CHANNELS) as file:
         with sd.InputStream(samplerate=SAMPLERATE, dtype='int16', channels=CHANNELS, callback=complicated_save):
             while recording:
-                file.write(q.get())
-                print("녹음 중")
                 if not recording:
                     break
+                file.write(q.get())
+                print("녹음중")
                 
 
 
@@ -39,4 +39,5 @@ def start():
 def stop():
     global recording
     recording = False
+    
     print("record stop")
