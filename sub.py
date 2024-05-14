@@ -1,7 +1,7 @@
 # ----------------------------------------------------------------
 import os
 import sys
-#import spidev
+import spidev
 
 from PyQt5 import uic
 from PyQt5.QtWidgets import *
@@ -40,7 +40,7 @@ class WindowClass(QMainWindow, form_class):
         self.button_selectsexual.clicked.connect(self.uiselectsexual)
         self.button_startchecknoise.clicked.connect(self.uichecknoise)
         self.button_resultnoise.clicked.connect(self.uiresultnoise)
-        #self.button_resultnoise.clicked.connect(self.show_noise_result)
+        self.button_resultnoise.clicked.connect(self.show_noise_result)
         self.button_startrecord.clicked.connect(self.start_record)
         self.button_stoprecord.clicked.connect(self.uiresult)
         self.button_backtoselectsexual.clicked.connect(self.uiselectsexual)
@@ -49,9 +49,9 @@ class WindowClass(QMainWindow, form_class):
         self.button_rerecord.clicked.connect(self.uiresultnoise)
         self.button_exit.clicked.connect(self.close)
         noise = None
-        #self.spi = spidev.SpiDev()
-        #self.spi.open(0,0)
-        #self.spi.max_speed_hz = 1350000
+        self.spi = spidev.SpiDev()
+        self.spi.open(0,0)
+        self.spi.max_speed_hz = 1350000
         self.dialog = QDialog()
         self.noiselabel = QLabel(self.dialog)
         self.buttongroup_sexual = QButtonGroup(self)
@@ -83,18 +83,18 @@ class WindowClass(QMainWindow, form_class):
         self.noiselabel.clear()
     
     
-    # def read_sensor_data(self):
+    def read_sensor_data(self):
     #     # 사운드 센서값을 불러오는 함수
-    #     while True:
+        while True:
             
-    #         r = self.spi.xfer2([1, (8 + 0) << 4, 0])
-    #         adc_out = ((r[1] & 3) << 8) + r[2]
-    #         analog_value = adc_out
-    #         if analog_value <= 0:
-    #             analog_value = 1
-    #         db_value = round(20 * math.log10(analog_value), 1)
-    #         time.sleep(0.5)
-    #         return db_value
+            r = self.spi.xfer2([1, (8 + 0) << 4, 0])
+            adc_out = ((r[1] & 3) << 8) + r[2]
+            analog_value = adc_out
+            if analog_value <= 0:
+                analog_value = 1
+            db_value = round(20 * math.log10(analog_value), 1)
+            time.sleep(0.5)
+            return db_value
     
     
     def uiresultnoise(self):
@@ -178,23 +178,23 @@ class WindowClass(QMainWindow, form_class):
     
     
     
-    # def show_noise_result(self):
-    #     self.dialog.setWindowTitle("Dialog")
-    #     self.dialog.setWindowModality(Qt.ApplicationModal)
-    #     self.dialog.resize(300, 200)
-    #     noise = None
-    #     db_value = self.read_sensor_data()  # 사운드센서 값 불러옴
-    #     noise = str(db_value) + "db"
-    #     self.noiselabel.move(150, 100)
-    #     self.noiselabel.setText(noise)
-    #     if db_value > 40:
-    #         self.noiselabel.setStyleSheet("COLOR : red")
-    #     elif db_value <= 40 and db_value > 20:
-    #         self.noiselabel.setStyleSheet("COLOR : yellow")
-    #     else:
-    #         self.noiselabel.setStyleSheet("COLOR : green")
-    #     self.dialog.setWindowTitle("소음측정결과")
-    #     self.dialog.exec()
+    def show_noise_result(self):
+        self.dialog.setWindowTitle("Dialog")
+        self.dialog.setWindowModality(Qt.ApplicationModal)
+        self.dialog.resize(300, 200)
+        noise = None
+        db_value = self.read_sensor_data()  # 사운드센서 값 불러옴
+        noise = str(db_value) + "db"
+        self.noiselabel.move(150, 100)
+        self.noiselabel.setText(noise)
+        if db_value > 40:
+            self.noiselabel.setStyleSheet("COLOR : red")
+        elif db_value <= 40 and db_value > 20:
+            self.noiselabel.setStyleSheet("COLOR : yellow")
+        else:
+            self.noiselabel.setStyleSheet("COLOR : green")
+        self.dialog.setWindowTitle("소음측정결과")
+        self.dialog.exec()
         
     
 
