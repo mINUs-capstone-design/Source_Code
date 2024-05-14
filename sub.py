@@ -75,7 +75,7 @@ class WindowClass(QMainWindow, form_class):
         self.resultnoise.hide()
         self.result.hide()
         self.mainwindow.hide()
-        self.noiselabel.clear()
+        
 
 
     def read_sensor_data(self):
