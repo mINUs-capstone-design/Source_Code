@@ -51,6 +51,7 @@ class WindowClass(QMainWindow, form_class):
         self.spi.open(0,0)
         self.spi.max_speed_hz = 1350000
         self.dialog = QDialog()
+        self.noiselabel = QLabel(self.dialog)
         self.buttongroup_sexual = QButtonGroup(self)
         self.buttongroup_sexual.setExclusive(True)
         self.buttongroup_sexual.addButton(self.check_man,1)
@@ -75,6 +76,7 @@ class WindowClass(QMainWindow, form_class):
         self.resultnoise.hide()
         self.result.hide()
         self.mainwindow.hide()
+        self.noiselabel.clear()
         
 
 
@@ -120,10 +122,7 @@ class WindowClass(QMainWindow, form_class):
         noise = None
         db_value = self.read_sensor_data()  # 사운드센서 값 불러옴
         noise = str(db_value) + "db"
-        noiselabel = QLabel(self.dialog)
-        
-        noiselabel.move(100, 100)
-        noiselabel.clear()
+        noiselabel.move(150, 100)
         noiselabel.text(noise)
         if db_value > 40:
             noiselabel.setStyleSheet("COLOR : red")
