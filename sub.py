@@ -121,7 +121,7 @@ class WindowClass(QMainWindow, form_class):
         db_value = self.read_sensor_data()  # 사운드센서 값 불러옴
         noise = str(db_value) + "db"
         noiselabel = QLabel(self.dialog)
-        noiselabel.clear()
+        self.dialog.clear()
         noiselabel.move(100, 100)
         noiselabel.setText(noise)
         if db_value > 40:
