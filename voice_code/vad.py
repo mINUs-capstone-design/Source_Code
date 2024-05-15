@@ -12,26 +12,30 @@ from scipy.io.wavfile import read
 # ----------------------------------------------------------------
 
 # ----------------------------------------------------------------
-# 예제 오디오 신호
-wav_file_name = glob.glob('*.wav')
-recent_file = max(wav_file_name, key=os.path.getmtime)
-print(recent_file)
+def take_vad(wav_file):
+    # 녹음된 파일에 VAD 알고리즘을 적용하는 함수
 
-y, sr = librosa.load(recent_file)
+    # 예제 오디오 신호
+    wav_file_name = glob.glob('*.wav')
+    recent_file = max(wav_file_name, key=os.path.getmtime)
 
-# 오디오 신호 자르기
-y_trimmed, index = librosa.effects.trim(y, top_db=30)
-# ----------------------------------------------------------------
+    y, sr = librosa.load(recent_file)
 
-# ----------------------------------------------------------------
-# 잘린 신호를 WAV 파일로 저장
-current_directory = os.path.dirname(os.path.abspath(__file__))
-current_time = datetime.datetime.now().strftime('%Y%m%d_%H-%M-%S')
+    # 오디오 신호 자르기
+    y_trimmed, index = librosa.effects.trim(y, top_db=30)
 
-sf.write('after_VAD_record.wav', y_trimmed, sr)
+    # 잘린 신호를 WAV 파일로 저장
+    #current_time = datetime.datetime.now().strftime('%Y%m%d_%H-%M-%S')
 
+    voice_code = os.path.dirname(os.path.abspath(__file__))
+    source_code = os.path.join(voice_code, "..")
+    after_wav_file = os.path.join(source_code, "record_after_vad.wav")
 
-# 추출 전 원본 음원 파일 삭제
-os.remove(recent_file)
-print("VAD 실행 후 추출 완료...저장된 이름은 after_VAD_record.wav")
+    # VAD 결과를 파일로 저장
+    sf.write(after_wav_file, y_trimmed, sr)
+
+    # 원본 녹음 파일 삭제
+    #os.remove(wav_file)
+
+    print("VAD 실행 후 추출 완료...")
 # ----------------------------------------------------------------
