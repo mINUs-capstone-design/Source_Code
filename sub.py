@@ -148,7 +148,7 @@ class WindowClass(QMainWindow, form_class):
         self.checknoise.hide()
         self.resultnoise.hide()
         self.mainwindow.hide()
-<<<<<<< HEAD
+
         
         # TTS 생성 부분 추가
         # =======================================================
@@ -167,7 +167,7 @@ class WindowClass(QMainWindow, form_class):
         vad.take_vad(new_record_file)
         mel.take_mel(new_record_file)
         
-=======
+
         self.loading.hide()
         self.result.show()
 
@@ -178,7 +178,7 @@ class WindowClass(QMainWindow, form_class):
 
         record.stop()
         self.loading.show()
->>>>>>> loading
+
         # 유사도 측정을 녹음 후에 실행하기
         # 맨위에 __init__ 부분에 이어붙이면, 녹음 전에 먼저 실행됨...
         QTimer.singleShot(5000,self.similar_test)
