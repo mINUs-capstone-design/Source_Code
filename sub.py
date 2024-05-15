@@ -183,7 +183,7 @@ class WindowClass(QMainWindow, form_class):
 
         output1, output2 = model(x0, x1)
         euclidean_distance = F.pairwise_distance(output1, output2)
-        final_similar_score = 80#getScore(euclidean_distance.item())
+        final_similar_score = getScore(euclidean_distance.item())
 
         # 유사도 측정 결과를 pyqt5 위젯에 표시...터미널X
         #print(f"score : {getScore(euclidean_distance.item())}")
