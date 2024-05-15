@@ -175,7 +175,7 @@ class WindowClass(QMainWindow, form_class):
         # x0 : 사용자가 녹음한 음성데이터의 Mel 이미지
         # x1 : 기준이 되는 TTS 음성데이터의 Mel 이미지
         x0 = Image.open("Mel_record_after_vad.jpg")
-        x1 = Image.open("data/testing/korean/Mel_spectrum_VAD_KsponSpeech_000091.jpg")
+        x1 = Image.open("Mel_TTS_woman_record.jpg")
 
         convert_tensor = transforms.Compose([transforms.Resize((99,250)),transforms.ToTensor()])
         x0 = convert_tensor(x0).unsqueeze(0)
