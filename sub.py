@@ -4,7 +4,7 @@ import sys
 import spidev
 
 from PyQt5 import uic
-from PyQt5.QtGui import QColor
+from PyQt5.QtGui import QColor, QMovie
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 
@@ -24,6 +24,7 @@ import button_rc
 from voice_code import vad, mel
 
 form_class = uic.loadUiType("./sub.ui")[0]
+
 # ----------------------------------------------------------------
 
 
@@ -38,18 +39,19 @@ class WindowClass(QMainWindow, form_class):
         self.selectsexual.setHidden(True)
         self.resultnoise.setHidden(True)
         self.result.setHidden(True)
+        self.loading.setHidden(True)
         self.button_selectsexual.clicked.connect(self.uiselectsexual)
         self.button_startchecknoise.clicked.connect(self.uichecknoise)
         self.button_resultnoise.clicked.connect(self.uiresultnoise)
         self.button_resultnoise.clicked.connect(self.show_noise_result)
         self.button_startrecord.clicked.connect(self.start_record)
-        self.button_stoprecord.clicked.connect(self.uiresult)
+        self.button_stoprecord.clicked.connect(self.uiloading)
+
         self.button_backtoselectsexual.clicked.connect(self.uiselectsexual)
         self.button_backtochecknoise.clicked.connect(self.uichecknoise)
         self.button_backtomain.clicked.connect(self.uimain)
         self.button_rerecord.clicked.connect(self.uiresultnoise)
         self.button_exit.clicked.connect(self.close)
-        noise = None
         self.spi = spidev.SpiDev()
         self.spi.open(0,0)
         self.spi.max_speed_hz = 1350000
@@ -59,7 +61,14 @@ class WindowClass(QMainWindow, form_class):
         self.buttongroup_sexual.setExclusive(True)
         self.buttongroup_sexual.addButton(self.check_man,1)
         self.buttongroup_sexual.addButton(self.check_woman,2)
-        
+        self.movie = QMovie('loading.gif', QByteArray(), self)
+        self.movie.setCacheMode(QMovie.CacheAll)
+        # QLabel에 동적 이미지 삽입
+        self.loading_label.setMovie(self.movie)
+        self.movie.start()
+
+        self.timer = QTimer(self)
+
 
     def uimain(self):
         self.selectsexual.hide()
@@ -110,7 +119,7 @@ class WindowClass(QMainWindow, form_class):
         self.select_word.setAlignment(Qt.AlignCenter)
         self.select_word.setText("제시된 단어") #제시된 단어 적기
 
-        noise = None
+
         db_value = 30  # self.read_sensor_data()  # 사운드센서 값 불러옴
         noise = str(db_value) + "db"
 
@@ -140,26 +149,33 @@ class WindowClass(QMainWindow, form_class):
         self.selectsexual.hide()
         self.checknoise.hide()
         self.resultnoise.hide()
-        record.stop()
-        self.result.show()
         self.mainwindow.hide()
-        # 녹음 후 생긴 record.wav에 VAD, MEL 적용
-        new_record_file = "record_after_vad.wav"
-        
-        vad.take_vad(new_record_file)
-        mel.take_mel(new_record_file)
-        
-        # VAD, MEL 적용 전 원본 .wav랑 .jpg 삭제
-        os.remove("record.wav")
-        os.remove("Mel_record.jpg")
-        
+        self.loading.hide()
+        self.result.show()
+
+
+
+
+    def uiloading(self):
+
+        record.stop()
+        self.loading.show()
         # 유사도 측정을 녹음 후에 실행하기
         # 맨위에 __init__ 부분에 이어붙이면, 녹음 전에 먼저 실행됨...
-        self.similar_test()
-    
+        QTimer.singleShot(5000,self.similar_test)
+
     
     # 유사도 측정 함수
     def similar_test(self):
+        new_record_file = "record_after_vad.wav"
+        # 녹음 후 생긴 record.wav에 VAD, MEL 적용
+        vad.take_vad(new_record_file)
+        mel.take_mel(new_record_file)
+
+        # VAD, MEL 적용 전 원본 .wav랑 .jpg 삭제
+        os.remove("record.wav")
+        os.remove("Mel_record.jpg")
+
         # 측정...
         device = "cuda" if torch.cuda.is_available() else "cpu"
         # 모델 이름 경로
@@ -179,7 +195,7 @@ class WindowClass(QMainWindow, form_class):
 
         output1, output2 = model(x0, x1)
         euclidean_distance = F.pairwise_distance(output1, output2)
-        final_similar_score = 80#getScore(euclidean_distance.item())
+        final_similar_score = getScore(euclidean_distance.item())
 
         # 유사도 측정 결과를 pyqt5 위젯에 표시...터미널X
         #print(f"score : {getScore(euclidean_distance.item())}")
@@ -197,17 +213,14 @@ class WindowClass(QMainWindow, form_class):
 
         self.similar_score_text.setText("유사도 안내 : {final_similar_score}%")
         self.similar_score_text.setAlignment(Qt.AlignCenter)
-
-    
-    
+        self.uiresult()
     
     
     def show_noise_result(self):
         self.dialog.setWindowTitle("Dialog")
         self.dialog.setWindowModality(Qt.ApplicationModal)
         self.dialog.resize(300, 200)
-        noise = None
-        db_value = 30#self.read_sensor_data()  # 사운드센서 값 불러옴
+        db_value = self.read_sensor_data()  # 사운드센서 값 불러옴
         noise = str(db_value) + "db"
         self.noiselabel.move(150, 100)
         self.noiselabel.setText(noise)
@@ -219,9 +232,6 @@ class WindowClass(QMainWindow, form_class):
             self.noiselabel.setStyleSheet("COLOR : green")
         self.dialog.setWindowTitle("소음측정결과")
         self.dialog.exec()
-
-
-    
 
 
     #list = ['안녕하세요', '바가지','도깨비','고구마','누룽지','주전자']

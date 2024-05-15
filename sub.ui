@@ -491,11 +491,35 @@ p, li { white-space: pre-wrap; }
      </property>
     </widget>
    </widget>
+   <widget class="QWidget" name="loading" native="true">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>800</width>
+      <height>480</height>
+     </rect>
+    </property>
+    <widget class="QLabel" name="loading_label">
+     <property name="geometry">
+      <rect>
+       <x>309</x>
+       <y>109</y>
+       <width>182</width>
+       <height>182</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </widget>
    <zorder>selectsexual</zorder>
    <zorder>mainwindow</zorder>
    <zorder>result</zorder>
    <zorder>checknoise</zorder>
    <zorder>resultnoise</zorder>
+   <zorder>loading</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
