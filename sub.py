@@ -94,7 +94,7 @@ class WindowClass(QMainWindow, form_class):
         self.given_sentense.setText("단어 리스트 중 랜덤하게 하나 등장") #단어리스트 랜덤하게 뽑아와서 넣으면 완료
 
     def read_sensor_data(self):
-    #     # 사운드 센서값을 불러오는 함수
+        # 사운드 센서값을 불러오는 함수
         while True:
             r = self.spi.xfer2([1, (8 + 0) << 4, 0])
             adc_out = ((r[1] & 3) << 8) + r[2]
@@ -148,26 +148,6 @@ class WindowClass(QMainWindow, form_class):
         self.checknoise.hide()
         self.resultnoise.hide()
         self.mainwindow.hide()
-
-        
-        # TTS 생성 부분 추가
-        # =======================================================
-        if self.check_man.isChecked():
-            print("man 불러오기 완료")
-            man_tts.run_tts()
-        else:
-            print("woman 불러오기 완료")
-            woman_tts.run_tts()
-        # =======================================================
-
-        
-        # 녹음 후 생긴 record.wav에 VAD, MEL 적용
-        new_record_file = "record_after_vad.wav"
-        
-        vad.take_vad(new_record_file)
-        mel.take_mel(new_record_file)
-        
-
         self.loading.hide()
         self.result.show()
 
@@ -181,11 +161,19 @@ class WindowClass(QMainWindow, form_class):
 
         # 유사도 측정을 녹음 후에 실행하기
         # 맨위에 __init__ 부분에 이어붙이면, 녹음 전에 먼저 실행됨...
-        QTimer.singleShot(5000,self.similar_test)
+        QTimer.singleShot(5000,self.vad_mel_test)
 
-    
-    # 유사도 측정 함수
-    def similar_test(self):
+    def vad_mel_test(self):
+        # TTS 생성 부분 추가
+        # =======================================================
+        if self.check_man.isChecked():
+            print("man 불러오기 완료")
+            man_tts.run_tts()
+        else:
+            print("woman 불러오기 완료")
+            woman_tts.run_tts()
+        # =======================================================
+
         new_record_file = "record_after_vad.wav"
         # 녹음 후 생긴 record.wav에 VAD, MEL 적용
         vad.take_vad(new_record_file)
@@ -194,6 +182,12 @@ class WindowClass(QMainWindow, form_class):
         # VAD, MEL 적용 전 원본 .wav랑 .jpg 삭제
         os.remove("record.wav")
         os.remove("Mel_record.jpg")
+        self.similar_test()
+    
+    # 유사도 측정 함수
+    def similar_test(self):
+
+
 
         # 측정...
         device = "cuda" if torch.cuda.is_available() else "cpu"
