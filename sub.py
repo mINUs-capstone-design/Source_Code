@@ -125,12 +125,10 @@ class WindowClass(QMainWindow, form_class):
     
     # 녹음시작
     def start_record(self):
-        # 녹음 시작 전에, 유사도 측정한 파일들 삭제
-        if os.path.exists("record_after_vad.wav"):
-            os.remove("record_after_vad.wav")
-        if os.path.exists("Mel_record_after_vad.jpg"):
-            os.remove("Mel_record_after_vad.jpg")
-            
+
+        [os.remove(os.path.join('.', filename)) for filename in os.listdir('.') if filename.endswith('.wav')]
+        [os.remove(os.path.join('.', filename)) for filename in os.listdir('.') if filename.endswith('.jpg')]
+        
         self.button_startrecord.hide()
         self.button_stoprecord.show()
         record.start()
@@ -143,15 +141,23 @@ class WindowClass(QMainWindow, form_class):
         record.stop()
         self.result.show()
         self.mainwindow.hide()
+        
+        # TTS 생성 부분 추가
+        # =======================================================
+        if self.check_man.isChecked():
+            print("man 불러오기 완료")
+            man_tts.run_tts()
+        else:
+            print("woman 불러오기 완료")
+            woman_tts.run_tts()
+        # =======================================================
+
+        
         # 녹음 후 생긴 record.wav에 VAD, MEL 적용
         new_record_file = "record_after_vad.wav"
         
         vad.take_vad(new_record_file)
         mel.take_mel(new_record_file)
-        
-        # VAD, MEL 적용 전 원본 .wav랑 .jpg 삭제
-        os.remove("record.wav")
-        os.remove("Mel_record.jpg")
         
         # 유사도 측정을 녹음 후에 실행하기
         # 맨위에 __init__ 부분에 이어붙이면, 녹음 전에 먼저 실행됨...
@@ -174,8 +180,6 @@ class WindowClass(QMainWindow, form_class):
         convert_tensor = transforms.Compose([transforms.Resize((99,250)),transforms.ToTensor()])
         x0 = convert_tensor(x0).unsqueeze(0)
         x1 = convert_tensor(x1).unsqueeze(0)
-        print(x0.shape)
-        print(x1.shape)
 
         output1, output2 = model(x0, x1)
         euclidean_distance = F.pairwise_distance(output1, output2)
