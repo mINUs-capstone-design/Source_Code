@@ -4,6 +4,7 @@ import sys
 import spidev
 
 from PyQt5 import uic
+from PyQt5.QtGui import QColor
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 
@@ -81,12 +82,11 @@ class WindowClass(QMainWindow, form_class):
         self.result.hide()
         self.mainwindow.hide()
         self.noiselabel.clear()
-    
-    
+        self.given_sentense.setText("단어 리스트 중 랜덤하게 하나 등장") #단어리스트 랜덤하게 뽑아와서 넣으면 완료
+
     def read_sensor_data(self):
     #     # 사운드 센서값을 불러오는 함수
         while True:
-            
             r = self.spi.xfer2([1, (8 + 0) << 4, 0])
             adc_out = ((r[1] & 3) << 8) + r[2]
             analog_value = adc_out
@@ -106,6 +106,22 @@ class WindowClass(QMainWindow, form_class):
         #self.select_word.setPlainText(random(list))
         self.result.hide()
         self.mainwindow.hide()
+
+        self.select_word.setAlignment(Qt.AlignCenter)
+        self.select_word.setText("제시된 단어") #제시된 단어 적기
+
+        noise = None
+        db_value = 30  # self.read_sensor_data()  # 사운드센서 값 불러옴
+        noise = str(db_value) + "db"
+
+        if db_value > 40:
+            self.present_db.setTextColor(QColor("Red"))
+        elif db_value <= 40 and db_value > 20:
+            self.present_db.setTextColor(QColor("Orange"))
+        else:
+            self.present_db.setTextColor(QColor("Green"))
+        self.present_db.setText(noise)
+        self.present_db.setAlignment(Qt.AlignCenter)
     
     # 녹음시작
     def start_record(self):
@@ -127,7 +143,6 @@ class WindowClass(QMainWindow, form_class):
         record.stop()
         self.result.show()
         self.mainwindow.hide()
-
         # 녹음 후 생긴 record.wav에 VAD, MEL 적용
         new_record_file = "record_after_vad.wav"
         
@@ -149,7 +164,7 @@ class WindowClass(QMainWindow, form_class):
         device = "cuda" if torch.cuda.is_available() else "cpu"
         # 모델 이름 경로
         model = torch.load("siamese_net_v4.pt", map_location=device)
-        
+
         # 비교하려는 이미지(.jpg)들의 경로
         # x0 : 사용자가 녹음한 음성데이터의 Mel 이미지
         # x1 : 기준이 되는 TTS 음성데이터의 Mel 이미지
@@ -164,7 +179,7 @@ class WindowClass(QMainWindow, form_class):
 
         output1, output2 = model(x0, x1)
         euclidean_distance = F.pairwise_distance(output1, output2)
-        final_similar_score = getScore(euclidean_distance.item())
+        final_similar_score = 80#getScore(euclidean_distance.item())
 
         # 유사도 측정 결과를 pyqt5 위젯에 표시...터미널X
         #print(f"score : {getScore(euclidean_distance.item())}")
@@ -173,7 +188,16 @@ class WindowClass(QMainWindow, form_class):
         # self.[].setText() 함수 이용
         # ex) self.text_label.setText('hello world') 형태...self는 함수에서 써야 함
         # f"" 안에 띄어쓰기 -> 위젯에서 가운데에 표시하려고 함 (앞에 8칸 띄기)
-        self.check_word_4.setText(f"        유사도 안내 : {final_similar_score}%")
+        if final_similar_score < 33:
+            self.similar_score_text.setTextColor(QColor("Red"))
+        elif final_similar_score >=33 and final_similar_score < 66:
+            self.similar_score_text.setTextColor(QColor("Orange"))
+        else:
+            self.similar_score_text.setTextColor(QColor("Green"))
+
+        self.similar_score_text.setText("유사도 안내 : {final_similar_score}%")
+        self.similar_score_text.setAlignment(Qt.AlignCenter)
+
     
     
     
@@ -183,7 +207,7 @@ class WindowClass(QMainWindow, form_class):
         self.dialog.setWindowModality(Qt.ApplicationModal)
         self.dialog.resize(300, 200)
         noise = None
-        db_value = self.read_sensor_data()  # 사운드센서 값 불러옴
+        db_value = 30#self.read_sensor_data()  # 사운드센서 값 불러옴
         noise = str(db_value) + "db"
         self.noiselabel.move(150, 100)
         self.noiselabel.setText(noise)
@@ -195,7 +219,8 @@ class WindowClass(QMainWindow, form_class):
             self.noiselabel.setStyleSheet("COLOR : green")
         self.dialog.setWindowTitle("소음측정결과")
         self.dialog.exec()
-        
+
+
     
 
 
