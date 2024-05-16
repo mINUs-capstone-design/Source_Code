@@ -32,6 +32,11 @@ form_class = uic.loadUiType("./sub.ui")[0]
 # ----------------------------------------------------------------
 
 
+# 추가) random word 전역변수 설정 부분
+# =======================================================
+global_selected_sentence = ""
+# =======================================================
+
 
 # ----------------------------------------------------------------
 # button 기능 함수
@@ -89,12 +94,19 @@ class WindowClass(QMainWindow, form_class):
         self.mainwindow.hide()
 
     def select_random_word(self):
+        
+        # =======================================================
+        # 추가) 전역변수 설정 : 랜덤선택된 단어 -> TTS에서 사용
+        global global_selected_sentence
+        # =======================================================
+        
         # 파일에서 단어 리스트 읽어오기
         # 리스트로 변환 (=한 줄씩 단어로 인식)
         # 단어 리스트 중 랜덤하게 선택
         f = io.open('words_list.txt', 'r', encoding='utf-8')
         words_list = f.readlines()
         random_word = random.choice(words_list).strip()
+        global_selected_sentence = random_word
         return random_word
 
     def uichecknoise(self):
@@ -110,6 +122,7 @@ class WindowClass(QMainWindow, form_class):
 
         self.given_sentense.setText(self.selected_sentense)  # 단어리스트 랜덤하게 뽑아와서 넣으면 완료
         self.given_sentense.setAlignment(Qt.AlignCenter)
+        
     # def read_sensor_data(self):
         # 사운드 센서값을 불러오는 함수
         # while True:
