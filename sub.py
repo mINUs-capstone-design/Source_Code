@@ -5,7 +5,7 @@ import sys
 import io
 
 from PyQt5 import uic
-from PyQt5.QtGui import QColor, QMovie
+from PyQt5.QtGui import QColor, QMovie, QFont
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 
@@ -229,9 +229,11 @@ class WindowClass(QMainWindow, form_class):
             self.similar_score_text.setTextColor(QColor("Orange"))
         else:
             self.similar_score_text.setTextColor(QColor("Green"))
-
+        self.similar_score_text.setFont(QFont('Arial', 10, QFont.Bold))
+        self.similar_score_text.setFontPointSize(20)
         self.similar_score_text.setText(f"유사도 안내 : {final_similar_score}%")
         self.similar_score_text.setAlignment(Qt.AlignCenter)
+        self.similar_score_text.setStyleSheet("background-color: rgba(255, 255, 255, 0); border: 1px solid black; border-radius: 10px;")
         self.uiresult()
     
     
