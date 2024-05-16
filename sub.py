@@ -5,7 +5,7 @@ import sys
 import io
 
 from PyQt5 import uic
-from PyQt5.QtGui import QColor, QMovie, QFont
+from PyQt5.QtGui import QColor, QMovie, QFont, QPixmap
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 
@@ -56,22 +56,28 @@ class WindowClass(QMainWindow, form_class):
         self.button_backtomain.clicked.connect(self.uimain)
         self.button_rerecord.clicked.connect(self.uiresultnoise)
         self.button_exit.clicked.connect(self.end_function)
+
+        self.checked_man =False
+        self.checked_wonam = False
+        self.buttongroup_sexual = QButtonGroup(self)
+        self.buttongroup_sexual.addButton(self.check_man, 1)
+        self.buttongroup_sexual.addButton(self.check_woman, 2)
+        self.buttongroup_sexual.setExclusive(True)
         # self.spi = spidev.SpiDev()
         # self.spi.open(0,0)
         # self.spi.max_speed_hz = 1350000
         self.dialog = QDialog()
         self.noiselabel = QLabel(self.dialog)
-        self.buttongroup_sexual = QButtonGroup(self)
-        self.buttongroup_sexual.setExclusive(True)
-        self.buttongroup_sexual.addButton(self.check_man,1)
-        self.buttongroup_sexual.addButton(self.check_woman,2)
+        
         self.movie = QMovie('icons/loading.gif', QByteArray(), self)
         self.movie.setCacheMode(QMovie.CacheAll)
         # QLabel에 동적 이미지 삽입
         self.loading_label.setMovie(self.movie)
         self.movie.start()
-
         self.timer = QTimer(self)
+    
+
+
 
 
     def uimain(self):
@@ -174,7 +180,7 @@ class WindowClass(QMainWindow, form_class):
 
         record.stop()
         self.loading.show()
-
+        self.loading.raise_()
         # 유사도 측정을 녹음 후에 실행하기
         # 맨위에 __init__ 부분에 이어붙이면, 녹음 전에 먼저 실행됨...
         QTimer.singleShot(5000,self.vad_mel_test)

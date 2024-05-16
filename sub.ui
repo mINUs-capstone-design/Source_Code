@@ -19,12 +19,15 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <widget class="QWidget" name="centralwidget">
+  <widget class="QWidget" name="backgroundui">
    <property name="maximumSize">
     <size>
      <width>800</width>
      <height>480</height>
     </size>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
    </property>
    <widget class="QWidget" name="result" native="true">
     <property name="geometry">
@@ -312,16 +315,19 @@ p, li { white-space: pre-wrap; }
      <property name="geometry">
       <rect>
        <x>360</x>
-       <y>360</y>
+       <y>320</y>
        <width>80</width>
-       <height>23</height>
+       <height>81</height>
       </rect>
      </property>
      <property name="autoFillBackground">
-      <bool>true</bool>
+      <bool>false</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border-image:url(:/noise/icons/free-icon-noise-12299217.png)</string>
      </property>
      <property name="text">
-      <string>소음 측정</string>
+      <string/>
      </property>
     </widget>
    </widget>
@@ -366,6 +372,29 @@ p, li { white-space: pre-wrap; }
      </property>
     </widget>
    </widget>
+   <widget class="QWidget" name="loading" native="true">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>800</width>
+      <height>480</height>
+     </rect>
+    </property>
+    <widget class="QLabel" name="loading_label">
+     <property name="geometry">
+      <rect>
+       <x>309</x>
+       <y>109</y>
+       <width>182</width>
+       <height>182</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </widget>
    <widget class="QWidget" name="selectsexual" native="true">
     <property name="geometry">
      <rect>
@@ -380,6 +409,19 @@ p, li { white-space: pre-wrap; }
       <width>800</width>
       <height>480</height>
      </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">self.check_man.setStyleSheet(&quot;QCheckBox {&quot;
+                                     &quot;    border-image: url(/icons/unchecked_man_.png);&quot;
+                                     &quot;}&quot;
+                                     &quot;QCheckBox::indicator {&quot;
+                                     &quot;    width: 0px;&quot;
+                                     &quot;    height: 0px;&quot;
+                                     &quot;    border: none;&quot;
+                                     &quot;}&quot;
+                                     &quot;QCheckBox:checked {&quot;
+                                     &quot;    border-image: url(/icons/checked_man.png);&quot;
+                                     &quot;}&quot;)</string>
     </property>
     <widget class="QPushButton" name="button_backtomain">
      <property name="geometry">
@@ -416,11 +458,14 @@ p, li { white-space: pre-wrap; }
     <widget class="QCheckBox" name="check_woman">
      <property name="geometry">
       <rect>
-       <x>440</x>
-       <y>200</y>
+       <x>480</x>
+       <y>190</y>
        <width>80</width>
-       <height>40</height>
+       <height>80</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border-image: url(:/woman/icons/unchecked_woman.png);</string>
      </property>
      <property name="text">
       <string>여자</string>
@@ -432,11 +477,14 @@ p, li { white-space: pre-wrap; }
     <widget class="QCheckBox" name="check_man">
      <property name="geometry">
       <rect>
-       <x>280</x>
-       <y>200</y>
+       <x>220</x>
+       <y>190</y>
        <width>80</width>
-       <height>40</height>
+       <height>80</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border-image: url(:/man/icons/unchecked_man.png);</string>
      </property>
      <property name="text">
       <string>남자</string>
@@ -472,35 +520,12 @@ p, li { white-space: pre-wrap; }
      </property>
     </widget>
    </widget>
-   <widget class="QWidget" name="loading" native="true">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>800</width>
-      <height>480</height>
-     </rect>
-    </property>
-    <widget class="QLabel" name="loading_label">
-     <property name="geometry">
-      <rect>
-       <x>309</x>
-       <y>109</y>
-       <width>182</width>
-       <height>182</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
-   </widget>
    <zorder>loading</zorder>
-   <zorder>checknoise</zorder>
    <zorder>mainwindow</zorder>
    <zorder>resultnoise</zorder>
-   <zorder>selectsexual</zorder>
    <zorder>result</zorder>
+   <zorder>checknoise</zorder>
+   <zorder>selectsexual</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
