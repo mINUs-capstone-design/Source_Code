@@ -7,7 +7,7 @@ from google.oauth2 import service_account
 # TTS 변환 기능 함수
 def run_tts():
 
-    credentials = service_account.Credentials.from_service_account_file('majestic-cairn-422006-c4-adf3cfa75c37.json')
+    credentials = service_account.Credentials.from_service_account_file('[key].json')
 
     client = texttospeech.TextToSpeechClient(credentials=credentials)
     
