@@ -2,6 +2,23 @@
   <qresource prefix="start_button">
     <file>icons/free-icon-start-button-5261874.png</file>
   </qresource>
+  <qresource prefix="noise">
+    <file>icons/free-icon-noise-12299217.png</file>
+  </qresource>
+  <qresource prefix="woman">
+    <file>icons/checked_woman.png</file>
+    <file>icons/unchecked_woman.png</file>
+  </qresource>
+  <qresource prefix="man">
+    <file>icons/checked_man.png</file>
+    <file>icons/unchecked_man.png</file>
+  </qresource>
+  <qresource prefix="background">
+    <file>icons/galaxy.jpg</file>
+  </qresource>
+  <qresource prefix="result">
+    <file>icons/result.jpg</file>
+  </qresource>
   <qresource prefix="record_button">
     <file>icons/free-icon-voice-recording-3444418.png</file>
     <file>icons/free-icon-voice-3687408.png</file>
