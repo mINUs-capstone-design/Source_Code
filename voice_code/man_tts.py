@@ -5,7 +5,7 @@ from google.oauth2 import service_account
 
 # ----------------------------------------------------------------
 # TTS 변환 기능 함수
-def run_tts():
+def run_tts(global_selected_sentence):
 
     credentials = service_account.Credentials.from_service_account_file('[key].json')
 
@@ -13,7 +13,7 @@ def run_tts():
     
     #text_block = input("텍스트 입력 : ")
     
-    synthesis_input = texttospeech.SynthesisInput(text="사과")
+    synthesis_input = texttospeech.SynthesisInput(text=global_selected_sentence)
 
     voice = texttospeech.VoiceSelectionParams(
         language_code="ko-KR",
