@@ -193,11 +193,7 @@ class WindowClass(QMainWindow, form_class):
         self.loading.hide()
         self.result.show()
 
-
-
-
     def uiloading(self):
-
         record.stop()
         self.loading.show()
         self.loading.raise_()
