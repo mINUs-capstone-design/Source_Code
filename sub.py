@@ -63,11 +63,13 @@ class WindowClass(QMainWindow, form_class):
         self.button_exit.clicked.connect(self.end_function)
 
         self.checked_man =False
-        self.checked_wonam = False
+        self.checked_woman = False
         self.buttongroup_sexual = QButtonGroup(self)
         self.buttongroup_sexual.addButton(self.check_man, 1)
         self.buttongroup_sexual.addButton(self.check_woman, 2)
         self.buttongroup_sexual.setExclusive(True)
+        self.check_man.clicked.connect(self.button_checked_man)
+        self.check_woman.clicked.connect(self.button_checked_woman)
         # self.spi = spidev.SpiDev()
         # self.spi.open(0,0)
         # self.spi.max_speed_hz = 1350000
@@ -81,8 +83,26 @@ class WindowClass(QMainWindow, form_class):
         self.movie.start()
         self.timer = QTimer(self)
     
-
-
+    def button_checked_man(self):
+        self.checked_man = not self.checked_man
+        if self.checked_man:
+            self.check_man.setStyleSheet("border-image: url(./icons/checked_man.png);")
+            self.check_woman.setStyleSheet("border-image: url(./icons/unchecked_woman.png);")
+            if self.checked_woman:
+                self.checked_woman = not self.checked_woman
+        else:
+            self.check_man.setStyleSheet("border-image: url(./icons/unchecked_man.png);")
+            self.check_woman.setStyleSheet("border-image: url(./icons/unchecked_woman.png);")
+    def button_checked_woman(self):
+        self.checked_woman = not self.checked_woman
+        if self.checked_woman:
+            self.check_man.setStyleSheet("border-image: url(./icons/unchecked_man.png);")
+            self.check_woman.setStyleSheet("border-image: url(./icons/checked_woman.png);")
+            if self.checked_man:
+                self.checked_man = not self.checked_man
+        else:
+            self.check_man.setStyleSheet("border-image: url(./icons/unchecked_man.png);")
+            self.check_woman.setStyleSheet("border-image: url(./icons/unchecked_woman.png);")
 
 
     def uimain(self):
@@ -186,11 +206,7 @@ class WindowClass(QMainWindow, form_class):
         self.loading.hide()
         self.result.show()
 
-
-
-
     def uiloading(self):
-
         record.stop()
         self.loading.show()
         self.loading.raise_()

@@ -455,7 +455,7 @@ p, li { white-space: pre-wrap; }
       <string>학습시작</string>
      </property>
     </widget>
-    <widget class="QCheckBox" name="check_woman">
+    <widget class="QPushButton" name="check_woman">
      <property name="geometry">
       <rect>
        <x>480</x>
@@ -468,13 +468,13 @@ p, li { white-space: pre-wrap; }
       <string notr="true">border-image: url(:/woman/icons/unchecked_woman.png);</string>
      </property>
      <property name="text">
-      <string>여자</string>
+      <string/>
      </property>
      <property name="checked">
       <bool>false</bool>
      </property>
     </widget>
-    <widget class="QCheckBox" name="check_man">
+    <widget class="QPushButton" name="check_man">
      <property name="geometry">
       <rect>
        <x>220</x>
@@ -487,7 +487,7 @@ p, li { white-space: pre-wrap; }
       <string notr="true">border-image: url(:/man/icons/unchecked_man.png);</string>
      </property>
      <property name="text">
-      <string>남자</string>
+      <string/>
      </property>
     </widget>
     <widget class="QTextBrowser" name="textBrowser_4">
