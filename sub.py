@@ -1,7 +1,7 @@
 # ----------------------------------------------------------------
 import os
 import sys
-import spidev
+# import spidev
 
 from PyQt5 import uic
 from PyQt5.QtGui import QColor, QMovie
@@ -18,10 +18,13 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
+
+import random
 import button_rc
 
+
 # 추가...voice_code의 vad.py, mel.py
-from voice_code import vad, mel, man_tts, woman_tts
+from voice_code import preprocessing, man_tts, woman_tts
 
 form_class = uic.loadUiType("./sub.ui")[0]
 
@@ -51,17 +54,17 @@ class WindowClass(QMainWindow, form_class):
         self.button_backtochecknoise.clicked.connect(self.uichecknoise)
         self.button_backtomain.clicked.connect(self.uimain)
         self.button_rerecord.clicked.connect(self.uiresultnoise)
-        self.button_exit.clicked.connect(self.close)
-        self.spi = spidev.SpiDev()
-        self.spi.open(0,0)
-        self.spi.max_speed_hz = 1350000
+        self.button_exit.clicked.connect(self.end_function)
+        # self.spi = spidev.SpiDev()
+        # self.spi.open(0,0)
+        # self.spi.max_speed_hz = 1350000
         self.dialog = QDialog()
         self.noiselabel = QLabel(self.dialog)
         self.buttongroup_sexual = QButtonGroup(self)
         self.buttongroup_sexual.setExclusive(True)
         self.buttongroup_sexual.addButton(self.check_man,1)
         self.buttongroup_sexual.addButton(self.check_woman,2)
-        self.movie = QMovie('loading.gif', QByteArray(), self)
+        self.movie = QMovie('icons/loading.gif', QByteArray(), self)
         self.movie.setCacheMode(QMovie.CacheAll)
         # QLabel에 동적 이미지 삽입
         self.loading_label.setMovie(self.movie)
@@ -84,6 +87,14 @@ class WindowClass(QMainWindow, form_class):
         self.result.hide()
         self.mainwindow.hide()
 
+    def select_random_word(self):
+        # 파일에서 단어 리스트 읽어오기
+        # 리스트로 변환 (=한 줄씩 단어로 인식)
+        # 단어 리스트 중 랜덤하게 선택
+        f = open('words_list.txt', 'r', encodings='utf-8')
+        words_list = f.readlines()
+        random_word = random.choice(words_list).strip()
+
     def uichecknoise(self):
         self.selectsexual.hide()
         self.checknoise.show()
@@ -93,19 +104,20 @@ class WindowClass(QMainWindow, form_class):
         self.noiselabel.clear()
         self.given_sentense.setText("단어 리스트 중 랜덤하게 하나 등장") #단어리스트 랜덤하게 뽑아와서 넣으면 완료
 
-    def read_sensor_data(self):
+        selected_sentense = self.select_random_word()
+    # def read_sensor_data(self):
         # 사운드 센서값을 불러오는 함수
-        while True:
-            r = self.spi.xfer2([1, (8 + 0) << 4, 0])
-            adc_out = ((r[1] & 3) << 8) + r[2]
-            analog_value = adc_out
-            if analog_value <= 0:
-                analog_value = 1
-            db_value = round(20 * math.log10(analog_value), 1)
-            time.sleep(0.5)
-            return db_value
+        # while True:
+        #     r = self.spi.xfer2([1, (8 + 0) << 4, 0])
+        #     adc_out = ((r[1] & 3) << 8) + r[2]
+        #     analog_value = adc_out
+        #     if analog_value <= 0:
+        #         analog_value = 1
+        #     db_value = round(20 * math.log10(analog_value), 1)
+        #     time.sleep(0.5)
+        #     return db_value
     
-    
+   
     def uiresultnoise(self):
         self.selectsexual.hide()
         self.checknoise.hide()
@@ -174,21 +186,13 @@ class WindowClass(QMainWindow, form_class):
             woman_tts.run_tts()
         # =======================================================
 
-        new_record_file = "record_after_vad.wav"
-        # 녹음 후 생긴 record.wav에 VAD, MEL 적용
-        vad.take_vad(new_record_file)
-        mel.take_mel(new_record_file)
+        # 녹음 후 생긴 record.wav, tts에 VAD, MEL 적용
 
-        # VAD, MEL 적용 전 원본 .wav랑 .jpg 삭제
-        os.remove("record.wav")
-        os.remove("Mel_record.jpg")
+        preprocessing.wav_to_mel()
         self.similar_test()
     
     # 유사도 측정 함수
     def similar_test(self):
-
-
-
         # 측정...
         device = "cuda" if torch.cuda.is_available() else "cpu"
         # 모델 이름 경로
@@ -197,8 +201,8 @@ class WindowClass(QMainWindow, form_class):
         # 비교하려는 이미지(.jpg)들의 경로
         # x0 : 사용자가 녹음한 음성데이터의 Mel 이미지
         # x1 : 기준이 되는 TTS 음성데이터의 Mel 이미지
-        x0 = Image.open("Mel_record_after_vad.jpg")
-        x1 = Image.open("Mel_TTS_woman_record.jpg")
+        x0 = Image.open("Mel_VAD_record.jpg")
+        x1 = Image.open("Mel_VAD_TTS_record.jpg")
 
         convert_tensor = transforms.Compose([transforms.Resize((99,250)),transforms.ToTensor()])
         x0 = convert_tensor(x0).unsqueeze(0)
@@ -222,7 +226,7 @@ class WindowClass(QMainWindow, form_class):
         else:
             self.similar_score_text.setTextColor(QColor("Green"))
 
-        self.similar_score_text.setText("유사도 안내 : {final_similar_score}%")
+        self.similar_score_text.setText(f"유사도 안내 : {final_similar_score}%")
         self.similar_score_text.setAlignment(Qt.AlignCenter)
         self.uiresult()
     
@@ -231,7 +235,8 @@ class WindowClass(QMainWindow, form_class):
         self.dialog.setWindowTitle("Dialog")
         self.dialog.setWindowModality(Qt.ApplicationModal)
         self.dialog.resize(300, 200)
-        db_value = self.read_sensor_data()  # 사운드센서 값 불러옴
+        # db_value = self.read_sensor_data()  # 사운드센서 값 불러옴
+        db_value = 0
         noise = str(db_value) + "db"
         self.noiselabel.move(150, 100)
         self.noiselabel.setText(noise)
@@ -244,6 +249,10 @@ class WindowClass(QMainWindow, form_class):
         self.dialog.setWindowTitle("소음측정결과")
         self.dialog.exec()
 
+    def end_function(self):
+        [os.remove(os.path.join('.', filename)) for filename in os.listdir('.') if filename.endswith('.wav')]
+        [os.remove(os.path.join('.', filename)) for filename in os.listdir('.') if filename.endswith('.jpg')]
+        self.close()
 
     #list = ['안녕하세요', '바가지','도깨비','고구마','누룽지','주전자']
 # ----------------------------------------------------------------
