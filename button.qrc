@@ -1,16 +1,15 @@
 <RCC>
   <qresource prefix="start_button">
-    <file>free-icon-start-button-5261874.png</file>
+    <file>icons/free-icon-start-button-5261874.png</file>
   </qresource>
   <qresource prefix="record_button">
-    <file>free-icon-voice-recording-3444418.png</file>
-    <file>free-icon-voice-3687408.png</file>
+    <file>icons/free-icon-voice-recording-3444418.png</file>
+    <file>icons/free-icon-voice-3687408.png</file>
   </qresource>
   <qresource prefix="exit_button">
-    <file>free-icon-exit-full-screen-7479439.png</file>
+    <file>icons/free-icon-exit-full-screen-7479439.png</file>
   </qresource>
   <qresource prefix="back_button">
-    <file>free-icon-back-786298.png</file>
-    <file>free-icon-go-back-arrow-17699.png</file>
+    <file>icons/free-icon-back-786298.png</file>
   </qresource>
 </RCC>

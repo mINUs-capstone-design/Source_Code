@@ -2,6 +2,7 @@
 import os
 import sys
 # import spidev
+import io
 
 from PyQt5 import uic
 from PyQt5.QtGui import QColor, QMovie
@@ -91,9 +92,10 @@ class WindowClass(QMainWindow, form_class):
         # 파일에서 단어 리스트 읽어오기
         # 리스트로 변환 (=한 줄씩 단어로 인식)
         # 단어 리스트 중 랜덤하게 선택
-        f = open('words_list.txt', 'r', encodings='utf-8')
+        f = io.open('words_list.txt', 'r', encoding='utf-8')
         words_list = f.readlines()
         random_word = random.choice(words_list).strip()
+        return random_word
 
     def uichecknoise(self):
         self.selectsexual.hide()
@@ -102,9 +104,12 @@ class WindowClass(QMainWindow, form_class):
         self.result.hide()
         self.mainwindow.hide()
         self.noiselabel.clear()
-        self.given_sentense.setText("단어 리스트 중 랜덤하게 하나 등장") #단어리스트 랜덤하게 뽑아와서 넣으면 완료
 
-        selected_sentense = self.select_random_word()
+
+        self.selected_sentense = self.select_random_word()
+
+        self.given_sentense.setText(self.selected_sentense)  # 단어리스트 랜덤하게 뽑아와서 넣으면 완료
+        self.given_sentense.setAlignment(Qt.AlignCenter)
     # def read_sensor_data(self):
         # 사운드 센서값을 불러오는 함수
         # while True:
@@ -128,9 +133,8 @@ class WindowClass(QMainWindow, form_class):
         self.result.hide()
         self.mainwindow.hide()
 
+        self.select_word.setText(self.selected_sentense) #제시된 단어 적기
         self.select_word.setAlignment(Qt.AlignCenter)
-        self.select_word.setText("제시된 단어") #제시된 단어 적기
-
 
         db_value = 30  # self.read_sensor_data()  # 사운드센서 값 불러옴
         noise = str(db_value) + "db"

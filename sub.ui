@@ -111,7 +111,7 @@ p, li { white-space: pre-wrap; }
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">border-image:url(:/exit_button/free-icon-exit-full-screen-7479439.png)</string>
+      <string notr="true">border-image:url(:/exit_button/icons/free-icon-exit-full-screen-7479439.png)</string>
      </property>
      <property name="text">
       <string/>
@@ -127,7 +127,7 @@ p, li { white-space: pre-wrap; }
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">border-image:url(:/record_button/free-icon-voice-recording-3444418.png)</string>
+      <string notr="true">border-image:url(:/record_button/icons/free-icon-voice-recording-3444418.png)</string>
      </property>
      <property name="text">
       <string/>
@@ -179,7 +179,7 @@ p, li { white-space: pre-wrap; }
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">border-image:url(:/back_button/free-icon-back-786298.png)</string>
+      <string notr="true">border-image:url(:/back_button/icons/free-icon-back-786298.png)</string>
      </property>
      <property name="text">
       <string/>
@@ -218,7 +218,7 @@ p, li { white-space: pre-wrap; }
       <bool>false</bool>
      </property>
      <property name="styleSheet">
-      <string notr="true">border-image:url(:/record_button/free-icon-voice-recording-3444418.png)</string>
+      <string notr="true">border-image:url(:/record_button/icons/free-icon-voice-recording-3444418.png)</string>
      </property>
      <property name="text">
       <string/>
@@ -257,7 +257,7 @@ p, li { white-space: pre-wrap; }
       <bool>false</bool>
      </property>
      <property name="styleSheet">
-      <string notr="true">border-image:url(:/record_button/free-icon-voice-3687408.png)</string>
+      <string notr="true">border-image:url(:/record_button/icons/free-icon-voice-3687408.png)</string>
      </property>
      <property name="text">
       <string/>
@@ -295,7 +295,7 @@ p, li { white-space: pre-wrap; }
       </sizepolicy>
      </property>
      <property name="styleSheet">
-      <string notr="true">border-image:url(:/back_button/free-icon-back-786298.png)</string>
+      <string notr="true">border-image:url(:/back_button/icons/free-icon-back-786298.png)</string>
      </property>
      <property name="text">
       <string/>
@@ -378,7 +378,7 @@ p, li { white-space: pre-wrap; }
       <bool>false</bool>
      </property>
      <property name="styleSheet">
-      <string notr="true">border-image : url(:/start_button/free-icon-start-button-5261874.png)</string>
+      <string notr="true">border-image : url(:/start_button/icons/free-icon-start-button-5261874.png)</string>
      </property>
      <property name="text">
       <string/>
@@ -410,7 +410,7 @@ p, li { white-space: pre-wrap; }
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">border-image:url(:/back_button/free-icon-back-786298.png)</string>
+      <string notr="true">border-image:url(:/back_button/icons/free-icon-back-786298.png)</string>
      </property>
      <property name="text">
       <string/>
@@ -514,12 +514,12 @@ p, li { white-space: pre-wrap; }
      </property>
     </widget>
    </widget>
-   <zorder>selectsexual</zorder>
+   <zorder>loading</zorder>
+   <zorder>checknoise</zorder>
    <zorder>mainwindow</zorder>
    <zorder>result</zorder>
-   <zorder>checknoise</zorder>
    <zorder>resultnoise</zorder>
-   <zorder>loading</zorder>
+   <zorder>selectsexual</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
