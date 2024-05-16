@@ -197,10 +197,10 @@ class WindowClass(QMainWindow, form_class):
         # =======================================================
         if self.check_man.isChecked():
             print("man 불러오기 완료")
-            man_tts.run_tts()
+            man_tts.run_tts(global_selected_sentence)
         else:
             print("woman 불러오기 완료")
-            woman_tts.run_tts()
+            woman_tts.run_tts(global_selected_sentence)
         # =======================================================
 
         # 녹음 후 생긴 record.wav, tts에 VAD, MEL 적용
