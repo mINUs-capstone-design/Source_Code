@@ -191,7 +191,7 @@ class WindowClass(QMainWindow, form_class):
         if self.checked_man:
             print("man 불러오기 완료")
             man_tts.run_tts(global_selected_sentence)
-        else:
+        elif self.checked_woman:
             print("woman 불러오기 완료")
             woman_tts.run_tts(global_selected_sentence)
 
