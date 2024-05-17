@@ -25,7 +25,7 @@ def wav_to_mel():
     save_dir = "."
 
     original_files = [f for f in os.listdir(data_dir) if f.endswith(".wav")]
-
+    print(original_files)
     # 반복하여 한번에 여러 파일 처리
     for original_file in original_files:
         # original 파일의 이름
@@ -72,3 +72,6 @@ def wav_to_mel():
         plt.savefig(output_filename, bbox_inches='tight', pad_inches=0)
         plt.close()
         print(".wav 파일에 Mel 알고리즘 적용 완료")
+
+if __name__ == "__main__":
+    wav_to_mel()

@@ -12,6 +12,7 @@ from PyQt5.QtCore import *
 import time
 import math
 import record
+import speak_tts
 
 import torchvision.transforms as transforms
 from PIL import Image
@@ -70,6 +71,8 @@ class WindowClass(QMainWindow, form_class):
         self.buttongroup_sexual.setExclusive(True)
         self.check_man.clicked.connect(self.button_checked_man)
         self.check_woman.clicked.connect(self.button_checked_woman)
+
+        self.button_speak_sentense.clicked.connect(self.speak_sentense_word)
         # self.spi = spidev.SpiDev()
         # self.spi.open(0,0)
         # self.spi.max_speed_hz = 1350000
@@ -146,7 +149,7 @@ class WindowClass(QMainWindow, form_class):
 
         self.selected_sentense = self.select_random_word()
 
-        self.given_sentense.setText(self.selected_sentense)  # 단어리스트 랜덤하게 뽑아와서 넣으면 완료
+        #self.given_sentense.setText(self.selected_sentense)  # 단어리스트 랜덤하게 뽑아와서 넣으면 완료
         self.given_sentense.setAlignment(Qt.AlignCenter)
         
     # def read_sensor_data(self):
@@ -171,7 +174,7 @@ class WindowClass(QMainWindow, form_class):
         #self.select_word.setPlainText(random(list))
         self.result.hide()
         self.mainwindow.hide()
-
+        self.select_word.setFontPointSize(20)
         self.select_word.setText(self.selected_sentense) #제시된 단어 적기
         self.select_word.setAlignment(Qt.AlignCenter)
 
@@ -185,7 +188,16 @@ class WindowClass(QMainWindow, form_class):
             self.present_db.setTextColor(QColor("Green"))
         self.present_db.setText(noise)
         self.present_db.setAlignment(Qt.AlignCenter)
-    
+        if self.checked_man:
+            print("man 불러오기 완료")
+            man_tts.run_tts(global_selected_sentence)
+        else:
+            print("woman 불러오기 완료")
+            woman_tts.run_tts(global_selected_sentence)
+
+    def speak_sentense_word(self):
+        file_name = "TTS_record"
+        speak_tts.speak_sentense_tts(file_name)
     # 녹음시작
     def start_record(self):
 
@@ -216,12 +228,7 @@ class WindowClass(QMainWindow, form_class):
     def vad_mel_test(self):
         # TTS 생성 부분 추가
         # =======================================================
-        if self.checked_man:
-            print("man 불러오기 완료")
-            man_tts.run_tts(global_selected_sentence)
-        else:
-            print("woman 불러오기 완료")
-            woman_tts.run_tts(global_selected_sentence)
+
         # =======================================================
 
         # 녹음 후 생긴 record.wav, tts에 VAD, MEL 적용

@@ -172,10 +172,10 @@ p, li { white-space: pre-wrap; }
     <widget class="QTextBrowser" name="select_word">
      <property name="geometry">
       <rect>
-       <x>360</x>
-       <y>147</y>
-       <width>80</width>
-       <height>31</height>
+       <x>310</x>
+       <y>150</y>
+       <width>181</width>
+       <height>71</height>
       </rect>
      </property>
      <property name="autoFillBackground">
@@ -212,7 +212,7 @@ p, li { white-space: pre-wrap; }
      <property name="geometry">
       <rect>
        <x>310</x>
-       <y>250</y>
+       <y>270</y>
        <width>180</width>
        <height>31</height>
       </rect>
@@ -242,6 +242,25 @@ p, li { white-space: pre-wrap; }
      </property>
      <property name="styleSheet">
       <string notr="true">border-image:url(:/record_button/icons/free-icon-voice-3687408.png)</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="button_speak_sentense">
+     <property name="geometry">
+      <rect>
+       <x>530</x>
+       <y>145</y>
+       <width>80</width>
+       <height>80</height>
+      </rect>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border-image:url(:/speak/icons/free-icon-speaker-4347490.png)</string>
      </property>
      <property name="text">
       <string/>
@@ -294,13 +313,13 @@ p, li { white-space: pre-wrap; }
        <x>220</x>
        <y>80</y>
        <width>360</width>
-       <height>30</height>
+       <height>231</height>
       </rect>
      </property>
      <property name="maximumSize">
       <size>
        <width>16777215</width>
-       <height>30</height>
+       <height>250</height>
       </size>
      </property>
      <property name="html">
@@ -308,7 +327,12 @@ p, li { white-space: pre-wrap; }
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Gulim'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:11pt; font-weight:600;&quot;&gt;제시된 단어&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;소음 측정을 진행해주세요.&lt;/span&gt;&lt;/p&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;결과에 따른 주의 사항&lt;/span&gt;&lt;/p&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:16pt; font-weight:600; color:#00aa7f;&quot;&gt;녹색&lt;/span&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt; : 측정하기에 적합한 환경입니다.&lt;/span&gt;&lt;/p&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:16pt; font-weight:600; color:#ffaa00;&quot;&gt;주황&lt;/span&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt; : 측정 가능하나 약간의 오차가 있음.&lt;/span&gt;&lt;/p&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:16pt; font-weight:600; color:#ff0000;&quot;&gt;빨강&lt;/span&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt; : 제대로 된 측정이 불가능.&lt;/span&gt;&lt;/p&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;주변 소음을 통제 해주세요&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
     <widget class="QPushButton" name="button_resultnoise">
@@ -522,10 +546,10 @@ p, li { white-space: pre-wrap; }
    </widget>
    <zorder>loading</zorder>
    <zorder>mainwindow</zorder>
-   <zorder>resultnoise</zorder>
    <zorder>result</zorder>
-   <zorder>checknoise</zorder>
    <zorder>selectsexual</zorder>
+   <zorder>checknoise</zorder>
+   <zorder>resultnoise</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

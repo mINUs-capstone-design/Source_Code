@@ -22,7 +22,9 @@ def run_tts(global_selected_sentence):
     )
 
     audio_config = texttospeech.AudioConfig(
-        audio_encoding=texttospeech.AudioEncoding.MP3, speaking_rate=0.85
+
+        audio_encoding=texttospeech.AudioEncoding.LINEAR16, speaking_rate=0.85
+
     )
 
     response = client.synthesize_speech(

@@ -7,7 +7,7 @@ from google.oauth2 import service_account
 # TTS 변환 기능 함수
 def run_tts(global_selected_sentence):
 
-    credentials = service_account.Credentials.from_service_account_file('[key].json')
+    credentials = service_account.Credentials.from_service_account_file('majestic-cairn-422006-c4-adf3cfa75c37.json')
 
     client = texttospeech.TextToSpeechClient(credentials=credentials)
     
@@ -22,7 +22,8 @@ def run_tts(global_selected_sentence):
     )
 
     audio_config = texttospeech.AudioConfig(
-        audio_encoding=texttospeech.AudioEncoding.MP3, speaking_rate=0.85
+        audio_encoding=texttospeech.AudioEncoding.LINEAR16, speaking_rate=0.85
+
     )
 
     response = client.synthesize_speech(
@@ -30,7 +31,7 @@ def run_tts(global_selected_sentence):
     )
     
     #OUTPUT = input("저장할 파일이름 & 확장자 입력 : ")
-    
+
     with open("TTS_record.wav", "wb") as out:
         out.write(response.audio_content)
         print(f'Audio content written to file "TTS_record.wav"')
