@@ -70,6 +70,8 @@ class WindowClass(QMainWindow, form_class):
         self.buttongroup_sexual.setExclusive(True)
         self.check_man.clicked.connect(self.button_checked_man)
         self.check_woman.clicked.connect(self.button_checked_woman)
+
+        self.button_speak_sentense.clicked.connect(self.speak_sentense_word)
         # self.spi = spidev.SpiDev()
         # self.spi.open(0,0)
         # self.spi.max_speed_hz = 1350000
@@ -171,7 +173,7 @@ class WindowClass(QMainWindow, form_class):
         #self.select_word.setPlainText(random(list))
         self.result.hide()
         self.mainwindow.hide()
-
+        self.select_word.setFontPointSize(20)
         self.select_word.setText(self.selected_sentense) #제시된 단어 적기
         self.select_word.setAlignment(Qt.AlignCenter)
 
@@ -185,7 +187,9 @@ class WindowClass(QMainWindow, form_class):
             self.present_db.setTextColor(QColor("Green"))
         self.present_db.setText(noise)
         self.present_db.setAlignment(Qt.AlignCenter)
-    
+
+    def speak_sentense_word(self):
+        print('speak')
     # 녹음시작
     def start_record(self):
 

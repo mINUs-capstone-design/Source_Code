@@ -172,10 +172,10 @@ p, li { white-space: pre-wrap; }
     <widget class="QTextBrowser" name="select_word">
      <property name="geometry">
       <rect>
-       <x>360</x>
-       <y>147</y>
-       <width>80</width>
-       <height>31</height>
+       <x>310</x>
+       <y>150</y>
+       <width>181</width>
+       <height>71</height>
       </rect>
      </property>
      <property name="autoFillBackground">
@@ -212,7 +212,7 @@ p, li { white-space: pre-wrap; }
      <property name="geometry">
       <rect>
        <x>310</x>
-       <y>250</y>
+       <y>270</y>
        <width>180</width>
        <height>31</height>
       </rect>
@@ -242,6 +242,25 @@ p, li { white-space: pre-wrap; }
      </property>
      <property name="styleSheet">
       <string notr="true">border-image:url(:/record_button/icons/free-icon-voice-3687408.png)</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="button_speak_sentense">
+     <property name="geometry">
+      <rect>
+       <x>530</x>
+       <y>145</y>
+       <width>80</width>
+       <height>80</height>
+      </rect>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border-image:url(:/speak/icons/free-icon-speaker-4347490.png)</string>
      </property>
      <property name="text">
       <string/>
@@ -527,10 +546,10 @@ p, li { white-space: pre-wrap; }
    </widget>
    <zorder>loading</zorder>
    <zorder>mainwindow</zorder>
-   <zorder>resultnoise</zorder>
    <zorder>result</zorder>
    <zorder>selectsexual</zorder>
    <zorder>checknoise</zorder>
+   <zorder>resultnoise</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
