@@ -1,6 +1,5 @@
 import queue, os, threading
-import time
-
+import keyboard
 import sounddevice as sd
 import soundfile as sf
 from scipy.io.wavfile import write
@@ -42,3 +41,20 @@ def stop():
     recording = False
     recorder.join()
     print("record stop")
+
+def on_press_z(event):
+    if event.name == 'z':
+        start()
+
+# 'x' 키를 누르면 녹음 종료
+def on_press_x(event):
+    if event.name == 'x':
+        stop()
+
+# 키 이벤트 핸들러 등록
+keyboard.on_press(on_press_z)
+keyboard.on_press(on_press_x)
+
+# 프로그램이 종료될 때 키 이벤트 핸들러 제거
+keyboard.wait('esc')
+keyboard.unhook_all()
