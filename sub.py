@@ -146,7 +146,7 @@ class WindowClass(QMainWindow, form_class):
 
         self.selected_sentense = self.select_random_word()
 
-        self.given_sentense.setText(self.selected_sentense)  # 단어리스트 랜덤하게 뽑아와서 넣으면 완료
+        #self.given_sentense.setText(self.selected_sentense)  # 단어리스트 랜덤하게 뽑아와서 넣으면 완료
         self.given_sentense.setAlignment(Qt.AlignCenter)
         
     # def read_sensor_data(self):
