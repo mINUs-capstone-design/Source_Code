@@ -22,7 +22,7 @@ def run_tts(global_selected_sentence):
     )
 
     audio_config = texttospeech.AudioConfig(
-        audio_encoding=texttospeech.AudioEncoding.MP3
+        audio_encoding=texttospeech.AudioEncoding.LINEAR16
     )
 
     response = client.synthesize_speech(
@@ -30,8 +30,8 @@ def run_tts(global_selected_sentence):
     )
     
     #OUTPUT = input("저장할 파일이름 & 확장자 입력 : ")
-    output_file_name = global_selected_sentence + ".wav"
-    with open(output_file_name, "wb") as out:
+
+    with open("TTS_record.wav", "wb") as out:
         out.write(response.audio_content)
         print(f'Audio content written to file "TTS_record.wav"')
 # ----------------------------------------------------------------

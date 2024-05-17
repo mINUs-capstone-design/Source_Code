@@ -188,9 +188,16 @@ class WindowClass(QMainWindow, form_class):
             self.present_db.setTextColor(QColor("Green"))
         self.present_db.setText(noise)
         self.present_db.setAlignment(Qt.AlignCenter)
+        if self.checked_man:
+            print("man 불러오기 완료")
+            man_tts.run_tts(global_selected_sentence)
+        else:
+            print("woman 불러오기 완료")
+            woman_tts.run_tts(global_selected_sentence)
 
     def speak_sentense_word(self):
-        speak_tts.speak_sentense_tts(global_selected_sentence)
+        file_name = "TTS_record"
+        speak_tts.speak_sentense_tts(file_name)
     # 녹음시작
     def start_record(self):
 
@@ -221,12 +228,7 @@ class WindowClass(QMainWindow, form_class):
     def vad_mel_test(self):
         # TTS 생성 부분 추가
         # =======================================================
-        if self.checked_man:
-            print("man 불러오기 완료")
-            man_tts.run_tts(global_selected_sentence)
-        else:
-            print("woman 불러오기 완료")
-            woman_tts.run_tts(global_selected_sentence)
+
         # =======================================================
 
         # 녹음 후 생긴 record.wav, tts에 VAD, MEL 적용
