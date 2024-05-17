@@ -1,10 +1,30 @@
 import pygame
+import os
 
-def speak_sentense_tts(select_sentense):
-    # 초기화
+def speak_sentense_tts(file_name):
+    audio_directory ="."
+    audio_files = list_audio_files(audio_directory)
+    chosen_file = choose_audio_file(audio_files,file_name)
+    chosen_file_path = os.path.join(audio_directory,chosen_file)
+    play_audio(chosen_file_path)
+
+def list_audio_files(directory):
+    """지정된 디렉터리에서 오디오 파일 목록을 반환합니다."""
+    return [f for f in os.listdir(directory) if f.endswith(('.wav', '.mp3'))]
+
+def choose_audio_file(files,file_name):
+    possible_extensions = ['.wav', '.mp3']
+
+    for ext in possible_extensions:
+        chosen_file = file_name + ext
+        if chosen_file in files:
+            return chosen_file
+
+    return None
+def play_audio(file_path):
     pygame.mixer.init()
     # 음성 파일 로드
-    pygame.mixer.music.load(select_sentense)
+    pygame.mixer.music.load(file_path)
     # 음성 파일 재생
     pygame.mixer.music.play()
 

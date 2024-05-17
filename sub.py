@@ -12,6 +12,7 @@ from PyQt5.QtCore import *
 import time
 import math
 import record
+import speak_tts
 
 import torchvision.transforms as transforms
 from PIL import Image
@@ -189,7 +190,7 @@ class WindowClass(QMainWindow, form_class):
         self.present_db.setAlignment(Qt.AlignCenter)
 
     def speak_sentense_word(self):
-        print('speak')
+        speak_tts.speak_sentense_tts(global_selected_sentence)
     # 녹음시작
     def start_record(self):
 
