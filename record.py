@@ -1,5 +1,6 @@
 import queue, os, threading
-import keyboard
+import time
+
 import sounddevice as sd
 import soundfile as sf
 from scipy.io.wavfile import write
@@ -11,7 +12,7 @@ recorder = False
 recording = False
 
 def complicated_record():
-    filename = "record.wav"
+    filename = "voice_code/record.wav"
      # 파일이 존재하지 않으면 새로 생성
     with sf.SoundFile(filename, mode='w', samplerate=SAMPLERATE, subtype='PCM_16', channels=CHANNELS) as file:
         with sd.InputStream(samplerate=SAMPLERATE, device=None, dtype='int16', channels=CHANNELS, callback=complicated_save):
@@ -41,20 +42,3 @@ def stop():
     recording = False
     recorder.join()
     print("record stop")
-
-def on_press_z(event):
-    if event.name == 'z':
-        start()
-
-# 'x' 키를 누르면 녹음 종료
-def on_press_x(event):
-    if event.name == 'x':
-        stop()
-
-# 키 이벤트 핸들러 등록
-keyboard.on_press(on_press_z)
-keyboard.on_press(on_press_x)
-
-# 프로그램이 종료될 때 키 이벤트 핸들러 제거
-keyboard.wait('esc')
-keyboard.unhook_all()
