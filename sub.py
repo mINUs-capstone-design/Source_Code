@@ -177,7 +177,6 @@ class WindowClass(QMainWindow, form_class):
 
         db_value = 30  # self.read_sensor_data()  # 사운드센서 값 불러옴
         noise = str(db_value) + "db"
-
         if db_value > 40:
             self.present_db.setTextColor(QColor("Red"))
         elif db_value <= 40 and db_value > 20:
@@ -279,7 +278,7 @@ class WindowClass(QMainWindow, form_class):
         # db_value = self.read_sensor_data()  # 사운드센서 값 불러옴
         db_value = 30
         noise = str(db_value) + "db"
-        self.noiselabel.move(100, 80)
+        self.noiselabel.move(30, 80)
         if db_value > 40:
             self.noiselabel.setAlignment(Qt.AlignCenter)
             self.noiselanel.setText("주변의 소음이 심합니다. 측정결과가 부정확합니다.")
