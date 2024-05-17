@@ -12,7 +12,7 @@ recorder = False
 recording = False
 
 def complicated_record():
-    filename = "voice_code/record.wav"
+    filename = "record.wav"
      # 파일이 존재하지 않으면 새로 생성
     with sf.SoundFile(filename, mode='w', samplerate=SAMPLERATE, subtype='PCM_16', channels=CHANNELS) as file:
         with sd.InputStream(samplerate=SAMPLERATE, device=None, dtype='int16', channels=CHANNELS, callback=complicated_save):
@@ -42,3 +42,4 @@ def stop():
     recording = False
     recorder.join()
     print("record stop")
+

@@ -177,7 +177,6 @@ class WindowClass(QMainWindow, form_class):
         self.select_word.setFontPointSize(20)
         self.select_word.setText(self.selected_sentense) #제시된 단어 적기
         self.select_word.setAlignment(Qt.AlignCenter)
-
         db_value = 30  # self.read_sensor_data()  # 사운드센서 값 불러옴
         noise = str(db_value) + "db"
         if db_value > 40:
@@ -200,9 +199,6 @@ class WindowClass(QMainWindow, form_class):
         speak_tts.speak_sentense_tts(file_name)
     # 녹음시작
     def start_record(self):
-
-        [os.remove(os.path.join('.', filename)) for filename in os.listdir('.') if filename.endswith('.wav')]
-        [os.remove(os.path.join('.', filename)) for filename in os.listdir('.') if filename.endswith('.jpg')]
         
         self.button_startrecord.hide()
         self.button_stoprecord.show()
