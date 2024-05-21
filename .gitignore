@@ -1,2 +1,4 @@
 siamese_net_v4_cpu.pt
 siamese_net_v4.pt
+*.json
+*.pt
