@@ -5,14 +5,12 @@ import sys
 import io
 
 from PyQt5 import uic
-from PyQt5.QtGui import QColor, QMovie, QFont, QPixmap
+from PyQt5.QtGui import QColor, QMovie, QFont
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 
-import time
-import math
-import record
 import speak_tts
+
 
 import torchvision.transforms as transforms
 from PIL import Image
@@ -22,11 +20,10 @@ import torch.nn.functional as F
 
 
 import random
-import button_rc
-
 
 # 추가...voice_code의 vad.py, mel.py
-from voice_code import preprocessing, man_tts, woman_tts
+from voice_code import preprocessing, man_tts, woman_tts, noise_filter
+import record
 
 form_class = uic.loadUiType("./sub.ui")[0]
 
@@ -40,7 +37,8 @@ global_selected_sentence = ""
 
 
 # ----------------------------------------------------------------
-# button 기능 함수
+
+
 class WindowClass(QMainWindow, form_class):
     def __init__(self):
         super().__init__()
@@ -50,6 +48,7 @@ class WindowClass(QMainWindow, form_class):
         self.resultnoise.setHidden(True)
         self.result.setHidden(True)
         self.loading.setHidden(True)
+        # button 기능 함수
         self.button_selectsexual.clicked.connect(self.uiselectsexual)
         self.button_startchecknoise.clicked.connect(self.uichecknoise)
         self.button_resultnoise.clicked.connect(self.uiresultnoise)
@@ -85,7 +84,7 @@ class WindowClass(QMainWindow, form_class):
         self.loading_label.setMovie(self.movie)
         self.movie.start()
         self.timer = QTimer(self)
-    
+
     def button_checked_man(self):
         self.checked_man = not self.checked_man
         if self.checked_man:
@@ -96,6 +95,7 @@ class WindowClass(QMainWindow, form_class):
         else:
             self.check_man.setStyleSheet("border-image: url(./icons/unchecked_man.png);")
             self.check_woman.setStyleSheet("border-image: url(./icons/unchecked_woman.png);")
+
     def button_checked_woman(self):
         self.checked_woman = not self.checked_woman
         if self.checked_woman:
@@ -199,7 +199,6 @@ class WindowClass(QMainWindow, form_class):
         speak_tts.speak_sentense_tts(file_name)
     # 녹음시작
     def start_record(self):
-        
         self.button_startrecord.hide()
         self.button_stoprecord.show()
         record.start()
@@ -222,23 +221,15 @@ class WindowClass(QMainWindow, form_class):
         QTimer.singleShot(5000,self.vad_mel_test)
 
     def vad_mel_test(self):
-        # TTS 생성 부분 추가
-        # =======================================================
-
-        # =======================================================
-
         # 녹음 후 생긴 record.wav, tts에 VAD, MEL 적용
-
         preprocessing.wav_to_mel()
         self.similar_test()
-    
+
     # 유사도 측정 함수
     def similar_test(self):
-        # 측정...
-        device = "cuda" if torch.cuda.is_available() else "cpu"
-        # 모델 이름 경로
-        model = torch.load("siamese_net_v4.pt", map_location=device)
-
+        # # 측정...
+        #모델 불러오기
+        model = prepare_model()
         # 비교하려는 이미지(.jpg)들의 경로
         # x0 : 사용자가 녹음한 음성데이터의 Mel 이미지
         # x1 : 기준이 되는 TTS 음성데이터의 Mel 이미지
@@ -249,9 +240,11 @@ class WindowClass(QMainWindow, form_class):
         x0 = convert_tensor(x0).unsqueeze(0)
         x1 = convert_tensor(x1).unsqueeze(0)
 
+
         output1, output2 = model(x0, x1)
-        euclidean_distance = F.pairwise_distance(output1, output2)
+        euclidean_distance = F.pairwise_distance(output1,output2)
         final_similar_score = getScore(euclidean_distance.item())
+        print(final_similar_score)
 
         # 유사도 측정 결과를 pyqt5 위젯에 표시...터미널X
         #print(f"score : {getScore(euclidean_distance.item())}")
@@ -300,7 +293,7 @@ class WindowClass(QMainWindow, form_class):
         [os.remove(os.path.join('.', filename)) for filename in os.listdir('.') if filename.endswith('.jpg')]
         self.close()
 
-    #list = ['안녕하세요', '바가지','도깨비','고구마','누룽지','주전자']
+
 # ----------------------------------------------------------------
 
 
@@ -362,7 +355,12 @@ class SiameseNetwork(nn.Module):
         output2 = self.forward_once(input2)
         return output1, output2
 
-
+def prepare_model():
+    # 측정...
+    device = "cuda" if torch.cuda.is_available() else "cpu"
+    # 모델 이름 경로
+    model = torch.load("siamese_net_v5_50epoch.pt", map_location=device)
+    return model
 # 나머진 위에 함수로 옮김
 # ...
 

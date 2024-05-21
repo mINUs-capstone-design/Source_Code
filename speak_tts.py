@@ -35,6 +35,4 @@ def play_audio(file_path):
     while pygame.mixer.music.get_busy():
         pygame.time.Clock().tick(10)
 
-if __name__ == "__main__":
-    file_name = "record"
-    speak_sentense_tts(file_name)
+

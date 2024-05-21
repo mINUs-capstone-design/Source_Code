@@ -9,6 +9,7 @@ import wave
 from PIL import Image
 import matplotlib.pyplot as plt
 from scipy.io.wavfile import read
+from voice_code import noise_filter
 # ----------------------------------------------------------------
 
 # VAD 알고리즘
@@ -31,14 +32,18 @@ def wav_to_mel():
         # original 파일의 이름
         original_path = os.path.join(data_dir, original_file)
 
+        noise_filter.filter_noise_wav(original_file)
         # VAD 적용하여 새로운 .wav 파일 저장
         vad_wav_path = os.path.join(save_dir, f"VAD_{os.path.splitext(original_file)[0]}.wav")
         wav_to_vad(original_path, vad_wav_path)
         original_path = vad_wav_path
+        #noise_filter.filter_noise_wav(original_path)
         print(".wav 파일에 VAD 알고리즘 적용 완료")
 
         # WAV 파일 읽기
         y, sr = librosa.load(original_path)
+
+        print(y.shape)
 
         # Mel-spectrogram 계산
         mel_spectrogram = librosa.feature.melspectrogram(y=y, sr=sr)
@@ -72,6 +77,3 @@ def wav_to_mel():
         plt.savefig(output_filename, bbox_inches='tight', pad_inches=0)
         plt.close()
         print(".wav 파일에 Mel 알고리즘 적용 완료")
-
-if __name__ == "__main__":
-    wav_to_mel()
