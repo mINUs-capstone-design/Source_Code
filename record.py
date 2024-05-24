@@ -5,7 +5,7 @@ import sounddevice as sd
 import soundfile as sf
 from scipy.io.wavfile import write
 
-SAMPLERATE = 22050
+SAMPLERATE = 24000
 CHANNELS = 1
 q = queue.Queue()
 recorder = False
