@@ -292,8 +292,6 @@ class WindowClass(QMainWindow, form_class):
         [os.remove(os.path.join('.', filename)) for filename in os.listdir('.') if filename.endswith('.wav')]
         [os.remove(os.path.join('.', filename)) for filename in os.listdir('.') if filename.endswith('.jpg')]
         self.close()
-
-
 # ----------------------------------------------------------------
 
 
@@ -359,7 +357,7 @@ def prepare_model():
     # 측정...
     device = "cuda" if torch.cuda.is_available() else "cpu"
     # 모델 이름 경로
-    model = torch.load("siamese_net_v5_50epoch.pt", map_location=device)
+    model = torch.load("siamese_net_r1_epoch200.pt", map_location=device)
     return model
 # 나머진 위에 함수로 옮김
 # ...
