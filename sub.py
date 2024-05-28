@@ -235,8 +235,8 @@ class WindowClass(QMainWindow, form_class):
         # x1 : 기준이 되는 TTS 음성데이터의 Mel 이미지
         x0 = Image.open("Mel_VAD_record.jpg")
         x1 = Image.open("Mel_VAD_TTS_record.jpg")
-        x0 = x0.convert("L") # rgb to gray
-        x1 = x1.convert("L")
+        #x0 = x0.convert("L") # rgb to gray
+        #x1 = x1.convert("L")
 
         convert_tensor = transforms.Compose([transforms.Resize((99,250)),transforms.ToTensor()])
         x0 = convert_tensor(x0).unsqueeze(0)
@@ -317,7 +317,7 @@ class SiameseNetwork(nn.Module):
         super(SiameseNetwork, self).__init__()
         self.cnn1 = nn.Sequential(
             nn.ReflectionPad2d(1),
-            nn.Conv2d(1, 4, kernel_size=3),
+            nn.Conv2d(3, 4, kernel_size=3),
             nn.ReLU(inplace=True),
             nn.BatchNorm2d(4),
 
@@ -359,11 +359,7 @@ def prepare_model():
     # 측정...
     device = "cpu"
     # 모델 이름 경로
-<<<<<<< HEAD
     model = torch.load("siamese_net_r1_epoch200.pt", map_location=device)
-=======
-    model = torch.load("siamese_net_v6.pt", map_location=device)
->>>>>>> origin/master
     return model
 # 나머진 위에 함수로 옮김
 # ...
