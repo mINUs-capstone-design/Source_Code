@@ -22,7 +22,7 @@ import torch.nn.functional as F
 import random
 
 # 추가...voice_code의 vad.py, mel.py
-from voice_code import preprocessing, man_tts, woman_tts, noise_filter
+from voice_code import preprocessing, man_tts, woman_tts, noise_filter, etri_test
 import record
 
 form_class = uic.loadUiType("./sub.ui")[0]
@@ -228,6 +228,7 @@ class WindowClass(QMainWindow, form_class):
     # 유사도 측정 함수
     def similar_test(self):
         # # 측정...
+        etri_score = etri_test.score_etri(global_selected_sentence)
         #모델 불러오기
         model = prepare_model()
         # 비교하려는 이미지(.jpg)들의 경로
@@ -237,16 +238,16 @@ class WindowClass(QMainWindow, form_class):
         x1 = Image.open("Mel_VAD_TTS_record.jpg")
         #x0 = x0.convert("L") # rgb to gray
         #x1 = x1.convert("L")
-
-        convert_tensor = transforms.Compose([transforms.Resize((99,250)),transforms.ToTensor()])
+        convert_tensor = transforms.Compose([transforms.Resize((190,256)),transforms.ToTensor()])
         x0 = convert_tensor(x0).unsqueeze(0)
         x1 = convert_tensor(x1).unsqueeze(0)
 
-
         output1, output2 = model(x0, x1)
         euclidean_distance = F.pairwise_distance(output1,output2)
-        final_similar_score = getScore(euclidean_distance.item())
-        print(final_similar_score)
+        siamese_similar_score = getScore(euclidean_distance.item())
+
+        final_score = finalScore(etri_score,siamese_similar_score)
+        print(final_score)
 
         # 유사도 측정 결과를 pyqt5 위젯에 표시...터미널X
         #print(f"score : {getScore(euclidean_distance.item())}")
@@ -255,15 +256,15 @@ class WindowClass(QMainWindow, form_class):
         # self.[].setText() 함수 이용
         # ex) self.text_label.setText('hello world') 형태...self는 함수에서 써야 함
         # f"" 안에 띄어쓰기 -> 위젯에서 가운데에 표시하려고 함 (앞에 8칸 띄기)
-        if final_similar_score < 33:
+        if final_score < 33:
             self.similar_score_text.setTextColor(QColor("Red"))
-        elif final_similar_score >=33 and final_similar_score < 66:
+        elif final_score >=33 and final_score < 66:
             self.similar_score_text.setTextColor(QColor("Orange"))
         else:
             self.similar_score_text.setTextColor(QColor("Green"))
         self.similar_score_text.setFont(QFont('Arial', 10, QFont.Bold))
         self.similar_score_text.setFontPointSize(20)
-        self.similar_score_text.setText(f"유사도 안내 : {final_similar_score}%")
+        self.similar_score_text.setText(f"유사도 안내 : {final_score}%")
         self.similar_score_text.setAlignment(Qt.AlignCenter)
         self.similar_score_text.setStyleSheet("background-color: rgba(255, 255, 255, 0); border: 1px solid black; border-radius: 10px;")
         self.uiresult()
@@ -310,6 +311,12 @@ def getScore(dissimilarity):
   
   return score
 
+def finalScore(etri_score,siames_score):
+    etri_score = etri_score*20
+    etri_score = round(etri_score)
+    final_score = etri_score*0.3 + siames_score *0.7
+    final_score = round(final_score)
+    return final_score
 
 # 유사도 측정 모델
 class SiameseNetwork(nn.Module):
@@ -359,7 +366,7 @@ def prepare_model():
     # 측정...
     device = "cpu"
     # 모델 이름 경로
-    model = torch.load("siamese_net_r1_epoch200.pt", map_location=device)
+    model = torch.load("siamese_net_r1_epoch100.pt", map_location=device)
     return model
 # 나머진 위에 함수로 옮김
 # ...

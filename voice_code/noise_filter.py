@@ -49,20 +49,34 @@ def filter_noise_wav(file_name):
     # 필터링된 오디오 저장
     reduced_noise_audio.export(file_name,format = "wav")
 
+    # plt.figure(figsize=(12, 6))
+    #
+    # plt.subplot(2, 1, 1)
+    # plt.plot(data)
+    # plt.title("Original Audio")
+    # plt.xlabel("Sample")
+    # plt.ylabel("Amplitude")
+    #
+    # plt.subplot(2, 1, 2)
+    # plt.plot(reduced_noise)
+    # plt.title("Filtered Audio")
+    # plt.xlabel("Sample")
+    # plt.ylabel("Amplitude")
+    #
+    # plt.tight_layout()
+    # plt.show()
 
 
 
 
 
 
-
+# reduced_noise = filter_noise_wav("record.wav","filtering_record3.wav")
 
 # 필터링된 오디오 재생 (필요 시)
 # play(reduced_noise_audio)
 
 # 필터링된 오디오를 시각화하여 확인
-# plt.plot(reduced_noise)
-# plt.title("filtered_record.wav")
-# plt.show()
+
 
 

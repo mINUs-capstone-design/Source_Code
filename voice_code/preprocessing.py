@@ -33,6 +33,7 @@ def wav_to_mel():
         original_path = os.path.join(data_dir, original_file)
 
         noise_filter.filter_noise_wav(original_file)
+
         # VAD 적용하여 새로운 .wav 파일 저장
         vad_wav_path = os.path.join(save_dir, f"VAD_{os.path.splitext(original_file)[0]}.wav")
         wav_to_vad(original_path, vad_wav_path)
