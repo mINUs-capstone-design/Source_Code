@@ -18,6 +18,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
+from pydub import AudioSegment
 
 import random
 
@@ -229,6 +230,7 @@ class WindowClass(QMainWindow, form_class):
     def similar_test(self):
         # # 측정...
         etri_score = etri_test.score_etri(global_selected_sentence)
+        print("etri score: ",etri_score)
         #모델 불러오기
         model = prepare_model()
         # 비교하려는 이미지(.jpg)들의 경로
@@ -244,9 +246,12 @@ class WindowClass(QMainWindow, form_class):
 
         output1, output2 = model(x0, x1)
         euclidean_distance = F.pairwise_distance(output1,output2)
+
         siamese_similar_score = getScore(euclidean_distance.item())
+        print(etri_score,siamese_similar_score)
 
         final_score = finalScore(etri_score,siamese_similar_score)
+        #length_final_score = asd("VAD_record.wav","VAD_TTS_record.wav")*final_score
         print(final_score)
 
         # 유사도 측정 결과를 pyqt5 위젯에 표시...터미널X
@@ -302,22 +307,75 @@ class WindowClass(QMainWindow, form_class):
 # ----------------------------------------------------------------
 # 유사도 점수 측정 함수
 def getScore(dissimilarity):
-  
-  if dissimilarity >= 2.0:
-    score = 0
-  else:
-    score = 100 - dissimilarity*50
-    score = round(score)
-  
-  return score
+
+    if dissimilarity >= 2.0:
+        score = 0
+    else:
+        score = 100 - dissimilarity*50
+        score = round(score)
+
+    return score
 
 def finalScore(etri_score,siames_score):
     etri_score = etri_score*20
     etri_score = round(etri_score)
-    final_score = etri_score*0.3 + siames_score *0.7
+    final_score = etri_score*0.4 + siames_score *0.6
     final_score = round(final_score)
     return final_score
 
+def asd(base,voice):
+    # input : 두 음성데이터의 길이
+    # output : 1~5점
+    def get_fluency(base, target):
+        score = 1
+        distance = base - target
+        ratio = abs((distance / base) * 100)
+        if distance >= 0:
+            if ratio <= 25:
+                score = 5
+            elif ratio <= 35:
+                score = 4
+            elif ratio <= 50:
+                score = 3
+            elif ratio <= 60:
+                score = 2
+            else:
+                score = 1
+        else:
+            if ratio <= 10:
+                score = 5
+            elif ratio <= 15:
+                score = 4
+            elif ratio <= 20:
+                score = 3
+            elif ratio <= 25:
+                score = 2
+            else:
+                score = 1
+
+        if score == 5:
+            return 1
+        elif score == 4:
+            return 0.8
+        elif score == 3:
+            return 0.6
+        elif score == 2:
+            return 0.4
+        elif score == 2:
+            return 0.2
+        else:
+            return 0.1
+
+    # 오디오 파일 load
+    base_audio = AudioSegment.from_file(base)
+    voice_audio = AudioSegment.from_file(voice)
+
+    # 단위 : ms
+    base_length = len(base_audio)
+    voice_length = len(voice_audio)
+
+    print(get_fluency(base_length, voice_length))
+    return get_fluency(base_length,voice_length)
 # 유사도 측정 모델
 class SiameseNetwork(nn.Module):
     def __init__(self):

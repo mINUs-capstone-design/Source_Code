@@ -7,7 +7,7 @@ import base64
 def score_etri(text):
     openApiURL = "http://aiopen.etri.re.kr:8000/WiseASR/PronunciationKor"  # 한국어
 
-    accessKey = "767a5874-a73e-40df-ae2c-2557c512c2e5"
+    accessKey = "d27cbccd-0b46-4fb9-8f93-77d391e3dd52"
     audioFilePath = "record.wav"
     languageCode = "korean"
     script = text
@@ -32,11 +32,13 @@ def score_etri(text):
         body=json.dumps(requestJson)
     )
 
-    # print("[responseCode] " + str(response.status))
+    #print("[responseCode] " + str(response.status))
     # print("[responBody]")
-    # print(str(response.data, "utf-8"))
+    #print(str(response.data, "utf-8"))
     response_dict = json.loads(response.data)
     score = float(response_dict['return_object']['score'])
     print("etri score : ",score)
+    return score
 
-# score_etri("김치")
+
+#score_etri("김치")
