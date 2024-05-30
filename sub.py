@@ -23,7 +23,7 @@ from pydub import AudioSegment
 import random
 
 # 추가...voice_code의 vad.py, mel.py
-from voice_code import preprocessing, man_tts, woman_tts, noise_filter, etri_test
+from voice_code import preprocessing, man_tts, woman_tts, noise_filter, opencv_ccoeff
 import record
 
 form_class = uic.loadUiType("./sub.ui")[0]
@@ -229,29 +229,31 @@ class WindowClass(QMainWindow, form_class):
     # 유사도 측정 함수
     def similar_test(self):
         # # 측정...
-        etri_score = etri_test.score_etri(global_selected_sentence)
-        print("etri score: ",etri_score)
+        x0 = "Mel_VAD_record.jpg"
+        x1 = "Mel_VAD_TTS_record.jpg"
         #모델 불러오기
         model = prepare_model()
+        print("log 1")
         # 비교하려는 이미지(.jpg)들의 경로
+        opencv_score = opencv_ccoeff.compare_image(x0,x1)
         # x0 : 사용자가 녹음한 음성데이터의 Mel 이미지
         # x1 : 기준이 되는 TTS 음성데이터의 Mel 이미지
-        x0 = Image.open("Mel_VAD_record.jpg")
-        x1 = Image.open("Mel_VAD_TTS_record.jpg")
+        x0_image = Image.open(x0)
+        x1_image = Image.open(x1)
         #x0 = x0.convert("L") # rgb to gray
         #x1 = x1.convert("L")
         convert_tensor = transforms.Compose([transforms.Resize((190,256)),transforms.ToTensor()])
-        x0 = convert_tensor(x0).unsqueeze(0)
-        x1 = convert_tensor(x1).unsqueeze(0)
+        x0_image = convert_tensor(x0_image).unsqueeze(0)
+        x1_image = convert_tensor(x1_image).unsqueeze(0)
 
-        output1, output2 = model(x0, x1)
+        output1, output2 = model(x0_image, x1_image)
         euclidean_distance = F.pairwise_distance(output1,output2)
 
         siamese_similar_score = getScore(euclidean_distance.item())
-        print(etri_score,siamese_similar_score)
 
-        final_score = finalScore(etri_score,siamese_similar_score)
-        #length_final_score = asd("VAD_record.wav","VAD_TTS_record.wav")*final_score
+
+        final_score = finalScore(opencv_score,siamese_similar_score)
+        #length_final_score = get_length_change("VAD_record.wav","VAD_TTS_record.wav")*final_score
         print(final_score)
 
         # 유사도 측정 결과를 pyqt5 위젯에 표시...터미널X
@@ -316,14 +318,14 @@ def getScore(dissimilarity):
 
     return score
 
-def finalScore(etri_score,siames_score):
-    etri_score = etri_score*20
-    etri_score = round(etri_score)
-    final_score = etri_score*0.4 + siames_score *0.6
+def finalScore(opencv_score,siames_score):
+    opencv_score = opencv_score*100
+    opencv_score = round(opencv_score)
+    final_score = opencv_score*0.3 + siames_score *0.7
     final_score = round(final_score)
     return final_score
 
-def asd(base,voice):
+def get_length_change(base,voice):
     # input : 두 음성데이터의 길이
     # output : 1~5점
     def get_fluency(base, target):
