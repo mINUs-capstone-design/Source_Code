@@ -7,7 +7,7 @@ from google.oauth2 import service_account
 # TTS 변환 기능 함수
 def run_tts(global_selected_sentence):
 
-    credentials = service_account.Credentials.from_service_account_file('majestic-cairn-422006-c4-adf3cfa75c37.json.json')
+    credentials = service_account.Credentials.from_service_account_file('majestic-cairn-422006-c4-adf3cfa75c37.json')
 
     client = texttospeech.TextToSpeechClient(credentials=credentials)
     
@@ -17,13 +17,13 @@ def run_tts(global_selected_sentence):
 
     voice = texttospeech.VoiceSelectionParams(
         language_code="ko-KR",
-        name="ko-KR-Standard-A",
+        name="ko-KR-Standard-B",
         ssml_gender=texttospeech.SsmlVoiceGender.NEUTRAL
     )
 
     audio_config = texttospeech.AudioConfig(
 
-        audio_encoding=texttospeech.AudioEncoding.LINEAR16, speaking_rate=0.85
+        audio_encoding=texttospeech.AudioEncoding.LINEAR16, speaking_rate=0.85, sample_rate_hertz = 22050
 
     )
 
@@ -41,5 +41,5 @@ def run_tts(global_selected_sentence):
 # ----------------------------------------------------------------
 # main문에서 run_tts 함수 실행
 if __name__ == "__main__":
-    run_tts()
+    run_tts("쉴 거에요")
 # ----------------------------------------------------------------

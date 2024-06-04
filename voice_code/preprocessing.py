@@ -42,19 +42,19 @@ def wav_to_mel():
         print(".wav 파일에 VAD 알고리즘 적용 완료")
 
         # WAV 파일 읽기
-        y, sr = librosa.load(original_path)
+        y, sr = librosa.load(original_path,sr = 22050)
 
         print(y.shape)
 
         # Mel-spectrogram 계산
-        mel_spectrogram = librosa.feature.melspectrogram(y=y, sr=sr)
+        mel_spectrogram = librosa.feature.melspectrogram(y=y, sr=sr, n_fft=512, hop_length = 128, win_length= 512)
 
         # Mel-spectrogram을 데시벨로 변환
         mel_spectrogram_db = librosa.power_to_db(mel_spectrogram, ref=np.max)
 
         # Mel-spectrogram 플로팅
-        plt.figure(figsize=(10, 4)) # img 사이즈 변경
-        axes = librosa.display.specshow(mel_spectrogram_db, sr=sr, x_axis='time', y_axis='mel')
+        #plt.figure(figsize=(10, 4)) # img 사이즈 변경
+        axes = librosa.display.specshow(mel_spectrogram_db, sr=sr,n_fft=512, hop_length = 128, win_length= 512, x_axis='time', y_axis='mel')
 
         # plot 그래프 이미지만 나타내기
         plt.yticks(ticks= []) # y축 tick 제거
@@ -78,3 +78,5 @@ def wav_to_mel():
         plt.savefig(output_filename, bbox_inches='tight', pad_inches=0)
         plt.close()
         print(".wav 파일에 Mel 알고리즘 적용 완료")
+
+wav_to_mel()

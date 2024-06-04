@@ -15,3 +15,4 @@ def compare_image(img1_path,img2_path):
     return max_val
 
 
+compare_image("Mel_VAD_TTS_record.jpg", "Mel_VAD_record.jpg")

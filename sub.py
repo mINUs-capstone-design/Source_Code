@@ -355,18 +355,6 @@ def get_length_change(base,voice):
             else:
                 score = 1
 
-        if score == 5:
-            return 1
-        elif score == 4:
-            return 0.8
-        elif score == 3:
-            return 0.6
-        elif score == 2:
-            return 0.4
-        elif score == 2:
-            return 0.2
-        else:
-            return 0.1
 
     # 오디오 파일 load
     base_audio = AudioSegment.from_file(base)
