@@ -79,4 +79,5 @@ def wav_to_mel():
         plt.close()
         print(".wav 파일에 Mel 알고리즘 적용 완료")
 
-wav_to_mel()
+if __name__ == "__main__":
+    wav_to_mel()
