@@ -218,6 +218,8 @@ class WindowClass(QMainWindow, form_class):
         record.stop()
         self.resultnoise.hide()
         self.loading.show()
+        self.loadinglabel.setText("결과 측정 중입니다.")
+        self.loadinglabel.setAlignment(Qt.AlignCenter)
         # 유사도 측정을 녹음 후에 실행하기
         # 맨위에 __init__ 부분에 이어붙이면, 녹음 전에 먼저 실행됨...
         QTimer.singleShot(1000,self.vad_mel_test)
