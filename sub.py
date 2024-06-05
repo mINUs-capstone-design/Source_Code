@@ -163,9 +163,17 @@ class WindowClass(QMainWindow, form_class):
                 analog_value = 1
             db_value = round(20 * math.log10(analog_value), 1)
             time.sleep(0.5)
-            print("db_value = ",db_value)
+            #print("db_value = ",db_value)
             return db_value
-    
+
+    def set_result_noise(self):
+        db_value = 30 #self.read_sensor_data()
+        if db_value > 20:
+            self.now_noise_image.setStyleSheet("border-image: url(./icons/red_lights.png);")
+        elif db_value <= 20 and db_value > 10:
+            self.now_noise_image.setStyleSheet("border-image: url(./icons/orange_lights.png);")
+        else:
+            self.now_noise_image.setStyleSheet("border-image: url(./icons/green_lights.png);")
    
     def uiresultnoise(self):
         self.selectsexual.hide()
@@ -178,14 +186,15 @@ class WindowClass(QMainWindow, form_class):
         self.select_word.setFontPointSize(20)
         self.select_word.setText(self.selected_sentense) #제시된 단어 적기
         self.select_word.setAlignment(Qt.AlignCenter)
-        db_value = 30 #self.read_sensor_data()  # 사운드센서 값 불러옴
-        # noise = str(db_value) + "db"
-        if db_value > 20:
-            self.now_noise_image.setStyleSheet("border-image: url(./icons/red_lights.png);")
-        elif db_value <= 20 and db_value > 10:
-            self.now_noise_image.setStyleSheet("border-image: url(./icons/orange_lights.png);")
-        else:
-            self.now_noise_image.setStyleSheet("border-image: url(./icons/green_lights.png);")
+        self.set_result_noise()
+        # db_value = 30 #self.read_sensor_data()  # 사운드센서 값 불러옴
+        # # noise = str(db_value) + "db"
+        # if db_value > 20:
+        #     self.now_noise_image.setStyleSheet("border-image: url(./icons/red_lights.png);")
+        # elif db_value <= 20 and db_value > 10:
+        #     self.now_noise_image.setStyleSheet("border-image: url(./icons/orange_lights.png);")
+        # else:
+        #     self.now_noise_image.setStyleSheet("border-image: url(./icons/green_lights.png);")
         # self.present_db.setText(noise)
         # self.present_db.setAlignment(Qt.AlignCenter)
         if self.checked_man:
@@ -203,6 +212,7 @@ class WindowClass(QMainWindow, form_class):
         #print(self.read_sensor_data())
         self.button_startrecord.hide()
         self.button_stoprecord.show()
+        self.set_result_noise()
         record.start()
 
     # 녹음종료
