@@ -10,7 +10,7 @@ def compare_image(img1_path,img2_path):
     img2 = load_image(img2_path)
     result = cv2.matchTemplate(img2,img1, cv2.TM_CCOEFF_NORMED)
     _, max_val, _, _ = cv2.minMaxLoc(result)
-    # print(max_val)
+    print(max_val)
     return max_val
 
 
