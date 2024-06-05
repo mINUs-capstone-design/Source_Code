@@ -17,7 +17,7 @@ def run_tts(global_selected_sentence):
 
     voice = texttospeech.VoiceSelectionParams(
         language_code="ko-KR",
-        name="ko-KR-Standard-C",
+        name="ko-KR-Standard-D",
         ssml_gender=texttospeech.SsmlVoiceGender.NEUTRAL
     )
 
@@ -40,5 +40,5 @@ def run_tts(global_selected_sentence):
 # ----------------------------------------------------------------
 #main문에서 run_tts 함수 실행
 if __name__ == "__main__":
-    run_tts("도자기")
+    run_tts("김밥")
 # ----------------------------------------------------------------

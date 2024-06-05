@@ -19,6 +19,9 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color:rgb(255, 255, 255)</string>
+  </property>
   <widget class="QWidget" name="backgroundui">
    <property name="maximumSize">
     <size>
@@ -211,8 +214,8 @@ p, li { white-space: pre-wrap; }
     <widget class="QTextBrowser" name="present_db">
      <property name="geometry">
       <rect>
-       <x>310</x>
-       <y>270</y>
+       <x>600</x>
+       <y>30</y>
        <width>180</width>
        <height>31</height>
       </rect>
@@ -264,6 +267,16 @@ p, li { white-space: pre-wrap; }
      </property>
      <property name="text">
       <string/>
+     </property>
+    </widget>
+    <widget class="QWidget" name="now_noise_image" native="true">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>150</y>
+       <width>171</width>
+       <height>221</height>
+      </rect>
      </property>
     </widget>
    </widget>
@@ -408,14 +421,18 @@ p, li { white-space: pre-wrap; }
     <widget class="QLabel" name="loading_label">
      <property name="geometry">
       <rect>
-       <x>309</x>
-       <y>109</y>
-       <width>182</width>
-       <height>182</height>
+       <x>240</x>
+       <y>100</y>
+       <width>320</width>
+       <height>200</height>
       </rect>
      </property>
+     <property name="styleSheet">
+      <string notr="true">font :30pt
+</string>
+     </property>
      <property name="text">
-      <string/>
+      <string>계산 중입니다</string>
      </property>
     </widget>
    </widget>
@@ -461,22 +478,6 @@ p, li { white-space: pre-wrap; }
      </property>
      <property name="text">
       <string/>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="button_startchecknoise">
-     <property name="geometry">
-      <rect>
-       <x>360</x>
-       <y>360</y>
-       <width>80</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="autoFillBackground">
-      <bool>true</bool>
-     </property>
-     <property name="text">
-      <string>학습시작</string>
      </property>
     </widget>
     <widget class="QPushButton" name="check_woman">
@@ -544,12 +545,12 @@ p, li { white-space: pre-wrap; }
      </property>
     </widget>
    </widget>
-   <zorder>loading</zorder>
    <zorder>mainwindow</zorder>
    <zorder>result</zorder>
-   <zorder>selectsexual</zorder>
    <zorder>checknoise</zorder>
+   <zorder>selectsexual</zorder>
    <zorder>resultnoise</zorder>
+   <zorder>loading</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

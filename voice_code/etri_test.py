@@ -41,4 +41,4 @@ def score_etri(text):
     return score
 
 
-score_etri("한국어")
+score_etri("김밥")
