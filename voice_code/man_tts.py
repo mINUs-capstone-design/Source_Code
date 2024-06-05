@@ -17,12 +17,16 @@ def run_tts(global_selected_sentence):
 
     voice = texttospeech.VoiceSelectionParams(
         language_code="ko-KR",
+<<<<<<< HEAD
         name="ko-KR-Standard-D",
+=======
+        name="ko-KR-Wavenet-C",
+>>>>>>> origin/master
         ssml_gender=texttospeech.SsmlVoiceGender.NEUTRAL
     )
 
     audio_config = texttospeech.AudioConfig(
-        audio_encoding=texttospeech.AudioEncoding.LINEAR16, speaking_rate=0.85
+        audio_encoding=texttospeech.AudioEncoding.LINEAR16, speaking_rate=0.85, sample_rate_hertz = 22050
 
     )
 
