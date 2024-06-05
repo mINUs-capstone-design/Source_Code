@@ -1,7 +1,7 @@
 # ----------------------------------------------------------------
 import os
 import sys
-# import spidev
+import spidev
 import io
 import time,math
 from PyQt5 import uic
@@ -75,9 +75,9 @@ class WindowClass(QMainWindow, form_class):
         
 
         self.button_speak_sentense.clicked.connect(self.speak_sentense_word)
-        # self.spi = spidev.SpiDev()
-        # self.spi.open(0,0)
-        # self.spi.max_speed_hz = 1350000
+        self.spi = spidev.SpiDev()
+        self.spi.open(0,0)
+        self.spi.max_speed_hz = 1350000
         
         
         self.timer = QTimer(self)
@@ -163,11 +163,11 @@ class WindowClass(QMainWindow, form_class):
                 analog_value = 1
             db_value = round(20 * math.log10(analog_value), 1)
             time.sleep(0.5)
-            #print("db_value = ",db_value)
+            print("db_value = ",db_value)
             return db_value
 
     def set_result_noise(self):
-        db_value = 30 #self.read_sensor_data()
+        db_value = self.read_sensor_data()
         if db_value > 20:
             self.now_noise_image.setStyleSheet("border-image: url(./icons/red_lights.png);")
         elif db_value <= 20 and db_value > 10:
@@ -187,6 +187,10 @@ class WindowClass(QMainWindow, form_class):
         self.select_word.setText(self.selected_sentense) #제시된 단어 적기
         self.select_word.setAlignment(Qt.AlignCenter)
         self.set_result_noise()
+<<<<<<< HEAD
+=======
+        
+>>>>>>> origin/master
         if self.checked_man:
             print("man 불러오기 완료")
             man_tts.run_tts(global_selected_sentence)
