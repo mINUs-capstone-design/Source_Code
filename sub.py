@@ -1,7 +1,7 @@
 # ----------------------------------------------------------------
 import os
 import sys
-# import spidev
+import spidev
 import io
 import time,math
 from PyQt5 import uic
@@ -75,9 +75,9 @@ class WindowClass(QMainWindow, form_class):
         
 
         self.button_speak_sentense.clicked.connect(self.speak_sentense_word)
-        # self.spi = spidev.SpiDev()
-        # self.spi.open(0,0)
-        # self.spi.max_speed_hz = 1350000
+        self.spi = spidev.SpiDev()
+        self.spi.open(0,0)
+        self.spi.max_speed_hz = 1350000
         
         
         self.timer = QTimer(self)
@@ -167,7 +167,7 @@ class WindowClass(QMainWindow, form_class):
             return db_value
 
     def set_result_noise(self):
-        db_value = 30 #self.read_sensor_data()
+        db_value = self.read_sensor_data()
         if db_value > 20:
             self.now_noise_image.setStyleSheet("border-image: url(./icons/red_lights.png);")
         elif db_value <= 20 and db_value > 10:
