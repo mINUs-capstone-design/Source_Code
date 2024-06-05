@@ -1,4 +1,5 @@
-siamese_net_v4_cpu.pt
-siamese_net_v4.pt
 *.json
 *.pt
+*.pyc
+__pycache__/*.pyc
+voice_code/__pycache__/*.pyc
