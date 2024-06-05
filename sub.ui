@@ -440,6 +440,7 @@ p, li { white-space: pre-wrap; }
      </property>
      <property name="styleSheet">
       <string notr="true">font :30pt
+
 </string>
      </property>
      <property name="text">
@@ -586,12 +587,12 @@ p, li { white-space: pre-wrap; }
      </property>
     </widget>
    </widget>
-   <zorder>loading</zorder>
    <zorder>mainwindow</zorder>
    <zorder>checknoise</zorder>
    <zorder>selectsexual</zorder>
    <zorder>result</zorder>
    <zorder>resultnoise</zorder>
+   <zorder>loading</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
