@@ -5,7 +5,7 @@ import sys
 import io
 import time,math
 from PyQt5 import uic
-from PyQt5.QtGui import QColor, QMovie, QFont
+from PyQt5.QtGui import QColor, QFont
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 
@@ -23,7 +23,8 @@ from pydub import AudioSegment
 import random
 
 # 추가...voice_code의 vad.py, mel.py
-from voice_code import preprocessing, man_tts, woman_tts, noise_filter, opencv_ccoeff
+from voice_code import preprocessing, man_tts, woman_tts
+from icons import opencv_ccoeff
 import record
 
 form_class = uic.loadUiType("./sub.ui")[0]
@@ -181,11 +182,11 @@ class WindowClass(QMainWindow, form_class):
         db_value = 30 #self.read_sensor_data()  # 사운드센서 값 불러옴
         # noise = str(db_value) + "db"
         if db_value > 20:
-            self.now_noise_image.setStyleSheet("border-image: url(./icons/high-volume.png);")
+            self.now_noise_image.setStyleSheet("border-image: url(./icons/red_lights.png);")
         elif db_value <= 20 and db_value > 10:
-            self.now_noise_image.setStyleSheet("border-image: url(./icons/middle_volume.png);")
+            self.now_noise_image.setStyleSheet("border-image: url(./icons/orange_lights.png);")
         else:
-            self.now_noise_image.setStyleSheet("border-image: url(./icons/low_volume.png);")
+            self.now_noise_image.setStyleSheet("border-image: url(./icons/green_lights.png);")
         # self.present_db.setText(noise)
         # self.present_db.setAlignment(Qt.AlignCenter)
         if self.checked_man:
@@ -234,7 +235,7 @@ class WindowClass(QMainWindow, form_class):
         #모델 불러오기
         model = prepare_model()
         # 비교하려는 이미지(.jpg)들의 경로
-        opencv_score = opencv_ccoeff.compare_image(x0,x1)
+        opencv_score = opencv_ccoeff.compare_image(x0, x1)
         if opencv_score == 1 or opencv_score < 0:
             self.similar_score_text.setTextColor(QColor("Red"))
             self.similar_score_text.setFont(QFont('Arial', 10, QFont.Bold))
@@ -268,17 +269,32 @@ class WindowClass(QMainWindow, form_class):
             # self.[].setText() 함수 이용
             # ex) self.text_label.setText('hello world') 형태...self는 함수에서 써야 함
             # f"" 안에 띄어쓰기 -> 위젯에서 가운데에 표시하려고 함 (앞에 8칸 띄기)
-            if final_score < 33:
-                self.similar_score_text.setTextColor(QColor("Red"))
-            elif final_score >=33 and final_score < 66:
-                self.similar_score_text.setTextColor(QColor("Orange"))
-            else:
-                self.similar_score_text.setTextColor(QColor("Green"))
             self.similar_score_text.setFont(QFont('Arial', 10, QFont.Bold))
             self.similar_score_text.setFontPointSize(20)
+            self.text_score.setFont(QFont('Arial', 10, QFont.Bold))
+            self.text_score.setFontPointSize(20)
+            if final_score < 30:
+                self.similar_score_text.setTextColor(QColor("Red"))
+                self.text_score.setTextColor(QColor("Red"))
+                self.text_score.setText("발음이 많이 미숙")
+            elif final_score >=30 and final_score < 50:
+                self.similar_score_text.setTextColor(QColor("Orange"))
+                self.text_score.setTextColor(QColor("Orange"))
+                self.text_score.setText("외국인")
+            elif final_score >=50 and final_score < 70:
+                self.similar_score_text.setTextColor(QColor("Yellow"))
+                self.text_score.setTextColor(QColor("Yellow"))
+                self.text_score.setText("발음 꽤 하는 외국인")
+            else:
+                self.similar_score_text.setTextColor(QColor("Green"))
+                self.text_score.setTextColor(QColor("Yellow"))
+                self.text_score.setText("한국인")
             self.similar_score_text.setText(f"유사도 안내 : {final_score}%")
         self.similar_score_text.setAlignment(Qt.AlignCenter)
         self.similar_score_text.setStyleSheet("background-color: rgba(255, 255, 255, 0); border: 1px solid black; border-radius: 10px;")
+        self.text_score.setAlignment(Qt.AlignCenter)
+        self.text_score.setStyleSheet(
+            "background-color: rgba(255, 255, 255, 0); border: 1px solid black; border-radius: 10px;")
         self.uiresult()
     
     

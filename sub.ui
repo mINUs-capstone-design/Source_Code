@@ -280,10 +280,10 @@ p, li { white-space: pre-wrap; }
     <widget class="QWidget" name="now_noise_image" native="true">
      <property name="geometry">
       <rect>
-       <x>90</x>
-       <y>140</y>
+       <x>590</x>
+       <y>0</y>
        <width>171</width>
-       <height>221</height>
+       <height>101</height>
       </rect>
      </property>
     </widget>
@@ -586,9 +586,9 @@ p, li { white-space: pre-wrap; }
    <zorder>loading</zorder>
    <zorder>mainwindow</zorder>
    <zorder>checknoise</zorder>
-   <zorder>resultnoise</zorder>
    <zorder>selectsexual</zorder>
    <zorder>result</zorder>
+   <zorder>resultnoise</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
