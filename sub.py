@@ -187,16 +187,6 @@ class WindowClass(QMainWindow, form_class):
         self.select_word.setText(self.selected_sentense) #제시된 단어 적기
         self.select_word.setAlignment(Qt.AlignCenter)
         self.set_result_noise()
-        # db_value = 30 #self.read_sensor_data()  # 사운드센서 값 불러옴
-        # # noise = str(db_value) + "db"
-        # if db_value > 20:
-        #     self.now_noise_image.setStyleSheet("border-image: url(./icons/red_lights.png);")
-        # elif db_value <= 20 and db_value > 10:
-        #     self.now_noise_image.setStyleSheet("border-image: url(./icons/orange_lights.png);")
-        # else:
-        #     self.now_noise_image.setStyleSheet("border-image: url(./icons/green_lights.png);")
-        # self.present_db.setText(noise)
-        # self.present_db.setAlignment(Qt.AlignCenter)
         if self.checked_man:
             print("man 불러오기 완료")
             man_tts.run_tts(global_selected_sentence)
@@ -250,6 +240,10 @@ class WindowClass(QMainWindow, form_class):
             self.similar_score_text.setFont(QFont('Arial', 10, QFont.Bold))
             self.similar_score_text.setFontPointSize(20)
             self.similar_score_text.setText(f"측정 불가")
+            self.text_score.setFont(QFont('Arial', 10, QFont.Bold))
+            self.text_score.setFontPointSize(20)
+            self.text_score.setTextColor(QColor("Red"))
+            self.text_score.setText("재녹음 해주세요")
         else:
             # x0 : 사용자가 녹음한 음성데이터의 Mel 이미지
             # x1 : 기준이 되는 TTS 음성데이터의 Mel 이미지
@@ -305,28 +299,7 @@ class WindowClass(QMainWindow, form_class):
         self.text_score.setStyleSheet(
             "background-color: rgba(255, 255, 255, 0); border: 1px solid black; border-radius: 10px;")
         self.uiresult()
-    
-    
-    # def show_noise_result(self):
-    #     self.dialog.setWindowTitle("Dialog")
-    #     self.dialog.setWindowModality(Qt.ApplicationModal)
-    #     self.dialog.resize(300, 200)
-    #     # db_value = self.read_sensor_data()  # 사운드센서 값 불러옴
-    #     db_value = 30
-    #     noise = str(db_value) + "db"
-    #     self.noiselabel.move(30, 80)
-    #     if db_value > 40:
-    #         self.noiselabel.setAlignment(Qt.AlignCenter)
-    #         self.noiselanel.setText("주변의 소음이 심합니다. 측정결과가 부정확합니다.")
-    #         self.noiselabel.setStyleSheet("COLOR : red")
-    #     elif db_value <= 40 and db_value > 20:
-    #         self.noiselabel.setText("주변에 약간의 소음이 있습니다. 주의해주세요")
-    #         self.noiselabel.setStyleSheet("COLOR : Orange")
-    #     else:
-    #         self.noiselabel.setText("테스트하기에 적당한 소음입니다. 녹음을 진행해주세요.")
-    #         self.noiselabel.setStyleSheet("COLOR : green")
-    #     self.dialog.setWindowTitle("소음측정결과")
-    #     self.dialog.exec()
+
 
     def end_function(self):
         [os.remove(os.path.join('.', filename)) for filename in os.listdir('.') if filename.endswith('.wav')]
