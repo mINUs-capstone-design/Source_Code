@@ -280,11 +280,14 @@ p, li { white-space: pre-wrap; }
     <widget class="QWidget" name="now_noise_image" native="true">
      <property name="geometry">
       <rect>
-       <x>590</x>
-       <y>0</y>
-       <width>171</width>
-       <height>101</height>
+       <x>600</x>
+       <y>-30</y>
+       <width>181</width>
+       <height>181</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
      </property>
     </widget>
    </widget>

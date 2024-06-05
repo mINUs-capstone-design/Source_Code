@@ -23,8 +23,7 @@ from pydub import AudioSegment
 import random
 
 # 추가...voice_code의 vad.py, mel.py
-from voice_code import preprocessing, man_tts, woman_tts
-from icons import opencv_ccoeff
+from voice_code import preprocessing, man_tts, woman_tts, opencv_ccoeff
 import record
 
 form_class = uic.loadUiType("./sub.ui")[0]
@@ -282,12 +281,12 @@ class WindowClass(QMainWindow, form_class):
                 self.text_score.setTextColor(QColor("Orange"))
                 self.text_score.setText("외국인")
             elif final_score >=50 and final_score < 70:
-                self.similar_score_text.setTextColor(QColor("Yellow"))
-                self.text_score.setTextColor(QColor("Yellow"))
+                self.similar_score_text.setTextColor(QColor("Orange"))
+                self.text_score.setTextColor(QColor("Orange"))
                 self.text_score.setText("발음 꽤 하는 외국인")
             else:
                 self.similar_score_text.setTextColor(QColor("Green"))
-                self.text_score.setTextColor(QColor("Yellow"))
+                self.text_score.setTextColor(QColor("Green"))
                 self.text_score.setText("한국인")
             self.similar_score_text.setText(f"유사도 안내 : {final_score}%")
         self.similar_score_text.setAlignment(Qt.AlignCenter)
