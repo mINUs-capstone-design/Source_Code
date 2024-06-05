@@ -282,26 +282,26 @@ class WindowClass(QMainWindow, form_class):
         self.uiresult()
     
     
-    def show_noise_result(self):
-        self.dialog.setWindowTitle("Dialog")
-        self.dialog.setWindowModality(Qt.ApplicationModal)
-        self.dialog.resize(300, 200)
-        # db_value = self.read_sensor_data()  # 사운드센서 값 불러옴
-        db_value = 30
-        noise = str(db_value) + "db"
-        self.noiselabel.move(30, 80)
-        if db_value > 40:
-            self.noiselabel.setAlignment(Qt.AlignCenter)
-            self.noiselanel.setText("주변의 소음이 심합니다. 측정결과가 부정확합니다.")
-            self.noiselabel.setStyleSheet("COLOR : red")
-        elif db_value <= 40 and db_value > 20:
-            self.noiselabel.setText("주변에 약간의 소음이 있습니다. 주의해주세요")
-            self.noiselabel.setStyleSheet("COLOR : Orange")
-        else:
-            self.noiselabel.setText("테스트하기에 적당한 소음입니다. 녹음을 진행해주세요.")
-            self.noiselabel.setStyleSheet("COLOR : green")
-        self.dialog.setWindowTitle("소음측정결과")
-        self.dialog.exec()
+    # def show_noise_result(self):
+    #     self.dialog.setWindowTitle("Dialog")
+    #     self.dialog.setWindowModality(Qt.ApplicationModal)
+    #     self.dialog.resize(300, 200)
+    #     # db_value = self.read_sensor_data()  # 사운드센서 값 불러옴
+    #     db_value = 30
+    #     noise = str(db_value) + "db"
+    #     self.noiselabel.move(30, 80)
+    #     if db_value > 40:
+    #         self.noiselabel.setAlignment(Qt.AlignCenter)
+    #         self.noiselanel.setText("주변의 소음이 심합니다. 측정결과가 부정확합니다.")
+    #         self.noiselabel.setStyleSheet("COLOR : red")
+    #     elif db_value <= 40 and db_value > 20:
+    #         self.noiselabel.setText("주변에 약간의 소음이 있습니다. 주의해주세요")
+    #         self.noiselabel.setStyleSheet("COLOR : Orange")
+    #     else:
+    #         self.noiselabel.setText("테스트하기에 적당한 소음입니다. 녹음을 진행해주세요.")
+    #         self.noiselabel.setStyleSheet("COLOR : green")
+    #     self.dialog.setWindowTitle("소음측정결과")
+    #     self.dialog.exec()
 
     def end_function(self):
         [os.remove(os.path.join('.', filename)) for filename in os.listdir('.') if filename.endswith('.wav')]
