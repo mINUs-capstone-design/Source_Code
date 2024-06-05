@@ -293,6 +293,9 @@ class WindowClass(QMainWindow, form_class):
                 self.text_score.setTextColor(QColor("Orange"))
                 self.text_score.setText("발음 꽤 하는 외국인")
             else:
+                final_score = 70 + (final_score - 70)*2
+                if final_score >=100:
+                    final_score = 100
                 self.similar_score_text.setTextColor(QColor("Green"))
                 self.text_score.setTextColor(QColor("Green"))
                 self.text_score.setText("한국인")
