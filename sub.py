@@ -187,10 +187,7 @@ class WindowClass(QMainWindow, form_class):
         self.select_word.setText(self.selected_sentense) #제시된 단어 적기
         self.select_word.setAlignment(Qt.AlignCenter)
         self.set_result_noise()
-<<<<<<< HEAD
-=======
         
->>>>>>> origin/master
         if self.checked_man:
             print("man 불러오기 완료")
             man_tts.run_tts(global_selected_sentence)
