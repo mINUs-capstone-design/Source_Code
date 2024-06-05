@@ -2,3 +2,4 @@
 *.pt
 *.pyc
 __pycache__/*.pyc
+voice_code/__pycache__/*.pyc
