@@ -1,5 +1,5 @@
 *.json
 *.pt
 *.pyc
-__pycache__/*.pyc
-voice_code/__pycache__/*.pyc
+__pycache__/
+voice_code/__pycache__/
