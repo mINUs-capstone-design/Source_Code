@@ -1,7 +1,7 @@
 # ----------------------------------------------------------------
 import os
 import sys
-import spidev
+# import spidev
 import io
 import time,math
 from PyQt5 import uic
@@ -48,6 +48,7 @@ class WindowClass(QMainWindow, form_class):
         self.selectsexual.setHidden(True)
         self.resultnoise.setHidden(True)
         self.result.setHidden(True)
+        self.loading.setHidden(True)
         # button 기능 함수
         self.button_selectsexual.clicked.connect(self.uiselectsexual)
         #elf.button_startchecknoise.clicked.connect(self.uichecknoise)
@@ -74,9 +75,9 @@ class WindowClass(QMainWindow, form_class):
         
 
         self.button_speak_sentense.clicked.connect(self.speak_sentense_word)
-        self.spi = spidev.SpiDev()
-        self.spi.open(0,0)
-        self.spi.max_speed_hz = 1350000
+        # self.spi = spidev.SpiDev()
+        # self.spi.open(0,0)
+        # self.spi.max_speed_hz = 1350000
         
         
         self.timer = QTimer(self)
@@ -177,16 +178,16 @@ class WindowClass(QMainWindow, form_class):
         self.select_word.setFontPointSize(20)
         self.select_word.setText(self.selected_sentense) #제시된 단어 적기
         self.select_word.setAlignment(Qt.AlignCenter)
-        db_value =  self.read_sensor_data()  # 사운드센서 값 불러옴
-        noise = str(db_value) + "db"
+        db_value = 30 #self.read_sensor_data()  # 사운드센서 값 불러옴
+        # noise = str(db_value) + "db"
         if db_value > 20:
-            self.present_db.setTextColor(QColor("Red"))
+            self.now_noise_image.setStyleSheet("border-image: url(./icons/high-volume.png);")
         elif db_value <= 20 and db_value > 10:
-            self.present_db.setTextColor(QColor("Orange"))
+            self.now_noise_image.setStyleSheet("border-image: url(./icons/middle_volume.png);")
         else:
-            self.present_db.setTextColor(QColor("Green"))
-        self.present_db.setText(noise)
-        self.present_db.setAlignment(Qt.AlignCenter)
+            self.now_noise_image.setStyleSheet("border-image: url(./icons/low_volume.png);")
+        # self.present_db.setText(noise)
+        # self.present_db.setAlignment(Qt.AlignCenter)
         if self.checked_man:
             print("man 불러오기 완료")
             man_tts.run_tts(global_selected_sentence)
@@ -199,7 +200,7 @@ class WindowClass(QMainWindow, form_class):
         speak_tts.speak_sentense_tts(file_name)
     # 녹음시작
     def start_record(self):
-        print(self.read_sensor_data())
+        #print(self.read_sensor_data())
         self.button_startrecord.hide()
         self.button_stoprecord.show()
         record.start()
@@ -214,6 +215,8 @@ class WindowClass(QMainWindow, form_class):
 
     def uiloading(self):
         record.stop()
+        self.resultnoise.hide()
+        self.loading.show()
         # 유사도 측정을 녹음 후에 실행하기
         # 맨위에 __init__ 부분에 이어붙이면, 녹음 전에 먼저 실행됨...
         QTimer.singleShot(1000,self.vad_mel_test)

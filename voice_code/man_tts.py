@@ -17,11 +17,7 @@ def run_tts(global_selected_sentence):
 
     voice = texttospeech.VoiceSelectionParams(
         language_code="ko-KR",
-<<<<<<< HEAD
-        name="ko-KR-Standard-D",
-=======
         name="ko-KR-Wavenet-C",
->>>>>>> origin/master
         ssml_gender=texttospeech.SsmlVoiceGender.NEUTRAL
     )
 
