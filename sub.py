@@ -254,67 +254,67 @@ class WindowClass(QMainWindow, form_class):
         else:
             accuracy = complcate_text.compare_korean_words(global_selected_sentence,global_TTS_sentence)
             print(accuracy)
-        if opencv_score == 1 or opencv_score < 0.2 or accuracy < 0.5:
-            self.similar_score_text.setTextColor(QColor("Red"))
-            self.similar_score_text.setFont(QFont('Arial', 10, QFont.Bold))
-            self.similar_score_text.setFontPointSize(20)
-            self.similar_score_text.setText(f"측정 불가")
-            self.text_score.setFont(QFont('Arial', 10, QFont.Bold))
-            self.text_score.setFontPointSize(20)
-            self.text_score.setTextColor(QColor("Red"))
-            self.text_score.setText("재녹음 해주세요")
-        else:
-            # x0 : 사용자가 녹음한 음성데이터의 Mel 이미지
-            # x1 : 기준이 되는 TTS 음성데이터의 Mel 이미지
-            x0_image = Image.open(x0)
-            x1_image = Image.open(x1)
-        
-            convert_tensor = transforms.Compose([transforms.Resize((190,256)),transforms.ToTensor()])
-            x0_image = convert_tensor(x0_image).unsqueeze(0)
-            x1_image = convert_tensor(x1_image).unsqueeze(0)
-
-            output1, output2 = model(x0_image, x1_image)
-            euclidean_distance = F.pairwise_distance(output1,output2)
-
-            siamese_similar_score = getScore(euclidean_distance.item())
-
-
-            final_score = finalScore(opencv_score,siamese_similar_score)
-            #length_final_score = get_length_change("VAD_record.wav","VAD_TTS_record.wav")*final_score
-            print(siamese_similar_score)
-            # print(final_score)
-
-            # 유사도 측정 결과를 pyqt5 위젯에 표시...터미널X
-            #print(f"score : {getScore(euclidean_distance.item())}")
-        
-            # 기존에 "유사도 안내 : 90%" 라고 출력하던 곳에 결과 출력
-            # self.[].setText() 함수 이용
-            # ex) self.text_label.setText('hello world') 형태...self는 함수에서 써야 함
-            # f"" 안에 띄어쓰기 -> 위젯에서 가운데에 표시하려고 함 (앞에 8칸 띄기)
-            self.similar_score_text.setFont(QFont('Arial', 10, QFont.Bold))
-            self.similar_score_text.setFontPointSize(20)
-            self.text_score.setFont(QFont('Arial', 10, QFont.Bold))
-            self.text_score.setFontPointSize(20)
-            if final_score < 30:
+            if opencv_score == 1 or opencv_score < 0.2 or accuracy < 0.5:
                 self.similar_score_text.setTextColor(QColor("Red"))
+                self.similar_score_text.setFont(QFont('Arial', 10, QFont.Bold))
+                self.similar_score_text.setFontPointSize(20)
+                self.similar_score_text.setText(f"측정 불가")
+                self.text_score.setFont(QFont('Arial', 10, QFont.Bold))
+                self.text_score.setFontPointSize(20)
                 self.text_score.setTextColor(QColor("Red"))
-                self.text_score.setText("발음이 많이 미숙")
-            elif final_score >=30 and final_score < 50:
-                self.similar_score_text.setTextColor(QColor("Orange"))
-                self.text_score.setTextColor(QColor("Orange"))
-                self.text_score.setText("외국인")
-            elif final_score >=50 and final_score < 70:
-                self.similar_score_text.setTextColor(QColor("Orange"))
-                self.text_score.setTextColor(QColor("Orange"))
-                self.text_score.setText("발음 꽤 하는 외국인")
+                self.text_score.setText("재녹음 해주세요")
             else:
-                final_score = 70 + (final_score - 70)*2
-                if final_score >=100:
-                    final_score = 100
-                self.similar_score_text.setTextColor(QColor("Green"))
-                self.text_score.setTextColor(QColor("Green"))
-                self.text_score.setText("한국인")
-            self.similar_score_text.setText(f"유사도 안내 : {final_score}%")
+                # x0 : 사용자가 녹음한 음성데이터의 Mel 이미지
+                # x1 : 기준이 되는 TTS 음성데이터의 Mel 이미지
+                x0_image = Image.open(x0)
+                x1_image = Image.open(x1)
+
+                convert_tensor = transforms.Compose([transforms.Resize((190,256)),transforms.ToTensor()])
+                x0_image = convert_tensor(x0_image).unsqueeze(0)
+                x1_image = convert_tensor(x1_image).unsqueeze(0)
+
+                output1, output2 = model(x0_image, x1_image)
+                euclidean_distance = F.pairwise_distance(output1,output2)
+
+                siamese_similar_score = getScore(euclidean_distance.item())
+
+
+                final_score = finalScore(opencv_score,siamese_similar_score)
+                #length_final_score = get_length_change("VAD_record.wav","VAD_TTS_record.wav")*final_score
+                print(siamese_similar_score)
+                # print(final_score)
+
+                # 유사도 측정 결과를 pyqt5 위젯에 표시...터미널X
+                #print(f"score : {getScore(euclidean_distance.item())}")
+
+                # 기존에 "유사도 안내 : 90%" 라고 출력하던 곳에 결과 출력
+                # self.[].setText() 함수 이용
+                # ex) self.text_label.setText('hello world') 형태...self는 함수에서 써야 함
+                # f"" 안에 띄어쓰기 -> 위젯에서 가운데에 표시하려고 함 (앞에 8칸 띄기)
+                self.similar_score_text.setFont(QFont('Arial', 10, QFont.Bold))
+                self.similar_score_text.setFontPointSize(20)
+                self.text_score.setFont(QFont('Arial', 10, QFont.Bold))
+                self.text_score.setFontPointSize(20)
+                if final_score < 30:
+                    self.similar_score_text.setTextColor(QColor("Red"))
+                    self.text_score.setTextColor(QColor("Red"))
+                    self.text_score.setText("발음이 많이 미숙")
+                elif final_score >=30 and final_score < 50:
+                    self.similar_score_text.setTextColor(QColor("Orange"))
+                    self.text_score.setTextColor(QColor("Orange"))
+                    self.text_score.setText("외국인")
+                elif final_score >=50 and final_score < 70:
+                    self.similar_score_text.setTextColor(QColor("Orange"))
+                    self.text_score.setTextColor(QColor("Orange"))
+                    self.text_score.setText("발음 꽤 하는 외국인")
+                else:
+                    final_score = 70 + (final_score - 70)*2
+                    if final_score >=100:
+                        final_score = 100
+                    self.similar_score_text.setTextColor(QColor("Green"))
+                    self.text_score.setTextColor(QColor("Green"))
+                    self.text_score.setText("한국인")
+                self.similar_score_text.setText(f"유사도 안내 : {final_score}%")
         self.similar_score_text.setAlignment(Qt.AlignCenter)
         self.similar_score_text.setStyleSheet("background-color: rgba(255, 255, 255, 0); border: 1px solid black; border-radius: 10px;")
         self.text_score.setAlignment(Qt.AlignCenter)
