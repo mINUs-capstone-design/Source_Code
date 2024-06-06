@@ -187,10 +187,10 @@ p, li { white-space: pre-wrap; }
     <widget class="QPushButton" name="button_backtochecknoise">
      <property name="geometry">
       <rect>
-       <x>150</x>
-       <y>85</y>
-       <width>40</width>
-       <height>20</height>
+       <x>90</x>
+       <y>70</y>
+       <width>60</width>
+       <height>60</height>
       </rect>
      </property>
      <property name="styleSheet">
@@ -309,10 +309,10 @@ p, li { white-space: pre-wrap; }
     <widget class="QPushButton" name="button_backtoselectsexual">
      <property name="geometry">
       <rect>
-       <x>150</x>
-       <y>85</y>
-       <width>40</width>
-       <height>20</height>
+       <x>90</x>
+       <y>70</y>
+       <width>60</width>
+       <height>60</height>
       </rect>
      </property>
      <property name="sizePolicy">
@@ -479,10 +479,10 @@ p, li { white-space: pre-wrap; }
     <widget class="QPushButton" name="button_backtomain">
      <property name="geometry">
       <rect>
-       <x>150</x>
-       <y>85</y>
-       <width>40</width>
-       <height>20</height>
+       <x>90</x>
+       <y>70</y>
+       <width>60</width>
+       <height>60</height>
       </rect>
      </property>
      <property name="styleSheet">
@@ -587,12 +587,12 @@ p, li { white-space: pre-wrap; }
      </property>
     </widget>
    </widget>
-   <zorder>mainwindow</zorder>
    <zorder>checknoise</zorder>
-   <zorder>selectsexual</zorder>
+   <zorder>loading</zorder>
+   <zorder>mainwindow</zorder>
    <zorder>result</zorder>
    <zorder>resultnoise</zorder>
-   <zorder>loading</zorder>
+   <zorder>selectsexual</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
