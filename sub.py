@@ -23,7 +23,7 @@ from pydub import AudioSegment
 import random
 
 # 추가...voice_code의 vad.py, mel.py
-from voice_code import preprocessing, man_tts, woman_tts, opencv_ccoeff, stt
+from voice_code import preprocessing, man_tts, woman_tts, opencv_ccoeff, stt, complcate_text
 import record
 
 form_class = uic.loadUiType("./sub.ui")[0]
@@ -242,7 +242,8 @@ class WindowClass(QMainWindow, form_class):
         opencv_score = opencv_ccoeff.compare_image(x0, x1)
         print(global_TTS_sentence)
         print(global_selected_sentence)
-        if opencv_score == 1 or opencv_score < 0.2 or global_TTS_sentence != global_selected_sentence:
+        accuracy = complcate_text.compare_korean_words(global_selected_sentence,global_TTS_sentence)
+        if opencv_score == 1 or opencv_score < 0.2 or accuracy < 0.5:
             self.similar_score_text.setTextColor(QColor("Red"))
             self.similar_score_text.setFont(QFont('Arial', 10, QFont.Bold))
             self.similar_score_text.setFontPointSize(20)
