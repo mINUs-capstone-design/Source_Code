@@ -242,8 +242,12 @@ class WindowClass(QMainWindow, form_class):
         opencv_score = opencv_ccoeff.compare_image(x0, x1)
         print(global_TTS_sentence)
         print(global_selected_sentence)
+<<<<<<< HEAD
         accuracy = complcate_text.compare_korean_words(global_selected_sentence,global_TTS_sentence)
         if opencv_score == 1 or opencv_score < 0.2 or accuracy < 0.5:
+=======
+        if opencv_score == 1 or opencv_score < 0.3 or global_TTS_sentence != global_selected_sentence:
+>>>>>>> origin/master
             self.similar_score_text.setTextColor(QColor("Red"))
             self.similar_score_text.setFont(QFont('Arial', 10, QFont.Bold))
             self.similar_score_text.setFontPointSize(20)
@@ -341,7 +345,7 @@ def finalScore(opencv_score,siames_score):
     
     opencv_score = opencv_score*100
     opencv_score = round(opencv_score)
-    final_score = opencv_score*0.5 + siames_score *0.5
+    final_score = opencv_score*0.3 + siames_score *0.7
     final_score = round(final_score)
     return final_score
 
