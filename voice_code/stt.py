@@ -4,28 +4,28 @@ from google.oauth2 import service_account
 from pydub import AudioSegment
 
 pronunciation_map = {
-    "영": "영",
-    "일": "일",
-    "이": "이",
-    "삼": "삼",
-    "사": "사",
-    "오": "오",
-    "육": "육",
-    "칠": "칠",
-    "팔": "팔",
-    "구": "구",
-    "십": "십",
-    "공": "공",
-    "하나": "하나",
-    "둘": "둘",
-    "셋": "셋",
-    "넷": "넷",
-    "다섯": "다섯",
-    "여섯": "여섯",
-    "일곱": "일곱",
-    "여덟": "여덟",
-    "아홉": "아홉",
-    "열": "열",
+    "영": "0",
+    "일": "1",
+    "이": "2",
+    "삼": "3",
+    "사": "4",
+    "오": "5",
+    "육": "6",
+    "칠": "7",
+    "팔": "8",
+    "구": "9",
+    "십": "10",
+    "공": "0",
+    "하나": "1",
+    "둘": "2",
+    "셋": "3",
+    "넷": "4",
+    "다섯": "5",
+    "여섯": "6",
+    "일곱": "7",
+    "여덟": "8",
+    "아홉": "9",
+    "열": "10",
 }
 #--------------------------------------------------
 def transcribe_audio(audio_file_path):
@@ -54,7 +54,7 @@ def transcribe_audio(audio_file_path):
 
     for result in response.results:
         transcript = result.alternatives[0].transcript.strip()
-        print("Transcript: {}",transcript)
+        print("Transcript: ",transcript)
         transcript = "".join([pronunciation_map.get(word, word) for word in transcript.split()])
         return transcript
 
