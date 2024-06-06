@@ -242,8 +242,18 @@ class WindowClass(QMainWindow, form_class):
         opencv_score = opencv_ccoeff.compare_image(x0, x1)
         print(global_TTS_sentence)
         print(global_selected_sentence)
-        accuracy = complcate_text.compare_korean_words(global_selected_sentence,global_TTS_sentence)
-        print(accuracy)
+        if global_TTS_sentence == None:
+            self.similar_score_text.setTextColor(QColor("Red"))
+            self.similar_score_text.setFont(QFont('Arial', 10, QFont.Bold))
+            self.similar_score_text.setFontPointSize(20)
+            self.similar_score_text.setText(f"측정 불가")
+            self.text_score.setFont(QFont('Arial', 10, QFont.Bold))
+            self.text_score.setFontPointSize(20)
+            self.text_score.setTextColor(QColor("Red"))
+            self.text_score.setText("재녹음 해주세요")
+        else:
+            accuracy = complcate_text.compare_korean_words(global_selected_sentence,global_TTS_sentence)
+            print(accuracy)
         if opencv_score == 1 or opencv_score < 0.2 or accuracy < 0.5:
             self.similar_score_text.setTextColor(QColor("Red"))
             self.similar_score_text.setFont(QFont('Arial', 10, QFont.Bold))
