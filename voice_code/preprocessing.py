@@ -11,8 +11,7 @@ import wave
 from PIL import Image
 import matplotlib.pyplot as plt
 from scipy.io.wavfile import read
-from voice_code import noise_filter
-import light_down
+from voice_code import noise_filter, light_down
 # ----------------------------------------------------------------
 
 # VAD 알고리즘
