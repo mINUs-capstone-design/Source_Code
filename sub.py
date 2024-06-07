@@ -326,7 +326,7 @@ class WindowClass(QMainWindow, form_class):
     def end_function(self):
         [os.remove(os.path.join('.', filename)) for filename in os.listdir('.') if filename.endswith('.wav')]
         [os.remove(os.path.join('.', filename)) for filename in os.listdir('.') if filename.endswith('.jpg')]
-        self.close()
+        self.uimain()
         
     def restart_record(self):
         [os.remove(os.path.join('.', filename)) for filename in os.listdir('.') if filename.endswith('.wav')]
