@@ -254,7 +254,7 @@ class WindowClass(QMainWindow, form_class):
         else:
             accuracy = complcate_text.compare_korean_words(global_selected_sentence,global_TTS_sentence)
             print(accuracy)
-            if opencv_score == 1 or opencv_score < 0.2 or accuracy < 0.5:
+            if opencv_score == 1 or opencv_score < 0.25 or accuracy < 0.5:
                 self.similar_score_text.setTextColor(QColor("Red"))
                 self.similar_score_text.setFont(QFont('Arial', 10, QFont.Bold))
                 self.similar_score_text.setFontPointSize(20)
