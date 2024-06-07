@@ -23,7 +23,7 @@ from pydub import AudioSegment
 import random
 
 # 추가...voice_code의 vad.py, mel.py
-from voice_code import preprocessing, man_tts, woman_tts, opencv_ccoeff, stt, complcate_text
+from voice_code import preprocessing, man_tts, woman_tts, opencv_ccoeff, stt, complcate_text, light_down
 import record
 
 form_class = uic.loadUiType("./sub.ui")[0]
