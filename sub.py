@@ -445,7 +445,7 @@ def prepare_model():
     # 측정...
     device = "cpu"
     # 모델 이름 경로
-    model = torch.load("siamese_net_r1.pt", map_location=device)
+    model = torch.load("siamese_net_r5.pt", map_location=device)
     return model
 # 나머진 위에 함수로 옮김
 # ...
