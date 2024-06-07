@@ -80,7 +80,7 @@ def wav_to_mel():
         plt.savefig(output_filename, bbox_inches='tight', pad_inches=0)
         plt.close()
 
-        result_image = light_down.apply_threshold(output_filename,100)
+        result_image = light_down.apply_threshold(output_filename,0)
         cv2.imwrite(output_filename, result_image)
         print(".wav 파일에 Mel 알고리즘 적용 완료")
 
