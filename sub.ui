@@ -167,10 +167,10 @@ p, li { white-space: pre-wrap; }
     <widget class="QTextBrowser" name="check_word">
      <property name="geometry">
       <rect>
-       <x>300</x>
+       <x>270</x>
        <y>75</y>
-       <width>200</width>
-       <height>30</height>
+       <width>261</width>
+       <height>41</height>
       </rect>
      </property>
      <property name="autoFillBackground">
@@ -181,7 +181,7 @@ p, li { white-space: pre-wrap; }
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Gulim'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;다음 단어를 말해주세요&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:14pt; font-weight:600;&quot;&gt;SPEACK SENTENCE&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
     <widget class="QPushButton" name="button_backtochecknoise">
@@ -351,12 +351,11 @@ p, li { white-space: pre-wrap; }
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Gulim'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;소음 측정을 진행해주세요.&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;결과에 따른 주의 사항&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:16pt; font-weight:600; color:#00aa7f;&quot;&gt;녹색&lt;/span&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt; : 측정하기에 적합한 환경입니다.&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:16pt; font-weight:600; color:#ffaa00;&quot;&gt;주황&lt;/span&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt; : 측정 가능하나 약간의 오차가 있음.&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:16pt; font-weight:600; color:#ff0000;&quot;&gt;빨강&lt;/span&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt; : 제대로 된 측정이 불가능.&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;주변 소음을 통제 해주세요&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;p align=&quot;center&quot; style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;Please proceed with noise measurement.&lt;/span&gt;&lt;/p&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;Precautions according to the results&lt;/span&gt;&lt;/p&gt;
+&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;&quot;&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600; color:#00ff00;&quot;&gt;Green&lt;/span&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;: The environment is suitable for measurement.&lt;/span&gt;&lt;/li&gt;
+&lt;li style=&quot; font-size:12pt;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600; color:#ff6400;&quot;&gt;Orange&lt;/span&gt;: Measurement is possible, but there may be slight inaccuracies.&lt;/li&gt;
+&lt;li style=&quot; font-size:12pt;&quot; style=&quot; margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600; color:#ff0000;&quot;&gt;Red&lt;/span&gt;: Accurate measurement is not possible.&lt;/li&gt;&lt;/ul&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
     <widget class="QPushButton" name="button_resultnoise">
@@ -533,13 +532,13 @@ p, li { white-space: pre-wrap; }
        <x>220</x>
        <y>60</y>
        <width>360</width>
-       <height>30</height>
+       <height>40</height>
       </rect>
      </property>
      <property name="maximumSize">
       <size>
        <width>16777215</width>
-       <height>30</height>
+       <height>40</height>
       </size>
      </property>
      <property name="mouseTracking">
@@ -553,7 +552,7 @@ p, li { white-space: pre-wrap; }
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Gulim'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;성별을 선택하세요&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:14pt; font-weight:600;&quot;&gt;SELECT GENDER&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
     <widget class="QTextBrowser" name="textBrowser_5">
@@ -562,13 +561,13 @@ p, li { white-space: pre-wrap; }
        <x>220</x>
        <y>140</y>
        <width>360</width>
-       <height>51</height>
+       <height>80</height>
       </rect>
      </property>
      <property name="maximumSize">
       <size>
        <width>16777215</width>
-       <height>60</height>
+       <height>80</height>
       </size>
      </property>
      <property name="mouseTracking">
@@ -582,17 +581,17 @@ p, li { white-space: pre-wrap; }
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Gulim'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600; color:#ff0000;&quot;&gt;잘못된 성별이 선택 된 경우&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600; color:#ff0000;&quot;&gt;측정 결과가 이상할 수 있습니다.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:14pt; font-weight:600; color:#ff0000;&quot;&gt;If the incorrect gender is selected, &lt;/span&gt;&lt;/p&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:14pt; font-weight:600; color:#ff0000;&quot;&gt;the measurement results may be inaccurate.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
    </widget>
-   <zorder>checknoise</zorder>
    <zorder>loading</zorder>
-   <zorder>mainwindow</zorder>
-   <zorder>result</zorder>
    <zorder>resultnoise</zorder>
+   <zorder>result</zorder>
+   <zorder>mainwindow</zorder>
    <zorder>selectsexual</zorder>
+   <zorder>checknoise</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

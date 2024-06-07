@@ -298,22 +298,22 @@ class WindowClass(QMainWindow, form_class):
                 if final_score < 30:
                     self.similar_score_text.setTextColor(QColor("Red"))
                     self.text_score.setTextColor(QColor("Red"))
-                    self.text_score.setText("발음이 많이 미숙")
+                    self.text_score.setText("FOREIGNER")
                 elif final_score >=30 and final_score < 50:
                     self.similar_score_text.setTextColor(QColor("Orange"))
                     self.text_score.setTextColor(QColor("Orange"))
-                    self.text_score.setText("외국인")
+                    self.text_score.setText("BEGINNER")
                 elif final_score >=50 and final_score < 70:
                     self.similar_score_text.setTextColor(QColor("Orange"))
                     self.text_score.setTextColor(QColor("Orange"))
-                    self.text_score.setText("발음 꽤 하는 외국인")
+                    self.text_score.setText("EXPERT")
                 else:
                     final_score = 70 + (final_score - 70)*2
                     if final_score >=100:
                         final_score = 100
                     self.similar_score_text.setTextColor(QColor("Green"))
                     self.text_score.setTextColor(QColor("Green"))
-                    self.text_score.setText("한국인")
+                    self.text_score.setText("NATIVE KOREAN")
                 self.similar_score_text.setText(f"유사도 안내 : {final_score}%")
         self.similar_score_text.setAlignment(Qt.AlignCenter)
         self.similar_score_text.setStyleSheet("background-color: rgba(255, 255, 255, 0); border: 1px solid black; border-radius: 10px;")
