@@ -248,7 +248,7 @@ class WindowClass(QMainWindow, form_class):
             self.similar_score_text.setFontPointSize(20)
             self.similar_score_text.setText("ERROR")
             self.text_score.setFont(QFont('Arial', 10, QFont.Bold))
-            self.text_score.setFontPointSize(14)
+            self.text_score.setFontPointSize(16)
             self.text_score.setTextColor(QColor("Red"))
             self.text_score.setText("PLEASE RE-RECORD")
         else:
@@ -260,7 +260,7 @@ class WindowClass(QMainWindow, form_class):
                 self.similar_score_text.setFontPointSize(20)
                 self.similar_score_text.setText("ERROR")
                 self.text_score.setFont(QFont('Arial', 10, QFont.Bold))
-                self.text_score.setFontPointSize(14)
+                self.text_score.setFontPointSize(16)
                 self.text_score.setTextColor(QColor("Red"))
                 self.text_score.setText("PLEASE RE-RECORD")
             else:
