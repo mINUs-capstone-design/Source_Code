@@ -217,7 +217,7 @@ class WindowClass(QMainWindow, form_class):
         record.stop()
         self.resultnoise.hide()
         self.loading.show()
-        self.loading_label.setText("결과 측정 중입니다.")
+        self.loading_label.setText("Measuring results")
         self.loading_label.setAlignment(Qt.AlignCenter)
         global global_TTS_sentence
         global_TTS_sentence = stt.transcribe_audio("record.wav")
@@ -246,11 +246,11 @@ class WindowClass(QMainWindow, form_class):
             self.similar_score_text.setTextColor(QColor("Red"))
             self.similar_score_text.setFont(QFont('Arial', 10, QFont.Bold))
             self.similar_score_text.setFontPointSize(20)
-            self.similar_score_text.setText(f"측정 불가")
+            self.similar_score_text.setText("ERROR")
             self.text_score.setFont(QFont('Arial', 10, QFont.Bold))
             self.text_score.setFontPointSize(20)
             self.text_score.setTextColor(QColor("Red"))
-            self.text_score.setText("재녹음 해주세요")
+            self.text_score.setText("PLEASE RE-RECORD")
         else:
             accuracy = complcate_text.compare_korean_words(global_selected_sentence,global_TTS_sentence)
             print(accuracy)
@@ -258,11 +258,11 @@ class WindowClass(QMainWindow, form_class):
                 self.similar_score_text.setTextColor(QColor("Red"))
                 self.similar_score_text.setFont(QFont('Arial', 10, QFont.Bold))
                 self.similar_score_text.setFontPointSize(20)
-                self.similar_score_text.setText(f"측정 불가")
+                self.similar_score_text.setText("ERROR")
                 self.text_score.setFont(QFont('Arial', 10, QFont.Bold))
                 self.text_score.setFontPointSize(20)
                 self.text_score.setTextColor(QColor("Red"))
-                self.text_score.setText("재녹음 해주세요")
+                self.text_score.setText("PLEASE RE-RECORD")
             else:
                 # x0 : 사용자가 녹음한 음성데이터의 Mel 이미지
                 # x1 : 기준이 되는 TTS 음성데이터의 Mel 이미지
@@ -314,7 +314,7 @@ class WindowClass(QMainWindow, form_class):
                     self.similar_score_text.setTextColor(QColor("Green"))
                     self.text_score.setTextColor(QColor("Green"))
                     self.text_score.setText("NATIVE KOREAN")
-                self.similar_score_text.setText(f"유사도 안내 : {final_score}%")
+                self.similar_score_text.setText(f"RESULT : {final_score}%")
         self.similar_score_text.setAlignment(Qt.AlignCenter)
         self.similar_score_text.setStyleSheet("background-color: rgba(255, 255, 255, 0); border: 1px solid black; border-radius: 10px;")
         self.text_score.setAlignment(Qt.AlignCenter)
