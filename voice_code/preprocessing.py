@@ -17,7 +17,7 @@ from voice_code import noise_filter, light_down
 # VAD 알고리즘
 def wav_to_vad(wav_data, path):
     y, sr = librosa.load(wav_data)
-    y_trimmed, index = librosa.effects.trim(y, top_db=47.5)
+    y_trimmed, index = librosa.effects.trim(y, top_db=30)
     sf.write(path, y_trimmed, sr)
 # ----------------------------------------------------------------
 
@@ -52,7 +52,7 @@ def wav_to_mel():
         mel_spectrogram = librosa.feature.melspectrogram(y=y, sr=sr, n_fft=512, hop_length = 128, win_length= 512)
 
         # Mel-spectrogram을 데시벨로 변환
-        mel_spectrogram_db = librosa.power_to_db(mel_spectrogram, ref=np.max)
+        mel_spectrogram_db = librosa.power_to_db(mel_spectrogram, ref=np.max,top_db = 47.5)
 
         # Mel-spectrogram 플로팅
         #plt.figure(figsize=(10, 4)) # img 사이즈 변경
