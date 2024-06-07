@@ -17,7 +17,7 @@ from voice_code import noise_filter, light_down
 # VAD 알고리즘
 def wav_to_vad(wav_data, path):
     y, sr = librosa.load(wav_data)
-    y_trimmed, index = librosa.effects.trim(y, top_db=30)
+    y_trimmed, index = librosa.effects.trim(y, top_db=47.5)
     sf.write(path, y_trimmed, sr)
 # ----------------------------------------------------------------
 
@@ -80,8 +80,8 @@ def wav_to_mel():
         plt.savefig(output_filename, bbox_inches='tight', pad_inches=0)
         plt.close()
 
-        result_image = light_down.apply_threshold(output_filename,0)
-        cv2.imwrite(output_filename, result_image)
+        # result_image = light_down.apply_threshold(output_filename,0)
+        # cv2.imwrite(output_filename, result_image)
         print(".wav 파일에 Mel 알고리즘 적용 완료")
 
 if __name__ == "__main__":
