@@ -248,9 +248,9 @@ class WindowClass(QMainWindow, form_class):
             self.similar_score_text.setFontPointSize(20)
             self.similar_score_text.setText("ERROR")
             self.text_score.setFont(QFont('Arial', 10, QFont.Bold))
-            self.text_score.setFontPointSize(16)
+            self.text_score.setFontPointSize(20)
             self.text_score.setTextColor(QColor("Red"))
-            self.text_score.setText("PLEASE RE-RECORD")
+            self.text_score.setText("TRY AGAIN")
         else:
             accuracy = complcate_text.compare_korean_words(global_selected_sentence,global_TTS_sentence)
             print(accuracy)
@@ -260,9 +260,9 @@ class WindowClass(QMainWindow, form_class):
                 self.similar_score_text.setFontPointSize(20)
                 self.similar_score_text.setText("ERROR")
                 self.text_score.setFont(QFont('Arial', 10, QFont.Bold))
-                self.text_score.setFontPointSize(16)
+                self.text_score.setFontPointSize(20)
                 self.text_score.setTextColor(QColor("Red"))
-                self.text_score.setText("PLEASE RE-RECORD")
+                self.text_score.setText("TRY AGAIN")
             else:
                 # x0 : 사용자가 녹음한 음성데이터의 Mel 이미지
                 # x1 : 기준이 되는 TTS 음성데이터의 Mel 이미지
