@@ -203,9 +203,9 @@ p, li { white-space: pre-wrap; }
     <widget class="QTextBrowser" name="select_word">
      <property name="geometry">
       <rect>
-       <x>310</x>
-       <y>180</y>
-       <width>181</width>
+       <x>200</x>
+       <y>170</y>
+       <width>401</width>
        <height>71</height>
       </rect>
      </property>
@@ -261,8 +261,8 @@ p, li { white-space: pre-wrap; }
     <widget class="QPushButton" name="button_speak_sentense">
      <property name="geometry">
       <rect>
-       <x>530</x>
-       <y>175</y>
+       <x>620</x>
+       <y>165</y>
        <width>80</width>
        <height>80</height>
       </rect>
@@ -587,11 +587,11 @@ p, li { white-space: pre-wrap; }
     </widget>
    </widget>
    <zorder>loading</zorder>
-   <zorder>resultnoise</zorder>
    <zorder>result</zorder>
    <zorder>mainwindow</zorder>
    <zorder>selectsexual</zorder>
    <zorder>checknoise</zorder>
+   <zorder>resultnoise</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
