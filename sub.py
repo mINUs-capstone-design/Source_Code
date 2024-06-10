@@ -312,7 +312,7 @@ class WindowClass(QMainWindow, form_class):
                         final_score = 100
                     self.similar_score_text.setTextColor(QColor("Green"))
                     self.text_score.setTextColor(QColor("Green"))
-                    self.text_score.setText("NATIVE KOREAN")
+                    self.text_score.setText("NATIVE SPEAKER")
                 self.similar_score_text.setText(f"RESULT : {final_score}%")
         self.similar_score_text.setAlignment(Qt.AlignCenter)
         self.similar_score_text.setStyleSheet("background-color: rgba(255, 255, 255, 0); border: 1px solid black; border-radius: 10px;")
