@@ -294,20 +294,20 @@ class WindowClass(QMainWindow, form_class):
                 self.similar_score_text.setFontPointSize(20)
                 self.text_score.setFont(QFont('Arial', 10, QFont.Bold))
                 self.text_score.setFontPointSize(20)
-                if final_score < 30:
+                if final_score < 50:
                     self.similar_score_text.setTextColor(QColor("Red"))
                     self.text_score.setTextColor(QColor("Red"))
                     self.text_score.setText("FOREIGNER")
-                elif final_score >=30 and final_score < 50:
+                elif final_score >=50 and final_score < 65:
                     self.similar_score_text.setTextColor(QColor("Orange"))
                     self.text_score.setTextColor(QColor("Orange"))
                     self.text_score.setText("BEGINNER")
-                elif final_score >=50 and final_score < 70:
-                    self.similar_score_text.setTextColor(QColor("Orange"))
-                    self.text_score.setTextColor(QColor("Orange"))
+                elif final_score >=65 and final_score < 80:
+                    self.similar_score_text.setTextColor(QColor("Blue"))
+                    self.text_score.setTextColor(QColor("Blue"))
                     self.text_score.setText("EXPERT")
                 else:
-                    final_score = 70 + (final_score - 70)*2
+                    final_score = 80 + (final_score - 80)*2
                     if final_score >=100:
                         final_score = 100
                     self.similar_score_text.setTextColor(QColor("Green"))
@@ -351,7 +351,7 @@ def finalScore(opencv_score,siames_score):
     
     opencv_score = opencv_score*100
     opencv_score = round(opencv_score)
-    final_score = opencv_score*0.3 + siames_score *0.7
+    final_score = opencv_score*0.4 + siames_score *0.6
     final_score = round(final_score)
     return final_score
 
