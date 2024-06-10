@@ -253,7 +253,7 @@ class WindowClass(QMainWindow, form_class):
             self.text_score.setText("TRY AGAIN")
         else:
             accuracy = complcate_text.compare_korean_words(global_selected_sentence,global_TTS_sentence)
-            print(accuracy)
+            print("accuracy: ",accuracy)
             if opencv_score == 1 or opencv_score < 0.25 or accuracy < 0.5:
                 self.similar_score_text.setTextColor(QColor("Red"))
                 self.similar_score_text.setFont(QFont('Arial', 10, QFont.Bold))
@@ -278,10 +278,9 @@ class WindowClass(QMainWindow, form_class):
 
                 siamese_similar_score = getScore(euclidean_distance.item())
 
-
+                print("model score: ", siamese_similar_score)
                 final_score = finalScore(opencv_score,siamese_similar_score)
                 #length_final_score = get_length_change("VAD_record.wav","VAD_TTS_record.wav")*final_score
-                print(siamese_similar_score)
                 # print(final_score)
 
                 # 유사도 측정 결과를 pyqt5 위젯에 표시...터미널X
