@@ -12,7 +12,7 @@ def remove_after_silence(input_file, silence_duration=300):
     
     if silent_ranges:
         # 첫 번째 무음 구간의 시작 시간
-        first_silence_start = silent_ranges[-1][1]
+        first_silence_start = silent_ranges[0][0]
 
         # 첫 번째 무음 구간까지의 오디오 자르기
         trimmed_audio = audio[:first_silence_start]

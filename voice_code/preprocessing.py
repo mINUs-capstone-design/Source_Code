@@ -11,7 +11,7 @@ import wave
 from PIL import Image
 import matplotlib.pyplot as plt
 from scipy.io.wavfile import read
-from voice_code import noise_filter, light_down, remove_silence,nonsilece
+from voice_code import noise_filter, light_down, remove_silence
 # ----------------------------------------------------------------
 
 # VAD 알고리즘
@@ -41,7 +41,6 @@ def wav_to_mel():
         wav_to_vad(original_path, vad_wav_path)
         original_path = vad_wav_path
         remove_silence.remove_after_silence(original_path)
-        nonsilece.nonsilent_parts(original_path)
         #noise_filter.filter_noise_wav(original_path)
         print(".wav 파일에 VAD 알고리즘 적용 완료")
 
