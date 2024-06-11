@@ -351,7 +351,7 @@ def finalScore(opencv_score,siames_score):
     
     opencv_score = opencv_score*100
     opencv_score = round(opencv_score)
-    final_score = opencv_score*0.4 + siames_score *0.6
+    final_score = opencv_score*0.3 + siames_score *0.7
     final_score = round(final_score)
     return final_score
 
