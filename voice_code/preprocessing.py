@@ -7,7 +7,7 @@ import librosa.effects
 import librosa.display
 import soundfile as sf
 import matplotlib.pyplot as plt
-from voice_code import noise_filter, remove_silence
+from voice_code import noise_filter
 # ----------------------------------------------------------------
 
 # VAD 알고리즘
@@ -36,7 +36,6 @@ def wav_to_mel():
         vad_wav_path = os.path.join(save_dir, f"VAD_{os.path.splitext(original_file)[0]}.wav")
         wav_to_vad(original_path, vad_wav_path)
         original_path = vad_wav_path
-        remove_silence.remove_after_silence(original_path)
         print(".wav 파일에 VAD 알고리즘 적용 완료")
 
         # WAV 파일 읽기
