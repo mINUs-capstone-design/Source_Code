@@ -354,15 +354,15 @@ p, li { white-space: pre-wrap; }
      <property name="geometry">
       <rect>
        <x>220</x>
-       <y>80</y>
+       <y>60</y>
        <width>360</width>
-       <height>231</height>
+       <height>251</height>
       </rect>
      </property>
      <property name="maximumSize">
       <size>
        <width>16777215</width>
-       <height>250</height>
+       <height>260</height>
       </size>
      </property>
      <property name="html">
@@ -609,8 +609,8 @@ p, li { white-space: pre-wrap; }
    <zorder>result</zorder>
    <zorder>mainwindow</zorder>
    <zorder>selectsexual</zorder>
-   <zorder>checknoise</zorder>
    <zorder>resultnoise</zorder>
+   <zorder>checknoise</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

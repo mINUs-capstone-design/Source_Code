@@ -1,10 +1,6 @@
 from pydub import AudioSegment
 import noisereduce as nr
 import numpy as np
-import matplotlib.pyplot as plt
-
-# 녹음된 파일 불러오기
-
 
 def filter_noise_wav(file_name):
     audio = AudioSegment.from_wav(file_name)

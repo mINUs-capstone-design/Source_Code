@@ -48,7 +48,4 @@ def transcribe_audio(audio_file_path):
         transcript = "".join([pronunciation_map.get(word, word) for word in transcript.split()])
         return transcript
 
-# 예제로 사용할 오디오 파일의 경로
-# audio_file_path = "record.wav"
-#
-# transcribe_audio(audio_file_path)
+

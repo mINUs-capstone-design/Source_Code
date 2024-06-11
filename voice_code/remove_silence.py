@@ -23,8 +23,3 @@ def remove_after_silence(input_file, silence_duration=300):
     else:
         print("지정된 길이 이상의 무음 구간이 없습니다. 원본 파일을 그대로 사용합니다.")
 
-
-# 사용 예시
-# input_file = "path/to/your/input_file.wav"
-# output_file = "path/to/your/output_file.wav"
-# remove_after_silence(input_file)

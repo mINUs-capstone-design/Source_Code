@@ -1,17 +1,13 @@
 # ----------------------------------------------------------------
 import os
 
-import cv2
 import numpy as np
 import librosa
 import librosa.effects
 import librosa.display
 import soundfile as sf
-import wave
-from PIL import Image
 import matplotlib.pyplot as plt
-from scipy.io.wavfile import read
-from voice_code import noise_filter, light_down, remove_silence
+from voice_code import noise_filter, remove_silence
 # ----------------------------------------------------------------
 
 # VAD 알고리즘
@@ -41,7 +37,6 @@ def wav_to_mel():
         wav_to_vad(original_path, vad_wav_path)
         original_path = vad_wav_path
         remove_silence.remove_after_silence(original_path)
-        #noise_filter.filter_noise_wav(original_path)
         print(".wav 파일에 VAD 알고리즘 적용 완료")
 
         # WAV 파일 읽기
@@ -56,7 +51,6 @@ def wav_to_mel():
         mel_spectrogram_db = librosa.power_to_db(mel_spectrogram, ref=np.max,top_db = 47.5)
 
         # Mel-spectrogram 플로팅
-        #plt.figure(figsize=(10, 4)) # img 사이즈 변경
         axes = librosa.display.specshow(mel_spectrogram_db, sr=sr,n_fft=512, hop_length = 128, win_length= 512, x_axis='time', y_axis='mel')
 
         # plot 그래프 이미지만 나타내기
@@ -81,8 +75,6 @@ def wav_to_mel():
         plt.savefig(output_filename, bbox_inches='tight', pad_inches=0)
         plt.close()
 
-        # result_image = light_down.apply_threshold(output_filename,0)
-        # cv2.imwrite(output_filename, result_image)
         print(".wav 파일에 Mel 알고리즘 적용 완료")
 
 if __name__ == "__main__":
