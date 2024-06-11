@@ -2,6 +2,9 @@
   <qresource prefix="start_button">
     <file>icons/free-icon-start-button-5261874.png</file>
   </qresource>
+  <qresource prefix="change">
+    <file>icons/free-icon-exchange-152371.png</file>
+  </qresource>
   <qresource prefix="speak">
     <file>icons/free-icon-speaker-4347490.png</file>
   </qresource>

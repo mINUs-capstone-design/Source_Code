@@ -290,6 +290,25 @@ p, li { white-space: pre-wrap; }
       <string notr="true"/>
      </property>
     </widget>
+    <widget class="QPushButton" name="button_change_sentense">
+     <property name="geometry">
+      <rect>
+       <x>120</x>
+       <y>175</y>
+       <width>60</width>
+       <height>60</height>
+      </rect>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border-image:url(:/change/icons/free-icon-exchange-152371.png)</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="checknoise" native="true">
     <property name="geometry">

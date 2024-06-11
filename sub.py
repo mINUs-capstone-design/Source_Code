@@ -56,6 +56,8 @@ class WindowClass(QMainWindow, form_class):
         self.button_startrecord.clicked.connect(self.start_record)
         self.button_stoprecord.clicked.connect(self.uiloading)
 
+        self.button_change_sentense.clicked.connect(self.change_sentense)
+
         self.button_backtoselectsexual.clicked.connect(self.uiselectsexual)
         self.button_backtochecknoise.clicked.connect(self.uichecknoise)
         self.button_backtomain.clicked.connect(self.uimain)
@@ -145,10 +147,7 @@ class WindowClass(QMainWindow, form_class):
         self.resultnoise.hide()
         self.result.hide()
         self.mainwindow.hide()
-
-
         self.selected_sentense = self.select_random_word()
-
         #self.given_sentense.setText(self.selected_sentense)  # 단어리스트 랜덤하게 뽑아와서 넣으면 완료
         self.given_sentense.setAlignment(Qt.AlignCenter)
         
@@ -187,6 +186,19 @@ class WindowClass(QMainWindow, form_class):
         self.select_word.setAlignment(Qt.AlignCenter)
         self.set_result_noise()
         
+        if self.checked_man:
+            print("man 불러오기 완료")
+            man_tts.run_tts(global_selected_sentence)
+        elif self.checked_woman:
+            print("woman 불러오기 완료")
+            woman_tts.run_tts(global_selected_sentence)
+
+    def change_sentense(self):
+        self.selected_sentense = self.select_random_word()
+        self.select_word.setFontPointSize(20)
+        self.select_word.setText(self.selected_sentense)  # 제시된 단어 적기
+        self.select_word.setAlignment(Qt.AlignCenter)
+        self.set_result_noise()
         if self.checked_man:
             print("man 불러오기 완료")
             man_tts.run_tts(global_selected_sentence)
