@@ -16,8 +16,9 @@ def decompose_korean_word(word):
 
 def remove_spaces(text):
     """
-    주어진 텍스트에서 띄어쓰기를 제거합니다.
+    주어진 텍스트에서 띄어쓰기,?를 제거합니다.
     """
+    text = text.replace("?","")
     return text.replace(" ", "")
 
 

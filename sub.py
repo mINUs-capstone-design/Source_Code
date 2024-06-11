@@ -252,8 +252,7 @@ class WindowClass(QMainWindow, form_class):
         model = prepare_model()
         # 비교하려는 이미지(.jpg)들의 경로
         opencv_score = opencv_ccoeff.compare_image(x0, x1)
-        print(global_TTS_sentence)
-        print(global_selected_sentence)
+        
         if global_TTS_sentence == None:
             self.similar_score_text.setTextColor(QColor("Red"))
             self.similar_score_text.setFont(QFont('Arial', 10, QFont.Bold))
@@ -265,6 +264,8 @@ class WindowClass(QMainWindow, form_class):
             self.text_score.setText("TRY AGAIN")
         else:
             accuracy = complcate_text.compare_korean_words(global_selected_sentence,global_TTS_sentence)
+            print(global_TTS_sentence)
+            print(global_selected_sentence)
             print("accuracy: ",accuracy)
             if opencv_score == 1 or opencv_score < 0.25 or accuracy < 0.5:
                 self.similar_score_text.setTextColor(QColor("Red"))
