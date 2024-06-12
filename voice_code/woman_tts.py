@@ -21,7 +21,7 @@ def run_tts(global_selected_sentence):
 
     audio_config = texttospeech.AudioConfig(
 
-        audio_encoding=texttospeech.AudioEncoding.LINEAR16, speaking_rate=0.85, sample_rate_hertz = 22050
+        audio_encoding=texttospeech.AudioEncoding.LINEAR16, speaking_rate=1.0, sample_rate_hertz = 22050
 
     )
 
