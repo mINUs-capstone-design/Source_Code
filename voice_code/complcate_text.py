@@ -1,16 +1,7 @@
 from jamo import h2j, j2hcj
 import unicodedata
 
-#def decompose_korean_word(word):
-    #decomposed = []
-    #for char in word:
-        #if '가' <= char <= '힣':  # 한글 완성자 범위
-            #jamos = h2j(char)
-            #decomposed.append(j2hcj(jamos))
-        #else:
-            #decomposed.append(char)
-    #return ''.join(decomposed)
-    
+
 def decompose_korean_word(word):
     def decompose_char(char):
         # 유니코드에서 한글 음절의 시작점
