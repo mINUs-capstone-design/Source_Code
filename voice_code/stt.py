@@ -21,7 +21,7 @@ pronunciation_map = {
 }
 #--------------------------------------------------
 def transcribe_audio(audio_file_path):
-    credentials = service_account.Credentials.from_service_account_file('speech-to-text-425408-a797567b8e72.json')
+    credentials = service_account.Credentials.from_service_account_file('[].json')
     client = speech.SpeechClient(credentials=credentials)
 
     # pydub를 사용하여 오디오 파일을 불러오고 WAV 형식으로 변환
